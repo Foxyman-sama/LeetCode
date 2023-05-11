@@ -3,6 +3,6 @@
 
 int main() {
     Solution1061::UnionFind sol { };
-    std::cout << sol.smallestEquivalentString("leetcode", "programs", "sourcecode") << '\m';
+    std::cout << sol.smallestEquivalentString("leetcode", "programs", "sourcecode") << '\n';
     system("pause");
 }
