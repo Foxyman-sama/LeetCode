@@ -11,30 +11,21 @@ using Vec2D = std::vector<std::vector<T>>;
 
 class Solution1061 {
 public:
+    // Accepted
     class UnionFind {
     private:
         std::vector<int> id_;
 
     private:
         int find(int _p) {
-            int i { _p };    
-            for (; i != id_[i]; i = id_[i]);
-            while (id_[_p] != i) {
-                int parent { id_[_p] };
-                id_[_p] = i;
-                _p = parent;
-            }
-
-            return i;
+            return id_[_p];
         }
         char replace(char _p) {
-            int i { _p - 97 };
-            for (; i != id_[i]; i = id_[i]);
-
-            int min { };
+            int i { id_[_p - 97] };
+            int min { i };
             for (size_t j { }; j < 26; ++j) {
-                if ((id_[j] == i) && (j < min)) {
-                    min == j;
+                if (id_[j] == i) {
+                    min = min > j ? j : min;
                 }
             }
 
@@ -47,16 +38,19 @@ public:
             for (size_t i { }; i < 26; ++i) {
                 id_[i] = i;
             }
-            for (int i { }; i < _s1.size(); ++i) {
+            for (size_t i { }; i < _s1.size(); ++i) {
                 int p { _s1[i] - 97 };
                 int q { _s2[i] - 97 };
-                int p_root { find(p) };
-                int q_root { find(q) };
-                if (p_root == q_root) {
+                int temp { find(p) };
+                if (temp == id_[q]) {
                     continue;
                 }
 
-                id_[p_root] = q_root;
+                for (size_t i { }; i < 26; ++i) {
+                    if (id_[i] == temp) {
+                        id_[i] = id_[q];
+                    }
+                }
             }
         }  
 
