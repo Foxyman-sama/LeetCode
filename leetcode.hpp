@@ -9,6 +9,60 @@ template<
     typename T = int>
 using Vec2D = std::vector<std::vector<T>>;
 
+class Solution547 {
+public:
+    class UnionFind {
+    private:
+        std::vector<int> id_;
+
+    private:
+        int find(int _p) {
+            for (; _p != id_[_p]; _p = id_[_p]);
+
+            return _p;
+        }
+        int count(int _p) {
+            for (size_t i { }; i < id_.size(); ++i) {
+                int j { _p };
+                for (; j != id_[j]; j = id_[j]);
+            }
+
+            return _p;
+        }
+
+        void toId(const std::vector<std::vector<int>> &_k_is_connected) {
+            size_t size { _k_is_connected.size() };
+            id_.resize(size);
+            for (size_t i { }; i < size; ++i) {
+                id_[i] = i;
+            }
+            for (int i { }; i < size; ++i) {
+                for (int j { }; j < _k_is_connected[i].size(); ++j) {
+                    if (!_k_is_connected[i][j]) {
+                        continue;
+                    }
+
+                    int p { i };
+                    int q { j };
+                    int p_root { find(p) };
+                    int q_root { find(q) };
+                    if (p_root == q_root) {
+                        continue;
+                    }
+
+                    id_[p_root] = q_root;
+                }
+            }
+        }
+
+    public:
+        int findCircleNum(std::vector<std::vector<int>> &_is_connected) {
+            toId(_is_connected);
+            find(0);
+            return 0;
+        }
+    };
+};
 class Solution1061 {
 public:
     // Accepted
@@ -32,15 +86,15 @@ public:
             return min + 97;
         }
 
-        void toId(const std::string &_s1,
-                  const std::string &_s2) {         
+        void toId(const std::string &_k_s1,
+                  const std::string &_k_s2) {         
             id_.resize(26);
             for (size_t i { }; i < 26; ++i) {
                 id_[i] = i;
             }
-            for (size_t i { }; i < _s1.size(); ++i) {
-                int p { _s1[i] - 97 };
-                int q { _s2[i] - 97 };
+            for (size_t i { }; i < _k_s1.size(); ++i) {
+                int p { _k_s1[i] - 97 };
+                int q { _k_s2[i] - 97 };
                 int temp { find(p) };
                 if (temp == id_[q]) {
                     continue;
@@ -97,17 +151,17 @@ public:
             return min + 97;
         }
 
-        void toId(const std::string &_s1,
-                  const std::string &_s2) {
+        void toId(const std::string &_k_s1,
+                  const std::string &_k_s2) {
             id_.resize(26);
             sz_.resize(26);
             for (int i { }; i < 26; ++i) {
                 id_[i] = i;
                 sz_[i] = 1;
             }
-            for (int i { }; i < _s1.size(); ++i) {
-                int p { _s1[i] - 97 };
-                int q { _s2[i] - 97 };
+            for (int i { }; i < _k_s1.size(); ++i) {
+                int p { _k_s1[i] - 97 };
+                int q { _k_s2[i] - 97 };
                 int p_root { find(p) };
                 int q_root { find(q) };
                 if (p_root == q_root) {
@@ -171,7 +225,7 @@ public:
         }        
 
         void toId(int _n,
-                  const std::vector<std::vector<int>> &_edges) {
+                  const std::vector<std::vector<int>> &_k_edges) {
             id_.resize(_n);
             sz_.resize(_n);
             for (size_t i { }; i < _n; ++i) {
@@ -179,10 +233,10 @@ public:
                 sz_[i] = 1;
             }
 
-            size_t size { _edges.size() };
+            size_t size { _k_edges.size() };
             for (size_t i { }; i < size; ++i) {
-                int p_root { find(_edges[i][0]) };
-                int q_root { find(_edges[i][1]) };
+                int p_root { find(_k_edges[i][0]) };
+                int q_root { find(_k_edges[i][1]) };
                 if (p_root == q_root) {
                     continue;
                 }

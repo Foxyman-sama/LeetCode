@@ -2,7 +2,8 @@
 #include "leetcode.hpp"
 
 int main() {
-    Solution1061::UnionFind2 sol { };
-    std::cout << sol.smallestEquivalentString("leetcode", "programs", "sourcecode") << '\n';
+    Solution547::UnionFind sol { };
+    Vec2D<int> vec { { 1, 1, 0 }, { 1, 1, 0 }, { 0, 0, 1 } };
+    std::cout << sol.findCircleNum(vec) << '\n';
     system("pause");
 }
