@@ -66,6 +66,76 @@ public:
             return _base_str;
         }
     };
+    // Accepted
+    class UnionFind2 {
+    private:
+        std::vector<int> id_;
+        std::vector<int> sz_;
+
+    public:
+        int find(int _p) {
+            int i { _p };
+            for (; i != id_[i]; i = id_[i]);
+            while (id_[_p] != i) {
+                int parent { id_[_p] };
+                id_[_p] = i;
+                _p = parent;
+            }
+
+            return i;
+        }
+        char replace(char _p) {
+            int root { find(_p - 97) };
+            int min { root };
+            for (int i { }; i < 26; ++i) {
+                int temp { find(i) };
+                if ((temp == root) && (min > i)) {
+                    min = i;
+                }
+            }
+
+            return min + 97;
+        }
+
+        void toId(const std::string &_s1,
+                  const std::string &_s2) {
+            id_.resize(26);
+            sz_.resize(26);
+            for (int i { }; i < 26; ++i) {
+                id_[i] = i;
+                sz_[i] = 1;
+            }
+            for (int i { }; i < _s1.size(); ++i) {
+                int p { _s1[i] - 97 };
+                int q { _s2[i] - 97 };
+                int p_root { find(p) };
+                int q_root { find(q) };
+                if (p_root == q_root) {
+                    continue;
+                }
+                if (sz_[p_root] > sz_[q_root]) {
+                    id_[q_root] = p_root;
+                    sz_[p_root] += sz_[q_root];
+                }
+                else {
+                    id_[p_root] = q_root;
+                    sz_[q_root] += sz_[p_root];
+                }
+            }
+        }
+
+    public:       
+        std::string smallestEquivalentString(std::string _s1, 
+                                             std::string _s2, 
+                                             std::string _base_str) {
+            toId(_s1, _s2);
+            for (size_t i { }; i < _base_str.size(); ++i) {
+                _base_str[i] = replace(_base_str[i]);
+            }
+
+            return _base_str;
+        }
+    };
 };
 class Solution1971 {
 public:
