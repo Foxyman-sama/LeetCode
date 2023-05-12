@@ -21,19 +21,28 @@ public:
 
             return _p;
         }
-        int count(int _p) {
-            for (size_t i { }; i < id_.size(); ++i) {
-                int j { _p };
-                for (; j != id_[j]; j = id_[j]);
+        int count() {
+            std::vector<int> sizes { };
+            sizes.resize(id_.size());
+            for (int i { }; i < id_.size(); ++i) {
+                int temp { find(i) };
+                ++sizes[temp];
             }
 
-            return _p;
+            int count { };
+            for (auto &&el : sizes) {
+                if (el) {
+                    ++count;
+                }
+            }
+
+            return count;
         }
 
         void toId(const std::vector<std::vector<int>> &_k_is_connected) {
             size_t size { _k_is_connected.size() };
             id_.resize(size);
-            for (size_t i { }; i < size; ++i) {
+            for (int i { }; i < size; ++i) {
                 id_[i] = i;
             }
             for (int i { }; i < size; ++i) {
@@ -58,8 +67,7 @@ public:
     public:
         int findCircleNum(std::vector<std::vector<int>> &_is_connected) {
             toId(_is_connected);
-            find(0);
-            return 0;
+            return count();
         }
     };
 };
