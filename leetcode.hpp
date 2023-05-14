@@ -32,6 +32,27 @@ public:
         }
     };
 };
+class Solution9 {
+public:
+
+    class Math {
+        bool isPalindrome(int _x) {
+            if (_x < 0) {
+                return false;
+            }
+
+            long temp { _x };
+            long reverse { };
+            while (temp) {
+                reverse *= 10;
+                reverse += temp % 10;
+                temp /= 10;
+            }
+
+            return reverse == _x;
+        }
+    };
+};
 class Solution547 {
 public:
     // Accepted
