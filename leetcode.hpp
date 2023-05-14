@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 template<
     typename T = int>
@@ -317,49 +318,50 @@ class Solution2316 {
 public:
     class UnionFind { 
     private:
-        std::vector<int> id_;
-        std::vector<int> sz_;
+        size_t n_;
+        std::vector<size_t> id_;
+        std::vector<size_t> sz_;
 
     private:
-        int find(int _p) {
-            int root { _p };
+        size_t find(size_t _p) {
+            size_t root { _p };
             for (; root != id_[root]; root = id_[root]);
             while (id_[_p] != root) {
-                int parent { id_[_p] };
+                size_t parent { id_[_p] };
                 id_[_p] = root;
                 _p = parent;
             }
 
             return root;
         }
-        int count() {
-            int amount { };
-            for (int i { }; i < id_.size(); ++i) {
-                int root_i { find(i) };
-                for (int j { i }; j < id_.size(); ++j) {
-                    int root_j { find(j) };
-                    if (root_i == root_j) {
-                        continue;
-                    }
-
-                    ++amount;
-                }
+        size_t count() {
+            std::unordered_map<size_t, size_t> sizes { };
+            for (size_t i { }; i < n_; ++i) {
+                ++sizes[find(i)];
             }
 
-            return amount;
+            size_t remaining_nodes { n_ };
+            size_t amount { };
+            for (auto &&el : sizes) {
+                auto temp { el.second };
+                amount += temp * (remaining_nodes - temp);
+                remaining_nodes -= temp;
+            }
+
+            return amount > 0 ? amount : 0;
         }
 
         void toId(int _n,
                   const std::vector<std::vector<int>> &_edges) {
+            n_ = _n;
             id_.resize(_n);
-            sz_.resize(_n);
-            for (int i { }; i < _n; ++i) {
+            sz_.resize(_n, 1);
+            for (size_t i { }; i < _n; ++i) {
                 id_[i] = i;
-                sz_[i] = 1;
             }
             for (size_t i { }; i < _edges.size(); ++i) {
-                int p_root { find(_edges[i][0]) };
-                int q_root { find(_edges[i][1]) };
+                size_t p_root { find(_edges[i][0]) };
+                size_t q_root { find(_edges[i][1]) };
                 if (p_root == q_root) {
                     continue;
                 }
