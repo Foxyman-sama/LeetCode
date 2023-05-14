@@ -2,6 +2,7 @@
 #define LEETCODE_HPP
 
 #include <memory>
+#include <algorithm>
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -10,6 +11,27 @@ template<
     typename T = int>
 using Vec2D = std::vector<std::vector<T>>;
 
+class Solution1 {
+public:
+    // Accepted
+    class HashTable {
+    public:
+        std::vector<int> twoSum(std::vector<int> &_nums, 
+                                int _target) {
+            std::unordered_map<int, int> hash { };
+            for (int i { }; i < _nums.size(); ++i) {
+                int needed { _target - _nums[i] };
+                if (hash.find(needed) != hash.end()) {
+                    return { hash[needed], i };
+                }
+
+                hash[_nums[i]] = i;
+            }
+
+            return { };
+        }
+    };
+};
 class Solution547 {
 public:
     // Accepted
@@ -316,6 +338,7 @@ public:
 };
 class Solution2316 {
 public:
+    // Accepted
     class UnionFind { 
     private:
         size_t n_;
@@ -348,20 +371,20 @@ public:
                 remaining_nodes -= temp;
             }
 
-            return amount > 0 ? amount : 0;
+            return amount;
         }
 
         void toId(int _n,
-                  const std::vector<std::vector<int>> &_edges) {
+                  const std::vector<std::vector<int>> &_k_edges) {
             n_ = _n;
             id_.resize(_n);
             sz_.resize(_n, 1);
             for (size_t i { }; i < _n; ++i) {
                 id_[i] = i;
             }
-            for (size_t i { }; i < _edges.size(); ++i) {
-                size_t p_root { find(_edges[i][0]) };
-                size_t q_root { find(_edges[i][1]) };
+            for (size_t i { }; i < _k_edges.size(); ++i) {
+                size_t p_root { find(_k_edges[i][0]) };
+                size_t q_root { find(_k_edges[i][1]) };
                 if (p_root == q_root) {
                     continue;
                 }
@@ -381,6 +404,65 @@ public:
                              std::vector<std::vector<int>> &_edges) {
             toId(_n, _edges);
             return count();
+        }
+    };
+};
+class Solution2492 {
+public:
+    class UnionFind {
+    private:
+        int n_;
+        std::vector<int> id_;
+        std::vector<int> sz_;
+
+    private:
+        int find(int _p) {
+            int root { _p - 1 };
+            for (; root != id_[root]; root = id_[root]);
+
+            return root;
+        }
+        int min() {
+            int min { sz_[1] };
+            for (auto &&el : sz_) {
+                if (min > el) {
+                    min = el;
+                }
+            }
+
+            return min;
+        }
+
+        void toId(int _n,
+                  const std::vector<std::vector<int>> &_k_roads) {
+            n_ = _n;
+            id_.resize(_n);
+            sz_.resize(_n, 1);
+            for (int i { }; i < _n; ++i) {
+                id_[i] = i;
+            }
+            for (int i { }; i < _k_roads.size(); ++i) {
+                int p_root { find(_k_roads[i][0]) };
+                int q_root { find(_k_roads[i][1]) };
+                if (p_root == q_root) {
+                    continue;
+                }
+                if (sz_[p_root] > sz_[q_root]) {
+                    id_[q_root] = p_root;
+                    sz_[p_root] += sz_[q_root];
+                }
+                else {
+                    id_[p_root] = q_root;
+                    sz_[q_root] += sz_[p_root];
+                }
+            }
+        }
+
+    public:
+        int minScore(int _n,
+                     std::vector<std::vector<int>> &_roads) {
+            toId(_n, _roads);
+            return min();
         }
     };
 };
