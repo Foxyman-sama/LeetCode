@@ -34,7 +34,7 @@ public:
 };
 class Solution9 {
 public:
-
+    // Accepted
     class Math {
         bool isPalindrome(int _x) {
             if (_x < 0) {
@@ -50,6 +50,25 @@ public:
             }
 
             return reverse == _x;
+        }
+    };
+};
+class Solution26 {
+public:
+    // Accepted
+    class TwoPointers {
+    public:
+        int removeDuplicates(std::vector<int> &_nums) {
+            std::vector<int> uniques { _nums[0] };
+            size_t j { };
+            for (size_t i { }; i < _nums.size(); ++i) {
+                if (_nums[i] != _nums[j]) {
+                    uniques.emplace_back(_nums[i]);
+                    j = i;
+                }
+            }
+            
+            return uniques.size();
         }
     };
 };
@@ -165,6 +184,30 @@ public:
                     }
                 }
             }
+        }
+    };
+};
+class Solution1020 {
+public:
+    class UnionFind {
+    private:
+        std::vector<int> id_;
+        std::vector<int> sz_;
+
+    private:
+        int find(int _p) {
+            for (; _p != id_[_p]; _p = id_[_p]);
+
+            return _p;
+        }
+
+        void toId(const std::vector<std::vector<int>> &_k_grid) {
+            id_.resize(_k_grid)
+        }
+
+    public:
+        int numEnclaves(std::vector<std::vector<int>> &_grid) {
+
         }
     };
 };
@@ -425,65 +468,6 @@ public:
                              std::vector<std::vector<int>> &_edges) {
             toId(_n, _edges);
             return count();
-        }
-    };
-};
-class Solution2492 {
-public:
-    class UnionFind {
-    private:
-        int n_;
-        std::vector<int> id_;
-        std::vector<int> sz_;
-
-    private:
-        int find(int _p) {
-            int root { _p - 1 };
-            for (; root != id_[root]; root = id_[root]);
-
-            return root;
-        }
-        int min() {
-            int min { sz_[1] };
-            for (auto &&el : sz_) {
-                if (min > el) {
-                    min = el;
-                }
-            }
-
-            return min;
-        }
-
-        void toId(int _n,
-                  const std::vector<std::vector<int>> &_k_roads) {
-            n_ = _n;
-            id_.resize(_n);
-            sz_.resize(_n, 1);
-            for (int i { }; i < _n; ++i) {
-                id_[i] = i;
-            }
-            for (int i { }; i < _k_roads.size(); ++i) {
-                int p_root { find(_k_roads[i][0]) };
-                int q_root { find(_k_roads[i][1]) };
-                if (p_root == q_root) {
-                    continue;
-                }
-                if (sz_[p_root] > sz_[q_root]) {
-                    id_[q_root] = p_root;
-                    sz_[p_root] += sz_[q_root];
-                }
-                else {
-                    id_[p_root] = q_root;
-                    sz_[q_root] += sz_[p_root];
-                }
-            }
-        }
-
-    public:
-        int minScore(int _n,
-                     std::vector<std::vector<int>> &_roads) {
-            toId(_n, _roads);
-            return min();
         }
     };
 };
