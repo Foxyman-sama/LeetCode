@@ -187,27 +187,95 @@ public:
         }
     };
 };
-class Solution1020 {
+class Solution200 {
 public:
+    // Accepted
     class UnionFind {
     private:
+        size_t size_;
         std::vector<int> id_;
         std::vector<int> sz_;
 
     private:
         int find(int _p) {
-            for (; _p != id_[_p]; _p = id_[_p]);
+            int root { _p };
+            for (; (root != -1) && (root != id_[root]); root = id_[root]);
+            if (root != -1) {
+                while (id_[_p] != root) {
+                    int parent { id_[_p] };
+                    id_[_p] = root;
+                    _p = parent;
+                }
+            }
 
-            return _p;
+            return root;
+        }
+        int count(const std::vector<std::vector<char>> &_k_grid) {
+            std::unordered_map<int, int> sizes { };
+            for (size_t i { }; i < size_; ++i) {
+                if (id_[i] != -1) {
+                    int root { find(i) };
+                    ++sizes[root];
+                }
+            }
+
+            return sizes.size();
         }
 
-        void toId(const std::vector<std::vector<int>> &_k_grid) {
-            id_.resize(_k_grid)
+        void merge(int _p,
+                   int _q) {
+            int p_root { find(_p) };
+            int q_root { find(_q) };
+            if (p_root == q_root) {
+                return;
+            }
+            if (sz_[p_root] > sz_[q_root]) {
+                id_[q_root] = p_root;
+                sz_[p_root] += sz_[q_root];
+            }
+            else {
+                id_[p_root] = q_root;
+                sz_[q_root] += sz_[p_root];
+            }
+        }
+        void toId(const std::vector<std::vector<char>> &_k_grid) {
+            size_ = _k_grid.size() * _k_grid[0].size();
+            id_.resize(size_);
+            sz_.resize(size_, 1);
+            for (size_t i { }; i < size_; ++i) {
+                id_[i] = i;
+            }
+
+            size_t row_count { _k_grid.size() };
+            size_t column_count { _k_grid[0].size() };
+            for (int i { }; i < row_count; ++i) {
+                for (int j { }; j < column_count; ++j) {
+                    int current_index { static_cast<int>(i * column_count + j) };
+                    if (_k_grid[i][j] == '0') {
+                        id_[current_index] = -1;
+                    }
+                    else {
+                        if ((i - 1 >= 0) && (_k_grid[i - 1][j] == '1')) {
+                            merge(current_index, (i - 1) * column_count + j);
+                        }
+                        if ((j + 1 < column_count) && (_k_grid[i][j + 1] == '1')) {
+                            merge(current_index, i * column_count + (j + 1));
+                        }
+                        if ((i + 1 < row_count) && (_k_grid[i + 1][j] == '1')) {
+                            merge(current_index, (i + 1) * column_count + j);
+                        }
+                        if ((j - 1 >= 0) && (_k_grid[i][j - 1] == '1')) {
+                            merge(current_index, i * column_count + j - 1);
+                        }
+                    }
+                }
+            }
         }
 
     public:
-        int numEnclaves(std::vector<std::vector<int>> &_grid) {
-
+        int numIslands(std::vector<std::vector<char>> &_grid) {
+            toId(_grid);
+            return count(_grid);
         }
     };
 };
