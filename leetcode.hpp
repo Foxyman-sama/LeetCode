@@ -279,6 +279,55 @@ public:
         }
     };
 };
+class Solution695 {
+public:
+    class UnionFind {
+    private:
+        size_t size_;
+        std::vector<int> id_;
+        std::vector<int> sz_;
+
+    private:
+        int find(int _p) {
+            int root { _p };
+            for (; root != id_[root]; root = id_[root]);
+            while (id_[_p] != root) {
+                int parent { id_[_p] };
+                id_[_p] = root;
+                _p = parent;
+            }
+
+            return root;
+        }
+        int max() {
+            return 0;
+        }
+
+        void toId(const std::vector<std::vector<int>> &_k_grid) {
+            size_t rows_count { _k_grid.size() };
+            size_t columns_count { _k_grid[0].size() };
+            size_ = rows_count * columns_count;
+            id_.resize(size_);
+            sz_.resize(size_, 1);
+            for (size_t i { }; i < size_; ++i) {
+                id_[i] = i;
+            }
+
+            for (size_t i { }; i < rows_count; ++i) {
+                for (size_t j { }; j < columns_count; ++j) {
+
+                }
+            }
+        }
+
+    public:
+        int maxAreaOfIsland(const std::vector<std::vector<int>> &_k_grid) {
+            toId(_k_grid);
+            return max();
+        }
+
+    };
+};
 class Solution1061 {
 public:
     // Accepted
