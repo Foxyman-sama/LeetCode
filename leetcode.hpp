@@ -499,6 +499,107 @@ public:
         }
     };
 };
+class Solution1267 {
+public:
+    // Accepted but a bad answer
+    class UnionFind {
+    private:
+        size_t rows_count_;
+        size_t columns_count_;
+        std::vector<int> id_;
+        std::vector<int> sz_;
+
+    private:
+        int find(int _p) {
+            int root { _p };
+            for (; root != id_[root]; root = id_[root]);
+            while (id_[_p] != root) {
+                int parent { id_[_p] };
+                id_[_p] = root;
+                _p = parent;
+            }
+
+            return root;
+        }
+        int count() {
+            std::unordered_map<int, int> sizes { };
+            for (size_t i { }; i < rows_count_ * columns_count_; ++i) {
+                int root { find(i) };
+                if ((sizes.find(root) == sizes.end()) && (sz_[root] > 1)) {
+                    sizes[root] = sz_[root];
+                }
+            }
+
+            int amount { };
+            for (auto &&el : sizes) {
+                amount += el.second;
+            }
+
+            return amount;
+        }
+
+        void toId(const std::vector<std::vector<int>> &_k_grid) {
+            rows_count_ = _k_grid.size();
+            columns_count_ = _k_grid[0].size();
+
+            size_t size { rows_count_ * columns_count_ };
+            id_.resize(size);
+            sz_.resize(size, 1);
+            for (size_t i { }; i < size; ++i) {
+                id_[i] = i;
+            }
+            for (int i { }; i < rows_count_; ++i) {
+                for (int j { }; j < columns_count_; ++j) {
+                    if (_k_grid[i][j]) {
+                        int current_index { static_cast<int>(i * columns_count_ + j) };
+                        for (int k { i - 1 }; k >= 0; --k) {              
+                            if (_k_grid[k][j]) {
+                                merge(current_index, k * columns_count_ + j);
+                            }
+                        }                       
+                        for (int k { j + 1 }; k < columns_count_; ++k) {              
+                            if (_k_grid[i][k]) {
+                                merge(current_index, i * columns_count_ + k);
+                            }
+                        }                       
+                        for (int k { i + 1 }; k < rows_count_; ++k) {              
+                            if (_k_grid[k][j]) {
+                                merge(current_index, k * columns_count_ + j);
+                            }
+                        }                       
+                        for (int k { j - 1 }; k >= 0; --k) {              
+                            if (_k_grid[i][k]) {
+                                merge(current_index, i * columns_count_ + k);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        void merge(int _p,
+                   int _q) {
+            int p_root { find(_p) };
+            int q_root { find(_q) };
+            if (p_root == q_root) {
+                return;
+            }
+            if (sz_[p_root] > sz_[q_root]) {
+                id_[q_root] = p_root;
+                sz_[p_root] += sz_[q_root];
+            }
+            else {
+                id_[p_root] = q_root;
+                sz_[q_root] += sz_[p_root];
+            }
+        }
+
+    public:
+        int countServers(std::vector<std::vector<int>> &_grid) {
+            toId(_grid);
+            return count();
+        }
+    };
+};
 class Solution1971 {
 public:
     // Accepted

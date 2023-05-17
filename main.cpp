@@ -2,22 +2,8 @@
 #include "leetcode.hpp"
 
 int main()  {
-    Solution695::UnionFind sol { };
-    Vec2D<int> vecs {
-        { 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0 },
-        { 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0 },
-        { 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 }
-    };    
-    Vec2D<int> vecs2 {
-        { 0, 1, 0, 1, 0 },
-        { 0, 1, 1, 1, 0 },
-        { 0, 0, 0, 1, 1 },
-    };
-    std::cout << sol.maxAreaOfIsland(vecs2) << '\n';
+    Solution1267::UnionFind sol { };
+    Vec2D<int> vecs { { 1, 0 }, { 1, 1 } };
+    std::cout << sol.countServers(vecs) << '\n';
     system("pause");
 }
