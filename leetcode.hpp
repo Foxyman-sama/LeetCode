@@ -281,9 +281,11 @@ public:
 };
 class Solution695 {
 public:
+    // Accepted
     class UnionFind {
     private:
-        size_t size_;
+        size_t rows_count_;
+        size_t columns_count_;
         std::vector<int> id_;
         std::vector<int> sz_;
 
@@ -299,33 +301,74 @@ public:
 
             return root;
         }
-        int max() {
-            return 0;
+        int max(const std::vector<std::vector<int>> &_k_grid) {
+            int max { };
+            for (size_t i { }; i < rows_count_; ++i) {
+                for (size_t j { }; j < columns_count_; ++j) {
+                    if (_k_grid[i][j]) { 
+                        int current_index { static_cast<int>(i * columns_count_ + j) };
+                        if (max < sz_[current_index]) {
+                            max = sz_[current_index];
+                        }
+                    }
+                }
+            }
+
+            return max;
         }
 
         void toId(const std::vector<std::vector<int>> &_k_grid) {
-            size_t rows_count { _k_grid.size() };
-            size_t columns_count { _k_grid[0].size() };
-            size_ = rows_count * columns_count;
-            id_.resize(size_);
-            sz_.resize(size_, 1);
-            for (size_t i { }; i < size_; ++i) {
+            rows_count_ = _k_grid.size();
+            columns_count_ = _k_grid[0].size();
+
+            size_t size { rows_count_ * columns_count_ };
+            id_.resize(size);
+            sz_.resize(size, 1);
+            for (size_t i { }; i < size; ++i) {
                 id_[i] = i;
             }
-
-            for (size_t i { }; i < rows_count; ++i) {
-                for (size_t j { }; j < columns_count; ++j) {
-
+            for (int i { }; i < rows_count_; ++i) {
+                for (int j { }; j < columns_count_; ++j) {
+                    if (_k_grid[i][j]) {
+                        int current_index { static_cast<int>(i * columns_count_ + j) };
+                        if ((i - 1 >= 0) && (_k_grid[i - 1][j])) {
+                            merge(current_index, (i - 1) * columns_count_ + j);
+                        }
+                        if ((j + 1 < columns_count_) && (_k_grid[i][j + 1])) {
+                            merge(current_index, i * columns_count_ + (j + 1));
+                        }
+                        if ((i + 1 < rows_count_) && (_k_grid[i + 1][j])) {
+                            merge(current_index, (i + 1) * columns_count_ + j);
+                        }
+                        if ((j - 1 >= 0) && (_k_grid[i][j - 1])) {
+                            merge(current_index, i * columns_count_ + (j - 1));
+                        }
+                    }
                 }
+            }
+        }
+        void merge(int _p,
+                   int _q) {
+            int p_root { find(_p) };
+            int q_root { find(_q) };
+            if (p_root == q_root) {
+                return;
+            }
+            if (sz_[p_root] > sz_[q_root]) {
+                id_[q_root] = p_root;
+                sz_[p_root] += sz_[q_root];
+            }
+            else {
+                id_[p_root] = q_root;
+                sz_[q_root] += sz_[p_root];
             }
         }
 
     public:
         int maxAreaOfIsland(const std::vector<std::vector<int>> &_k_grid) {
             toId(_k_grid);
-            return max();
+            return max(_k_grid);
         }
-
     };
 };
 class Solution1061 {
