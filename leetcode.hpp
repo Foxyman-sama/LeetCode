@@ -72,6 +72,31 @@ public:
         }
     };
 };
+class Solution27 {
+public:
+    class TwoPointers {
+    public:
+        int removeElement(std::vector<int> &_nums, 
+                          int _val) {
+            int amount { };
+            size_t i { _nums.size() };
+            size_t j { };
+            while (i >= j) {
+                if (_nums[i] == _val) {
+                    j = i;
+                }
+                else if (_nums[i] != _nums[j]) {
+                    ++amount;
+                    std::swap(_nums[i], _nums[j]);
+                    j = i;
+                }
+            }
+
+            _nums.erase(_nums.begin() + j - 1, _nums.end());
+            return amount;
+        }
+    };
+};
 class Solution547 {
 public:
     // Accepted
@@ -501,11 +526,12 @@ public:
 };
 class Solution1267 {
 public:
-    // Accepted but a bad answer
+    // Accepted but it`s a bad answer
     class UnionFind {
     private:
         size_t rows_count_;
         size_t columns_count_;
+        size_t size_;
         std::vector<int> id_;
         std::vector<int> sz_;
 
@@ -523,7 +549,7 @@ public:
         }
         int count() {
             std::unordered_map<int, int> sizes { };
-            for (size_t i { }; i < rows_count_ * columns_count_; ++i) {
+            for (size_t i { }; i < size_; ++i) {
                 int root { find(i) };
                 if ((sizes.find(root) == sizes.end()) && (sz_[root] > 1)) {
                     sizes[root] = sz_[root];
@@ -541,11 +567,10 @@ public:
         void toId(const std::vector<std::vector<int>> &_k_grid) {
             rows_count_ = _k_grid.size();
             columns_count_ = _k_grid[0].size();
-
-            size_t size { rows_count_ * columns_count_ };
-            id_.resize(size);
-            sz_.resize(size, 1);
-            for (size_t i { }; i < size; ++i) {
+            size_ = rows_count_ * columns_count_;
+            id_.resize(size_);
+            sz_.resize(size_, 1);
+            for (size_t i { }; i < size_; ++i) {
                 id_[i] = i;
             }
             for (int i { }; i < rows_count_; ++i) {

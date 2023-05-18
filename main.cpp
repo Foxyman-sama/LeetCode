@@ -2,8 +2,9 @@
 #include "leetcode.hpp"
 
 int main()  {
-    Solution1267::UnionFind sol { };
-    Vec2D<int> vecs { { 1, 0 }, { 1, 1 } };
-    std::cout << sol.countServers(vecs) << '\n';
+    Solution27::TwoPointers sol { };
+    std::vector<int> nums { 3, 2, 2, 3 };
+    std::cout << sol.removeElement(nums, 3) << '\n';
+
     system("pause");
 }
