@@ -55,33 +55,41 @@ public:
 };
 class Solution13 {
 public:
+    // Accepted
     class HashTable {
     public:
-        int romanToInt(std::string _str) {
-            std::unordered_map<char, int> equals {
-                std::pair<char, int> { 'I', 1 },
-                std::pair<char, int> { 'IV', 4 },
-                std::pair<char, int> { 'V', 5 },
-                std::pair<char, int> { 'IX', 9 },
-                std::pair<char, int> { 'X', 10 },
-                std::pair<char, int> { 'XL', 40 },
-                std::pair<char, int> { 'L', 50 },
-                std::pair<char, int> { 'XC', 90 },
-                std::pair<char, int> { 'C', 100 },
-                std::pair<char, int> { 'CD', 400 },
-                std::pair<char, int> { 'D', 500 },
-                std::pair<char, int> { 'CM', 900 },
-                std::pair<char, int> { 'M', 1000 },
+        int romanToInt(const std::string &_k_str) {
+            std::unordered_map<std::string, int> equals {
+                std::pair<std::string, int> { "I", 1 },
+                std::pair<std::string, int> { "IV", 4 },
+                std::pair<std::string, int> { "V", 5 },
+                std::pair<std::string, int> { "IX", 9 },
+                std::pair<std::string, int> { "X", 10 },
+                std::pair<std::string, int> { "XL", 40 },
+                std::pair<std::string, int> { "L", 50 },
+                std::pair<std::string, int> { "XC", 90 },
+                std::pair<std::string, int> { "C", 100 },
+                std::pair<std::string, int> { "CD", 400 },
+                std::pair<std::string, int> { "D", 500 },
+                std::pair<std::string, int> { "CM", 900 },
+                std::pair<std::string, int> { "M", 1000 },
             };
             int result { };
-            for (size_t i { }; i < _str.size(); ++i) {
-                if (i + 1 < _str.size()) {
-                    std::string composed { _str[i] };
-                    composed += _str[i + 1];
+            for (size_t i { }; i < _k_str.size(); ++i) {
+                if (i + 1 < _k_str.size()) {
+                    std::string composed { _k_str[i] };
+                    composed += _k_str[i + 1];
+                    if (equals.find(composed) != equals.end()) {
+                        result += equals[composed];
+                        ++i;
+                        continue;
+                    }
                 }
-                if (_str[i] == 'I')
-                result += equals[i];
+
+                result += equals[std::string { _k_str[i] }];
             }
+
+            return result;
         }
     };
 };
