@@ -2,9 +2,12 @@
 #include "leetcode.hpp"
 
 int main()  {
-    Solution27::TwoPointers sol { };
-    std::vector<int> nums { 3, 2, 2, 3 };
-    std::cout << sol.removeElement(nums, 3) << '\n';
+    Solution66::Math sol { };
+    std::vector<int> nums { 9, 9, 9 };
+    nums = sol.plusOne(nums);
+    for (auto &&el : nums) {
+        std::cout << "#\r\t" << el << '\n';
+    }
 
     system("pause");
 }

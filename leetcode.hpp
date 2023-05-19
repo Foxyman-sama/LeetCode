@@ -53,6 +53,38 @@ public:
         }
     };
 };
+class Solution13 {
+public:
+    class HashTable {
+    public:
+        int romanToInt(std::string _str) {
+            std::unordered_map<char, int> equals {
+                std::pair<char, int> { 'I', 1 },
+                std::pair<char, int> { 'IV', 4 },
+                std::pair<char, int> { 'V', 5 },
+                std::pair<char, int> { 'IX', 9 },
+                std::pair<char, int> { 'X', 10 },
+                std::pair<char, int> { 'XL', 40 },
+                std::pair<char, int> { 'L', 50 },
+                std::pair<char, int> { 'XC', 90 },
+                std::pair<char, int> { 'C', 100 },
+                std::pair<char, int> { 'CD', 400 },
+                std::pair<char, int> { 'D', 500 },
+                std::pair<char, int> { 'CM', 900 },
+                std::pair<char, int> { 'M', 1000 },
+            };
+            int result { };
+            for (size_t i { }; i < _str.size(); ++i) {
+                if (i + 1 < _str.size()) {
+                    std::string composed { _str[i] };
+                    composed += _str[i + 1];
+                }
+                if (_str[i] == 'I')
+                result += equals[i];
+            }
+        }
+    };
+};
 class Solution26 {
 public:
     // Accepted
@@ -74,26 +106,60 @@ public:
 };
 class Solution27 {
 public:
+    // Accepted
     class TwoPointers {
     public:
         int removeElement(std::vector<int> &_nums, 
                           int _val) {
-            int amount { };
-            size_t i { _nums.size() };
-            size_t j { };
-            while (i >= j) {
-                if (_nums[i] == _val) {
-                    j = i;
+            int i { };
+            int j { static_cast<int>(_nums.size() - 1) };
+            while (i < j) {
+                while ((i < j) && (_nums[i] != _val)) {
+                    ++i;
                 }
-                else if (_nums[i] != _nums[j]) {
-                    ++amount;
-                    std::swap(_nums[i], _nums[j]);
-                    j = i;
+                while ((i < j) && (_nums[j] == _val)) {
+                    --j;
+                }
+
+                std::swap(_nums[i++], _nums[j--]);
+            }
+
+            int amount { };
+            for (int i { static_cast<int>(_nums.size() - 1) }; i >= 0; --i) {
+                if (_nums[i] != _val) {
+                    break;
+                }
+
+                ++amount;
+            }
+
+            return _nums.size() - amount;
+        }
+    };
+};
+class Solution66 {
+public:
+    class Math {
+    public:
+        // Accepted
+        std::vector<int> plusOne(std::vector<int> &_digits) {
+            _digits.back() += 1;
+
+            int rest { };
+            for (int i { static_cast<int>(_digits.size() - 1) }; i >= 0; --i) {
+                _digits[i] += rest;
+                rest = 0;
+                if (_digits[i] > 9) {
+                    rest = _digits[i] / 10;
+                    _digits[i] = _digits[i] % 10;
                 }
             }
 
-            _nums.erase(_nums.begin() + j - 1, _nums.end());
-            return amount;
+            if (rest) {
+                _digits.insert(_digits.begin(), rest);
+            }
+
+            return _digits;
         }
     };
 };
