@@ -145,6 +145,30 @@ public:
         }
     };
 };
+class Solution58 {
+public:
+    // Accepted
+    class String {
+    public:
+        int lengthOfLastWord(const std::string &_k_str) {
+            int i { static_cast<int>(_k_str.size() - 1) };
+            while ((i >= 0) && (_k_str[i] == ' ')) {
+                --i;
+            }
+
+            int count { };
+            for (; i >= 0; --i) {
+                if (_k_str[i] == ' ') {
+                    break;
+                }
+
+                ++count;
+            }
+
+            return count;
+        }
+    };
+};
 class Solution66 {
 public:
     class Math {
@@ -168,6 +192,43 @@ public:
             }
 
             return _digits;
+        }
+    };
+};
+class Solution118 {
+public:
+    // Accepted
+    class DynamicProgramming {
+    public:
+        std::vector<std::vector<int>> generate(int _rows) {
+            if (_rows == 1) {
+                return std::vector<std::vector<int>> { { 1 } };
+            }
+
+            std::vector<std::vector<int>> result { { 1 }, { 1, 1 } };
+            for (size_t i { 2 }; i < _rows; ++i) {
+                std::vector<int> row { 1 };
+                size_t size { i };
+                for (size_t j { 1 }; j < size; ++j) {
+                    row.emplace_back(result[i - 1][j - 1] + result[i - 1][j]);
+                }
+
+                row.emplace_back(1);
+                result.emplace_back(row);
+            }
+
+            return result;
+        }
+    };
+};
+class Solution119 {
+public:
+    class DynamicProgramming {
+    public:
+        std::vector<int> getRow(int _index) {
+            if (!_index) {
+                return { 1 };
+            }
         }
     };
 };

@@ -2,8 +2,15 @@
 #include "leetcode.hpp"
 
 int main()  {
-    Solution13::HashTable sol { };
-    std::string test_case { "IV" };
-    std::cout << sol.romanToInt(test_case) << '\n';
+    Solution118::DynamicProgramming sol { };
+    auto result { sol.generate(5) };
+    for (auto &&row_el : result) {
+        for (auto &&col_el : row_el) {
+            std::cout << col_el << ' ';
+        }
+        
+        std::cout << '\n';
+    }
+
     system("pause");
 }
