@@ -2,15 +2,12 @@
 #include "leetcode.hpp"
 
 int main()  {
-    Solution118::DynamicProgramming sol { };
-    auto result { sol.generate(5) };
+    Solution119::DynamicProgramming sol { };
+    auto result { sol.getRow(3) };
     for (auto &&row_el : result) {
-        for (auto &&col_el : row_el) {
-            std::cout << col_el << ' ';
-        }
-        
-        std::cout << '\n';
+        std::cout << row_el << ' ';
     }
 
+    std::cout << '\n';
     system("pause");
 }

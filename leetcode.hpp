@@ -208,8 +208,7 @@ public:
             std::vector<std::vector<int>> result { { 1 }, { 1, 1 } };
             for (size_t i { 2 }; i < _rows; ++i) {
                 std::vector<int> row { 1 };
-                size_t size { i };
-                for (size_t j { 1 }; j < size; ++j) {
+                for (size_t j { 1 }; j < i; ++j) {
                     row.emplace_back(result[i - 1][j - 1] + result[i - 1][j]);
                 }
 
@@ -223,12 +222,73 @@ public:
 };
 class Solution119 {
 public:
+    // Accepted
     class DynamicProgramming {
     public:
         std::vector<int> getRow(int _index) {
             if (!_index) {
                 return { 1 };
             }
+
+            std::vector<std::vector<int>> triangle { { 1 }, { 1, 1 } };
+            for (size_t i { 2 }; i <= _index; ++i) {
+                std::vector<int> row { 1 };
+                for (size_t j { 1 }; j < i; ++j) {
+                    row.emplace_back(triangle[i - 1][j - 1] + triangle[i - 1][j]);
+                }
+
+                row.emplace_back(1);
+                triangle.emplace_back(row);
+            }
+
+            return triangle[_index];
+        }
+    };
+};
+class Solution128 {
+public:
+    class UnionFind {
+    private:
+        size_t size_;
+        std::vector<int> id_;
+        std::vector<int> sz_;
+
+    private:
+        int find(int _p) {
+            int root { _p };
+            for (; root != id_[root]; root = id_[root]);
+
+            return root;
+        }
+
+        void toId(const std::vector<int> &_k_nums) {
+            size_ = _k_nums.size();
+            id_.resize(size_);
+            sz_.resize(size_, 1);
+            for (size_t i { }; i < size_; ++i) {
+                id_[i] = i;
+            }
+        }
+        void merge(int _p,
+                   int _q) {
+            int p_root { find(_p) };
+            int q_root { find(_q) };
+            if (p_root == q_root) {
+                return;
+            }
+            if (sz_[p_root] > sz_[q_root]) {
+                id_[q_root] = p_root;
+                sz_[p_root] += sz_[q_root];
+            }
+            else {
+                id_[p_root] = q_root;
+                sz_[q_root] += sz_[p_root];
+            }
+        }
+
+    public:
+        int longestConsecutive(const std::vector<int> &_k_nums) {
+
         }
     };
 };
