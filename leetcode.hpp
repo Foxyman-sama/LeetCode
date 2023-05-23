@@ -560,6 +560,21 @@ public:
 
             return root;
         }
+        int count(const std::vector<std::vector<int>> &_k_grid) {
+            std::vector<int> borders { };
+            for (size_t i { }; i < rows_count_; ++i) {
+                for (size_t j { }; j < columns_count_; ++j) {
+                    int current_index { static_cast<int>(i * columns_count_ + j) };
+                    int root { find(current_index) };
+                    if ((root >= 0) && (root < columns_count_)) {
+                        continue;
+                    }   
+                    if ((root >= 0) && (root < columns_count_)) {
+                        continue;
+                    }
+                }
+            }
+        }
 
         void toId(const std::vector<std::vector<int>> &_k_grid) {
             rows_count_ = _k_grid.size();
