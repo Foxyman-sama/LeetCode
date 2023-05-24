@@ -2,12 +2,10 @@
 #include "leetcode.hpp"
 
 int main()  {
-    Solution119::DynamicProgramming sol { };
-    auto result { sol.getRow(3) };
-    for (auto &&row_el : result) {
-        std::cout << row_el << ' ';
-    }
-
-    std::cout << '\n';
+    Solution53::DivideAndConquer sol { };
+    std::vector<int> arr { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+    std::vector<int> arr2 { 1 };
+    std::vector<int> arr3 { 5, 4, -1, 7, 8 };
+    std::cout << sol.maxSubArray(arr) << '\n';
     system("pause");
 }

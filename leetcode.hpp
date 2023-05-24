@@ -145,6 +145,34 @@ public:
         }
     };
 };
+class Solution53 {
+public:
+    class DivideAndConquer {
+    private:
+        int sumRecursion(size_t _l,
+                         size_t _r,
+                         const std::vector<int> &_k_nums) {
+            if (_l == _r) {
+                return _k_nums[_l];
+            }
+            
+            int sum { };
+            for (size_t i { _l }; i <= _r; ++i) {
+                sum += _k_nums[i];
+            }
+
+            size_t mid { (_l + _r) / 2 };
+            int first { sumRecursion(_l, mid, _k_nums) };
+            int second { sumRecursion(mid + 1, _r, _k_nums) };
+            return std::max({ sum, first, second });
+        }
+
+    public:
+        int maxSubArray(const std::vector<int> &_k_nums) {
+            return sumRecursion(0, _k_nums.size() - 1, _k_nums);
+        }
+    };
+};
 class Solution58 {
 public:
     // Accepted
@@ -790,6 +818,37 @@ public:
         }
     };
 };
+class Solution1929 {
+public:
+    // Accepted
+    class Array {
+    public:
+        std::vector<int> getConcatenation(std::vector<int> &_nums) {
+            const size_t k_size { _nums.size() };
+            for (size_t i { }; i < k_size; ++i) {
+                _nums.emplace_back(_nums[i]);
+            }
+
+            return _nums;
+        }
+    };   
+    // Accepted
+    class Array2 {
+    public:
+        std::vector<int> getConcatenation(std::vector<int> &_nums) {
+            const size_t k_old_size { _nums.size() };
+            const size_t k_new_size { _nums.size() * 2 };
+            _nums.resize(k_old_size * 2);
+
+            size_t index { k_new_size / 2 };
+            for (size_t i { }; i < k_old_size; ++i) {
+                _nums[index++] = _nums[i];
+            }
+
+            return _nums;
+        }
+    };
+};
 class Solution1971 {
 public:
     // Accepted
@@ -919,6 +978,34 @@ public:
                              std::vector<std::vector<int>> &_edges) {
             toId(_n, _edges);
             return count();
+        }
+    };
+};
+class Solution2610 {
+public:
+    // Accepted
+    class HashTable {
+    public:
+        std::vector<std::vector<int>> findMatrix(std::vector<int> &_nums) {
+            std::vector<std::vector<int>> result { };
+            for (size_t i { }; i < _nums.size(); ++i) {
+                std::unordered_map<int, int> hash { };
+                std::vector<int> row { };
+                for (size_t j { }; j < _nums.size(); ++j) {
+                    if ((_nums[i] != INT_MIN) && (hash.find(_nums[i]) == hash.end())) {
+                        row.emplace_back(_nums[i]);
+                        _nums[i] = INT_MIN;
+                    }
+                }
+
+                if (row.empty()) {
+                    break;
+                }
+
+                result.emplace_back(row);
+            }
+
+            return result;
         }
     };
 };
