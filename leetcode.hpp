@@ -245,6 +245,98 @@ public:
         }
     };
 };
+class Solution200 {
+public:
+    // Accepted
+    class UnionFind {
+    private:
+        size_t size_;
+        std::vector<int> id_;
+        std::vector<int> sz_;
+
+    private:
+        int find(int _p) {
+            int root { _p };
+            for (; (root != -1) && (root != id_[root]); root = id_[root]);
+            if (root != -1) {
+                while (id_[_p] != root) {
+                    int parent { id_[_p] };
+                    id_[_p] = root;
+                    _p = parent;
+                }
+            }
+
+            return root;
+        }
+        int count(const std::vector<std::vector<char>> &_k_grid) {
+            std::unordered_map<int, int> sizes { };
+            for (size_t i { }; i < size_; ++i) {
+                if (id_[i] != -1) {
+                    int root { find(i) };
+                    ++sizes[root];
+                }
+            }
+
+            return sizes.size();
+        }
+
+        void merge(int _p,
+                   int _q) {
+            int p_root { find(_p) };
+            int q_root { find(_q) };
+            if (p_root == q_root) {
+                return;
+            }
+            if (sz_[p_root] > sz_[q_root]) {
+                id_[q_root] = p_root;
+                sz_[p_root] += sz_[q_root];
+            }
+            else {
+                id_[p_root] = q_root;
+                sz_[q_root] += sz_[p_root];
+            }
+        }
+        void toId(const std::vector<std::vector<char>> &_k_grid) {
+            size_ = _k_grid.size() * _k_grid[0].size();
+            id_.resize(size_);
+            sz_.resize(size_, 1);
+            for (size_t i { }; i < size_; ++i) {
+                id_[i] = i;
+            }
+
+            size_t row_count { _k_grid.size() };
+            size_t column_count { _k_grid[0].size() };
+            for (int i { }; i < row_count; ++i) {
+                for (int j { }; j < column_count; ++j) {
+                    int current_index { static_cast<int>(i * column_count + j) };
+                    if (_k_grid[i][j] == '0') {
+                        id_[current_index] = -1;
+                    }
+                    else {
+                        if ((i - 1 >= 0) && (_k_grid[i - 1][j] == '1')) {
+                            merge(current_index, (i - 1) * column_count + j);
+                        }
+                        if ((j + 1 < column_count) && (_k_grid[i][j + 1] == '1')) {
+                            merge(current_index, i * column_count + (j + 1));
+                        }
+                        if ((i + 1 < row_count) && (_k_grid[i + 1][j] == '1')) {
+                            merge(current_index, (i + 1) * column_count + j);
+                        }
+                        if ((j - 1 >= 0) && (_k_grid[i][j - 1] == '1')) {
+                            merge(current_index, i * column_count + j - 1);
+                        }
+                    }
+                }
+            }
+        }
+
+    public:
+        int numIslands(std::vector<std::vector<char>> &_grid) {
+            toId(_grid);
+            return count(_grid);
+        }
+    };
+};
 class Solution547 {
 public:
     // Accepted
@@ -360,98 +452,6 @@ public:
         }
     };
 };
-class Solution200 {
-public:
-    // Accepted
-    class UnionFind {
-    private:
-        size_t size_;
-        std::vector<int> id_;
-        std::vector<int> sz_;
-
-    private:
-        int find(int _p) {
-            int root { _p };
-            for (; (root != -1) && (root != id_[root]); root = id_[root]);
-            if (root != -1) {
-                while (id_[_p] != root) {
-                    int parent { id_[_p] };
-                    id_[_p] = root;
-                    _p = parent;
-                }
-            }
-
-            return root;
-        }
-        int count(const std::vector<std::vector<char>> &_k_grid) {
-            std::unordered_map<int, int> sizes { };
-            for (size_t i { }; i < size_; ++i) {
-                if (id_[i] != -1) {
-                    int root { find(i) };
-                    ++sizes[root];
-                }
-            }
-
-            return sizes.size();
-        }
-
-        void merge(int _p,
-                   int _q) {
-            int p_root { find(_p) };
-            int q_root { find(_q) };
-            if (p_root == q_root) {
-                return;
-            }
-            if (sz_[p_root] > sz_[q_root]) {
-                id_[q_root] = p_root;
-                sz_[p_root] += sz_[q_root];
-            }
-            else {
-                id_[p_root] = q_root;
-                sz_[q_root] += sz_[p_root];
-            }
-        }
-        void toId(const std::vector<std::vector<char>> &_k_grid) {
-            size_ = _k_grid.size() * _k_grid[0].size();
-            id_.resize(size_);
-            sz_.resize(size_, 1);
-            for (size_t i { }; i < size_; ++i) {
-                id_[i] = i;
-            }
-
-            size_t row_count { _k_grid.size() };
-            size_t column_count { _k_grid[0].size() };
-            for (int i { }; i < row_count; ++i) {
-                for (int j { }; j < column_count; ++j) {
-                    int current_index { static_cast<int>(i * column_count + j) };
-                    if (_k_grid[i][j] == '0') {
-                        id_[current_index] = -1;
-                    }
-                    else {
-                        if ((i - 1 >= 0) && (_k_grid[i - 1][j] == '1')) {
-                            merge(current_index, (i - 1) * column_count + j);
-                        }
-                        if ((j + 1 < column_count) && (_k_grid[i][j + 1] == '1')) {
-                            merge(current_index, i * column_count + (j + 1));
-                        }
-                        if ((i + 1 < row_count) && (_k_grid[i + 1][j] == '1')) {
-                            merge(current_index, (i + 1) * column_count + j);
-                        }
-                        if ((j - 1 >= 0) && (_k_grid[i][j - 1] == '1')) {
-                            merge(current_index, i * column_count + j - 1);
-                        }
-                    }
-                }
-            }
-        }
-
-    public:
-        int numIslands(std::vector<std::vector<char>> &_grid) {
-            toId(_grid);
-            return count(_grid);
-        }
-    };
-};
 class Solution695 {
 public:
     // Accepted
@@ -541,91 +541,6 @@ public:
         int maxAreaOfIsland(const std::vector<std::vector<int>> &_k_grid) {
             toId(_k_grid);
             return max(_k_grid);
-        }
-    };
-};
-class Solution1020 {
-public:
-    class UnionFind {
-    private:
-        size_t rows_count_;
-        size_t columns_count_;
-        std::vector<int> id_;
-        std::vector<int> sz_;
-
-    private:
-        int find(int _p) {
-            int root { _p };
-            for (; _p != id_[_p]; _p = id_[_p]);
-
-            return root;
-        }
-        int count(const std::vector<std::vector<int>> &_k_grid) {
-            std::vector<int> borders { };
-            for (size_t i { }; i < rows_count_; ++i) {
-                for (size_t j { }; j < columns_count_; ++j) {
-                    int current_index { static_cast<int>(i * columns_count_ + j) };
-                    int root { find(current_index) };
-                    if ((root >= 0) && (root < columns_count_)) {
-                        continue;
-                    }   
-                    if ((root >= 0) && (root < columns_count_)) {
-                        continue;
-                    }
-                }
-            }
-        }
-
-        void toId(const std::vector<std::vector<int>> &_k_grid) {
-            rows_count_ = _k_grid.size();
-            columns_count_ = _k_grid[0].size();
-
-            size_t size { rows_count_ * columns_count_ };
-            id_.resize(size);
-            sz_.resize(size, 1);
-            for (size_t i { }; i < size; ++i) {
-                id_[i] = i;
-            }
-            for (int i { }; i < rows_count_; ++i) {
-                for (int j { }; j < columns_count_; ++j) {
-                    if (_k_grid[i][j]) {
-                        int current_index { static_cast<int>(i * columns_count_ + j) };
-                        if ((i - 1 >= 0) && (_k_grid[i - 1][j])) {
-                            merge(current_index, (i - 1) * columns_count_ + j);
-                        }
-                        if ((j + 1 < columns_count_) && (_k_grid[i][j + 1])) {
-                            merge(current_index, i * columns_count_ + (j + 1));
-                        }
-                        if ((i + 1 < rows_count_) && (_k_grid[i + 1][j])) {
-                            merge(current_index, (i + 1) * columns_count_ + j);
-                        }
-                        if ((j - 1 >= 0) && (_k_grid[i][j - 1])) {
-                            merge(current_index, i * columns_count_ + (j - 1));
-                        }
-                    }
-                }
-            }
-        }
-        void merge(int _p,
-                   int _q) {
-            int p_root { find(_p) };
-            int q_root { find(_q) };
-            if (p_root == q_root) {
-                return;
-            }
-            if (sz_[p_root] > sz_[q_root]) {
-                id_[q_root] = p_root;
-                sz_[p_root] += sz_[q_root];
-            }
-            else {
-                id_[p_root] = q_root;
-                sz_[q_root] += sz_[p_root];
-            }
-        }
-
-    public:
-        int numEncvales(const std::vector<std::vector<int>> &_k_grid) {
-            
         }
     };
 };
@@ -855,6 +770,23 @@ public:
         int countServers(std::vector<std::vector<int>> &_grid) {
             toId(_grid);
             return count();
+        }
+    };
+};
+class Solution1920 {
+public:
+    // Accepted
+    class Array {
+    public:
+        std::vector<int> buildArray(const std::vector<int> &_k_nums) {
+            const size_t k_size { _k_nums.size() };
+            std::vector<int> result { };
+            result.resize(k_size);
+            for (size_t i { }; i < k_size; ++i) {
+                result[i] = _k_nums[_k_nums[i]];
+            }
+
+            return result;
         }
     };
 };
