@@ -1,6 +1,7 @@
 #ifndef LEETCODE_HPP
 #define LEETCODE_HPP
 
+#include <iostream>
 #include <memory>
 #include <algorithm>
 #include <string>
@@ -149,26 +150,34 @@ class Solution53 {
 public:
     class DivideAndConquer {
     private:
+        int sum_;
+        int max_;
+
+    private:
         int sumRecursion(size_t _l,
                          size_t _r,
                          const std::vector<int> &_k_nums) {
             if (_l == _r) {
                 return _k_nums[_l];
             }
-            
-            int sum { };
-            for (size_t i { _l }; i <= _r; ++i) {
-                sum += _k_nums[i];
-            }
 
-            size_t mid { (_l + _r) / 2 };
-            int first { sumRecursion(_l, mid, _k_nums) };
-            int second { sumRecursion(mid + 1, _r, _k_nums) };
+            int first_sum { sumRecursion(_l + 1, _r, _k_nums) };
+            int second_sum { sumRecursion(_l, _r - 1, _k_nums) };
+            if (first_sum > max_) {
+                max_ = first_sum;
+            }
+            else if (second_sum > max_) {
+                max_ = second_sum;
+            } 
             return std::max({ sum, first, second });
         }
 
     public:
         int maxSubArray(const std::vector<int> &_k_nums) {
+            for (size_t i { }; i < _k_nums.size(); ++i) {
+                max_ += _k_nums[i];
+            }
+
             return sumRecursion(0, _k_nums.size() - 1, _k_nums);
         }
     };
