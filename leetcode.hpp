@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <bitset>
 
 template<
     typename T = int>
@@ -319,11 +320,57 @@ public:
         }
     };
 };
-class Solution191 {
+class Solution190 {
 public:
     class DivideAndConquer {
+    
+    };
+    class BitManipulation {
     public:
+        uint32_t reverseBits(uint32_t _n) {
+            uint32_t result { };
+            while (_n) {
+                result <<= 1;
+                if (_n & 1) {
+                    result ^= 1;
+                }
 
+                _n >>= 1;
+            }
+
+            return result;
+        }
+    };
+};
+class Solution191 {
+public:
+    // Accepted
+    class DivideAndConquer {
+    private:
+        int amount_;
+
+    private:
+        void count(size_t _l,
+                   size_t _r,
+                   const std::bitset<32> &_k_n) {
+            if (_l == _r) {
+                if (_k_n[_l]) {
+                    ++amount_;
+                }
+
+                return;
+            }
+
+            size_t mid { (_l + _r) / 2 };
+            count(_l, mid, _k_n);
+            count(mid + 1, _r, _k_n);
+        }
+
+    public:
+        int hammingWeight(uint32_t _n) {
+            count(0, 31, _n);
+            return amount_;
+        }
     };
     // Accepted
     class BitManipulation {
