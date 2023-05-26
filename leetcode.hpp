@@ -146,42 +146,6 @@ public:
         }
     };
 };
-class Solution53 {
-public:
-    class DivideAndConquer {
-    private:
-        int sum_;
-        int max_;
-
-    private:
-        int sumRecursion(size_t _l,
-                         size_t _r,
-                         const std::vector<int> &_k_nums) {
-            if (_l == _r) {
-                return _k_nums[_l];
-            }
-
-            int first_sum { sumRecursion(_l + 1, _r, _k_nums) };
-            int second_sum { sumRecursion(_l, _r - 1, _k_nums) };
-            if (first_sum > max_) {
-                max_ = first_sum;
-            }
-            else if (second_sum > max_) {
-                max_ = second_sum;
-            } 
-            return std::max({ sum, first, second });
-        }
-
-    public:
-        int maxSubArray(const std::vector<int> &_k_nums) {
-            for (size_t i { }; i < _k_nums.size(); ++i) {
-                max_ += _k_nums[i];
-            }
-
-            return sumRecursion(0, _k_nums.size() - 1, _k_nums);
-        }
-    };
-};
 class Solution58 {
 public:
     // Accepted
@@ -279,6 +243,79 @@ public:
             }
 
             return triangle[_index];
+        }
+    };
+};
+class Solution169 {
+public:
+    // Accepted
+    class DivideAndConquer {
+    private:
+        std::unordered_map<int, int> amounts_;
+
+    private:
+        void max(size_t _l,
+                 size_t _r,
+                 const std::vector<int> &_k_nums) {
+            if (_l == _r) {
+                ++amounts_[_k_nums[_l]];
+                return;
+            }
+
+            size_t mid { (_l + _r) / 2 };
+            max(_l, mid, _k_nums) ;
+            max(mid + 1, _r, _k_nums);
+        }
+
+    public:
+        int majorityElement(std::vector<int> &_nums) {
+            max(0, _nums.size() - 1, _nums);
+
+            int number { };
+            int max { };
+            for (auto &&el : amounts_) {
+                if (el.second > max) {
+                    max = el.second;
+                    number = el.first;
+                }
+            }
+
+            return number;
+        }
+    };
+    // Accepted
+    class DivideAndConquer2 {
+    private:
+        int number_;
+        int amount_;
+
+    private:
+        void max(size_t _l,
+                 size_t _r,
+                 const std::vector<int> &_k_nums) {
+            if (_l == _r) {
+                if (number_ == _k_nums[_l]) {
+                    ++amount_;
+                }
+                else {
+                    if ((--amount_) <= 0) {
+                        number_ = _k_nums[_l];
+                        amount_ = 1;
+                    }
+                }
+
+                return;
+            }
+
+            size_t mid { (_l + _r) / 2 };
+            max(_l, mid, _k_nums) ;
+            max(mid + 1, _r, _k_nums);
+        }
+
+    public:
+        int majorityElement(std::vector<int> &_nums) {
+            max(0, _nums.size() - 1, _nums);
+            return number_;
         }
     };
 };
