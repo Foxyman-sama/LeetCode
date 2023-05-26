@@ -319,6 +319,30 @@ public:
         }
     };
 };
+class Solution191 {
+public:
+    class DivideAndConquer {
+    public:
+
+    };
+    // Accepted
+    class BitManipulation {
+    public:
+        int hammingWeight(uint32_t _n) {
+            int amount { };
+            while (_n) {
+                uint32_t current_bit { _n & 1 };
+                if (current_bit) {
+                    ++amount;
+                }
+
+                _n >>= 1;
+            }
+
+            return amount;
+        }
+    };
+};
 class Solution200 {
 public:
     // Accepted
