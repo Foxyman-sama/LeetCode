@@ -13,6 +13,15 @@ template<
     typename T = int>
 using Vec2D = std::vector<std::vector<T>>;
 
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) { }
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) { }
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) { }
+};
+
 class Solution1 {
 public:
     // Accepted
@@ -197,6 +206,15 @@ public:
         }
     };
 };
+class Solution108 {
+public:
+    class DivideAndConquer {
+    public:
+        TreeNode *sortedArrayToBST(const std::vector<int> &_k_nums) {
+
+        }
+    };
+};
 class Solution118 {
 public:
     // Accepted
@@ -320,11 +338,9 @@ public:
         }
     };
 };
-class Solution190 {
+class Solution190 { // !
 public:
-    class DivideAndConquer {
-
-    };
+    // Accepted
     class BitManipulation {
     public:
         uint32_t reverseBits(uint32_t _n) {
