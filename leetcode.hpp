@@ -323,19 +323,17 @@ public:
 class Solution190 {
 public:
     class DivideAndConquer {
-    
+
     };
     class BitManipulation {
     public:
         uint32_t reverseBits(uint32_t _n) {
             uint32_t result { };
-            while (_n) {
+            for (size_t i { }; i < 32; ++i) {
                 result <<= 1;
-                if (_n & 1) {
-                    result ^= 1;
+                if ((_n >> i) & 1) {
+                    ++result;
                 }
-
-                _n >>= 1;
             }
 
             return result;
