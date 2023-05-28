@@ -13,13 +13,29 @@ template<
     typename T = int>
 using Vec2D = std::vector<std::vector<T>>;
 
-struct TreeNode {
+class TreeNode {
+public:
     int val;
     TreeNode *left;
     TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) { }
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) { }
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) { }
+
+public:
+    TreeNode()
+        : val { }
+        , left { }
+        , right { } { }
+    TreeNode(int _x) 
+        : val { _x }
+        , left { }
+        , right { } { }
+    TreeNode(int _x, 
+             TreeNode *_p_left, 
+             TreeNode *_p_right) 
+        : val { _x }
+        , left { _p_left }
+        , right { _p_right } { }
+    ~TreeNode() {
+    }
 };
 
 class Solution1 {
@@ -209,9 +225,24 @@ public:
 class Solution108 {
 public:
     class DivideAndConquer {
+    private:
+        TreeNode *toTreeNode(size_t _l,
+                             size_t _r,
+                             const std::vector<int> &_k_nums) {
+            if (_l == _r) {
+                return new TreeNode { _k_nums[_l] };
+            }
+
+            size_t mid { (_l + _r) / 2 };
+            TreeNode *p_left { toTreeNode(_l, mid, _k_nums) };
+            TreeNode *p_right { toTreeNode(mid + 1, _r, _k_nums) };
+            p_left->right = p_right;
+            return p_left;
+        }
+
     public:
         TreeNode *sortedArrayToBST(const std::vector<int> &_k_nums) {
-
+            return toTreeNode(0, _k_nums.size() - 1, _k_nums);
         }
     };
 };
