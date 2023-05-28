@@ -234,10 +234,16 @@ public:
             }
 
             size_t mid { (_l + _r) / 2 };
-            TreeNode *p_left { toTreeNode(_l, mid, _k_nums) };
             TreeNode *p_right { toTreeNode(mid + 1, _r, _k_nums) };
-            p_left->right = p_right;
-            return p_left;
+            TreeNode *p_left { toTreeNode(_l, mid, _k_nums) };
+            if ((p_right->val > p_left->val) && (!p_right->left)) {
+                p_right->left = p_left;
+                return p_right;
+            }
+            else {
+                p_left->right = p_right;
+                return p_left;
+            }
         }
 
     public:
