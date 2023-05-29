@@ -4,10 +4,10 @@
 void print(TreeNode *_p_root) noexcept;
 
 int main()  {
-    Solution108::DivideAndConquer sol { };
-    std::vector<int> nums { -10, -3, 0, 5, 9 };
-    auto p_tree { sol.sortedArrayToBST(nums) };
-    print(p_tree);
+    setlocale(0, "");
+    {
+               
+    }
     system("pause");
 }
 

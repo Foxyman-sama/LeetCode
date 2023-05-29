@@ -34,8 +34,6 @@ public:
         : val { _x }
         , left { _p_left }
         , right { _p_right } { }
-    ~TreeNode() {
-    }
 };
 
 class Solution1 {
@@ -117,6 +115,30 @@ public:
             }
 
             return result;
+        }
+    };
+};
+class Solution14 {
+public:
+    class String {
+    private:
+        bool find(const std::string &_k_str,
+                  char _symbol) {
+            for (auto &&el : _k_str) {
+                if (el == _symbol) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+    public:
+        std::string longestCommonPrefix(const std::vector<std::string> &_k_strs) {
+            std::string result { };
+            for (auto &&el : _k_strs) {
+
+            }
         }
     };
 };
@@ -248,7 +270,14 @@ public:
 
     public:
         TreeNode *sortedArrayToBST(const std::vector<int> &_k_nums) {
-            return toTreeNode(0, _k_nums.size() - 1, _k_nums);
+            size_t size { _k_nums.size() };
+            size_t mid { size / 2 };
+            TreeNode *p_root { new TreeNode { _k_nums[mid] } };
+            TreeNode *p_left { toTreeNode(0, mid - 1, _k_nums) };
+            TreeNode *p_right { toTreeNode(mid + 1, size - 1, _k_nums) };
+            p_root->left = p_left;
+            p_root->right = p_right;
+            return p_root;
         }
     };
 };
