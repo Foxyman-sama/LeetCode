@@ -121,23 +121,18 @@ public:
 class Solution14 {
 public:
     class String {
-    private:
-        bool find(const std::string &_k_str,
-                  char _symbol) {
-            for (auto &&el : _k_str) {
-                if (el == _symbol) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
     public:
         std::string longestCommonPrefix(const std::vector<std::string> &_k_strs) {
+            std::string str { _k_strs[0] };
             std::string result { };
-            for (auto &&el : _k_strs) {
+            for (size_t i { }; i < str.size(); ++i) {
+                for (size_t j { 1 }; j < _k_strs.size(); ++j) {
+                    if (str[i] != _k_strs[j][i]) {
+                        return result;
+                    }
+                }
 
+                result += str[i];
             }
         }
     };
