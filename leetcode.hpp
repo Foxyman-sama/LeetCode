@@ -120,6 +120,7 @@ public:
 };
 class Solution14 {
 public:
+    // Accepted
     class String {
     public:
         std::string longestCommonPrefix(const std::vector<std::string> &_k_strs) {
@@ -134,6 +135,8 @@ public:
 
                 result += str[i];
             }
+
+            return result;
         }
     };
 };
@@ -236,6 +239,46 @@ public:
             }
 
             return _digits;
+        }
+    };
+};
+class Solution67 {
+public:
+    class String {
+    public:
+        std::string addBinary(std::string _a,
+                              std::string _b) {
+            if (_a.size() > _b.size()) {
+                std::string temp { };
+                temp.resize(_a.size() - _b.size(), '0');
+                _b = temp + _b;
+            }
+            else if (_b.size() > _a.size()) {
+                std::string temp { };
+                temp.resize(_b.size() - _a.size(), '0');
+                _a = temp + _a;
+            }
+
+            std::string result { };
+            int rest { };
+            for (int i { static_cast<int>(_a.size() - 1) }; i >= 0; --i) {
+                int temp { (_a[i] + _b[i]) - 96 };
+                int bit { temp + rest };
+                result.append(std::to_string((bit) % 2));
+                if (bit >= 2) {
+                    rest = 1;
+                }
+                else {
+                    rest = 0;
+                }
+            }
+
+            if (rest) {
+                result += '1';
+            }
+
+            std::reverse(result.begin(), result.end());
+            return result;
         }
     };
 };

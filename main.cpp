@@ -6,7 +6,8 @@ void print(TreeNode *_p_root) noexcept;
 int main()  {
     setlocale(0, "");
     {
-               
+        Solution67::String sol { };
+        std::cout << sol.addBinary("1", "111") << '\n';
     }
     system("pause");
 }
