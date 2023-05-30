@@ -6,8 +6,10 @@ void print(TreeNode *_p_root) noexcept;
 int main()  {
     setlocale(0, "");
     {
-        Solution67::String sol { };
-        std::cout << sol.addBinary("1", "111") << '\n';
+        Solution108::DivideAndConquer sol { };
+        std::vector<int> nums { -10, -3, 0, 5, 9 };
+        std::vector<int> nums2 { 1, 3 };
+        print(sol.sortedArrayToBST(nums2));
     }
     system("pause");
 }

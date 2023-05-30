@@ -296,25 +296,35 @@ public:
             size_t mid { (_l + _r) / 2 };
             TreeNode *p_right { toTreeNode(mid + 1, _r, _k_nums) };
             TreeNode *p_left { toTreeNode(_l, mid, _k_nums) };
-            if ((p_right->val > p_left->val) && (!p_right->left)) {
-                p_right->left = p_left;
-                return p_right;
-            }
-            else {
-                p_left->right = p_right;
-                return p_left;
-            }
         }
 
     public:
         TreeNode *sortedArrayToBST(const std::vector<int> &_k_nums) {
             size_t size { _k_nums.size() };
-            size_t mid { size / 2 };
-            TreeNode *p_root { new TreeNode { _k_nums[mid] } };
-            TreeNode *p_left { toTreeNode(0, mid - 1, _k_nums) };
-            TreeNode *p_right { toTreeNode(mid + 1, size - 1, _k_nums) };
-            p_root->left = p_left;
-            p_root->right = p_right;
+            TreeNode *p_root { };
+            if (size == 1) {
+                return new TreeNode { _k_nums[0] };
+            }
+            if (size == 2) {
+                if (_k_nums[0] > _k_nums[1]) {
+                    p_root = new TreeNode { _k_nums[0] };
+                    p_root->left = new TreeNode { _k_nums[1] };
+                }
+                else {
+                    p_root = new TreeNode { _k_nums[1] };
+                    p_root->left = new TreeNode { _k_nums[0] };
+                }
+            }
+            else {
+                size_t mid { size / 2 };
+                p_root = new TreeNode { _k_nums[mid] };
+
+                TreeNode *p_left { toTreeNode(0, mid - 1, _k_nums) };
+                TreeNode *p_right { toTreeNode(mid + 1, size - 1, _k_nums) };
+                p_root->left = p_left;
+                p_root->right = p_right;
+            }
+
             return p_root;
         }
     };
