@@ -286,46 +286,23 @@ class Solution108 {
 public:
     class DivideAndConquer {
     private:
-        TreeNode *toTreeNode(size_t _l,
-                             size_t _r,
+        TreeNode *toTreeNode(int _l,
+                             int _r,
                              const std::vector<int> &_k_nums) {
-            if (_l == _r) {
-                return new TreeNode { _k_nums[_l] };
+            if (_l > _r) {
+                return nullptr;
             }
 
-            size_t mid { (_l + _r) / 2 };
-            TreeNode *p_right { toTreeNode(mid + 1, _r, _k_nums) };
-            TreeNode *p_left { toTreeNode(_l, mid, _k_nums) };
+            int mid { (_l + _r) / 2 };
+            TreeNode *p_root { new TreeNode { _k_nums[mid] } };
+            p_root->left = toTreeNode(_l, mid - 1, _k_nums);
+            p_root->right = toTreeNode(mid + 1, _r, _k_nums);
+            return p_root;
         }
 
     public:
         TreeNode *sortedArrayToBST(const std::vector<int> &_k_nums) {
-            size_t size { _k_nums.size() };
-            TreeNode *p_root { };
-            if (size == 1) {
-                return new TreeNode { _k_nums[0] };
-            }
-            if (size == 2) {
-                if (_k_nums[0] > _k_nums[1]) {
-                    p_root = new TreeNode { _k_nums[0] };
-                    p_root->left = new TreeNode { _k_nums[1] };
-                }
-                else {
-                    p_root = new TreeNode { _k_nums[1] };
-                    p_root->left = new TreeNode { _k_nums[0] };
-                }
-            }
-            else {
-                size_t mid { size / 2 };
-                p_root = new TreeNode { _k_nums[mid] };
-
-                TreeNode *p_left { toTreeNode(0, mid - 1, _k_nums) };
-                TreeNode *p_right { toTreeNode(mid + 1, size - 1, _k_nums) };
-                p_root->left = p_left;
-                p_root->right = p_right;
-            }
-
-            return p_root;
+            return toTreeNode(0, _k_nums.size() - 1, _k_nums);
         }
     };
 };
