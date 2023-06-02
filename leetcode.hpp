@@ -286,17 +286,24 @@ class Solution108 {
 public:
     class DivideAndConquer {
     private:
+        // Accepted
         TreeNode *toTreeNode(int _l,
                              int _r,
                              const std::vector<int> &_k_nums) {
+            // If the left index more than right index then return nullptr
             if (_l > _r) {
                 return nullptr;
             }
 
+            // Finds the middle element
             int mid { (_l + _r) / 2 };
+            // Creates the root based on mid element
             TreeNode *p_root { new TreeNode { _k_nums[mid] } };
+            // Recursively does the same for the left tree
             p_root->left = toTreeNode(_l, mid - 1, _k_nums);
+            // Recursively does the same for the right tree
             p_root->right = toTreeNode(mid + 1, _r, _k_nums);
+            // Return the root
             return p_root;
         }
 
@@ -584,6 +591,70 @@ public:
         int numIslands(std::vector<std::vector<char>> &_grid) {
             toId(_grid);
             return count(_grid);
+        }
+    };
+};
+class Solution215 {
+public:
+    class DivideAndConquer {
+    private:
+        void merge(size_t _l,
+                   size_t _m,
+                   size_t _r,
+                   std::vector<int> &_nums) {
+            size_t size { _r - _l + 1 };
+            size_t lpos { _l };
+            size_t rpos { _m + 1 };
+            std::vector<int> temp { };
+            temp.resize(size);
+
+            size_t tpos { };
+            while ((lpos <= _m) && (rpos <= _r)) {
+                if (_nums[lpos] < _nums[rpos]) {
+                    temp[tpos++] = _nums[lpos++];
+                }
+                else {
+                    temp[tpos++] = _nums[rpos++];
+                }
+            }
+            while (lpos <= _m) {
+                temp[tpos++] = _nums[lpos++];
+            }
+            while (rpos <= _r) {
+                temp[tpos++] = _nums[rpos++];
+            }
+            for (size_t i { }; i < size; ++i) {
+                _nums[_l + i] = temp[i];
+            }
+        }
+        void mergeSort(size_t _l,
+                       size_t _r,
+                       std::vector<int> &_nums) {
+            if (_l < _r) {
+                size_t mid { (_l + _r) / 2 };
+                mergeSort(_l, mid, _nums);
+                mergeSort(mid + 1, _r, _nums);
+                merge(_l, mid, _r, _nums);
+            }
+        }
+
+    public:
+        int findKthLargest(std::vector<int> &_nums,
+                           int _k) {
+            mergeSort(0, _nums.size() - 1, _nums);
+            int max { INT_MIN };
+            size_t index { _nums.size() - 1 };
+            for (auto &&el : _nums) {
+                if (max < el) {
+                    max = el;
+                    --index;
+                    if (index == _k) {
+                        break;
+                    }
+                }
+            }
+
+            return max;
         }
     };
 };

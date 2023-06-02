@@ -6,12 +6,9 @@ void print(TreeNode *_p_root) noexcept;
 int main()  {
     setlocale(0, "");
     {
-        Solution108::DivideAndConquer sol { };
-        std::vector<int> nums { -10, -3, 0, 5, 9 };
-        std::vector<int> nums2 { 1, 3 };
-        std::vector<int> nums3 { 0, 1, 2, 3, 4, 5 };
-        std::vector<int> nums4 { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        print(sol.sortedArrayToBST(nums4));
+        Solution215::DivideAndConquer sol { };
+        std::vector<int> nums { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
+        std::cout << sol.findKthLargest(nums, 4) << '\n';
     }
     system("pause");
 }
