@@ -596,6 +596,7 @@ public:
 };
 class Solution215 {
 public:
+    // Accepted
     class DivideAndConquer {
     private:
         void merge(size_t _l,
@@ -641,20 +642,9 @@ public:
     public:
         int findKthLargest(std::vector<int> &_nums,
                            int _k) {
-            mergeSort(0, _nums.size() - 1, _nums);
-            int max { INT_MIN };
-            size_t index { _nums.size() - 1 };
-            for (auto &&el : _nums) {
-                if (max < el) {
-                    max = el;
-                    --index;
-                    if (index == _k) {
-                        break;
-                    }
-                }
-            }
-
-            return max;
+            size_t size { _nums.size() };
+            mergeSort(0, size - 1, _nums);
+            return _nums[size - _k];
         }
     };
 };
