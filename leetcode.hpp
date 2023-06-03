@@ -650,6 +650,7 @@ public:
 };
 class Solution347 {
 public:
+    // Accepted
     class DivideAndConquer {
     private:
         void merge(size_t _l,
@@ -697,17 +698,25 @@ public:
                                       int _k) {
             mergeSort(0, _nums.size() - 1, _nums);
 
-            std::map<int, int> map { };
-            for (size_t i { }; i < _nums.size(); ++i) {
-                ++map[_nums[i]];
+            std::unordered_map<int, int> hash { };
+            for (auto &&el : _nums) {
+                ++hash[el];
             }
 
             std::vector<int> result { };
-            for (auto &&el : map) {
-                result.emplace_back(el.second);
-                if (!(--_k)) {
-                    break;
+            result.reserve(_k);
+            for (size_t i { }; i < _k; ++i) {
+                int max { INT_MIN };
+                int num { INT_MIN };
+                for (auto &&[key, val] : hash) {
+                    if (max < val) {
+                        max = val;
+                        num = key;
+                    }
                 }
+
+                hash.erase(num);
+                result.emplace_back(num);
             }
 
             return result;

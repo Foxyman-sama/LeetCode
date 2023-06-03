@@ -5,14 +5,15 @@ void print(TreeNode *_p_root) noexcept;
 
 int main()  {
     setlocale(0, "");
-    {
-        Solution215::DivideAndConquer sol { };
-        std::vector<int> nums { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
-        std::vector<int> nums2 { 3, 2, 1, 5, 6, 4 };
-        std::vector<int> nums3 { 2, 1 };
-        std::vector<int> nums4 { -1, 2, 0 };
-        std::cout << sol.findKthLargest(nums, 4) << '\n';
+
+    Solution347::DivideAndConquer sol { };
+    std::vector<int> nums { 1, 1, 1, 2, 2, 3 };
+    std::vector<int> nums2 { 4, 1, -1, 2, -1, 2, 3 };
+    auto result { sol.topKFrequent(nums2, 2) };
+    for (auto &&el : result) {
+        std::cout << el << '\n';
     }
+
     system("pause");
 }
 
