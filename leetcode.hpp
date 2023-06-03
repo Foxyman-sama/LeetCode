@@ -2,6 +2,7 @@
 #define LEETCODE_HPP
 
 #include <iostream>
+#include <map>
 #include <memory>
 #include <algorithm>
 #include <string>
@@ -35,7 +36,6 @@ public:
         , left { _p_left }
         , right { _p_right } { }
 };
-
 class Solution1 {
 public:
     // Accepted
@@ -645,6 +645,72 @@ public:
             size_t size { _nums.size() };
             mergeSort(0, size - 1, _nums);
             return _nums[size - _k];
+        }
+    };
+};
+class Solution347 {
+public:
+    class DivideAndConquer {
+    private:
+        void merge(size_t _l,
+                   size_t _m,
+                   size_t _r,
+                   std::vector<int> &_nums) {
+            size_t size { _r - _l + 1 };
+            size_t lpos { _l };
+            size_t rpos { _m + 1 };
+            size_t tpos { };
+            std::vector<int> temp { };
+            temp.resize(size);
+            while ((lpos <= _m) && (rpos <= _r)) {
+                if (_nums[lpos] < _nums[rpos]) {
+                    temp[tpos++] = _nums[lpos++]; 
+                }
+                else {
+                    temp[tpos++] = _nums[rpos++];
+                }
+            }
+            while (lpos <= _m) {
+                temp[tpos++] = _nums[lpos++];
+            }
+            while (rpos <= _r) {
+                temp[tpos++] = _nums[rpos++];
+            } 
+            for (size_t i { }; i < size; ++i) {
+                _nums[_l + i] = temp[i];
+            }
+
+        }
+        void mergeSort(size_t _l,
+                       size_t _r,
+                       std::vector<int> &_nums) {
+            if (_l < _r) {
+                size_t mid { (_l + _r) / 2 };
+                mergeSort(_l, mid, _nums);
+                mergeSort(mid + 1, _r, _nums);
+                merge(_l, mid, _r, _nums);
+            }
+        }
+
+    public:
+        std::vector<int> topKFrequent(std::vector<int> &_nums,
+                                      int _k) {
+            mergeSort(0, _nums.size() - 1, _nums);
+
+            std::map<int, int> map { };
+            for (size_t i { }; i < _nums.size(); ++i) {
+                ++map[_nums[i]];
+            }
+
+            std::vector<int> result { };
+            for (auto &&el : map) {
+                result.emplace_back(el.second);
+                if (!(--_k)) {
+                    break;
+                }
+            }
+
+            return result;
         }
     };
 };
