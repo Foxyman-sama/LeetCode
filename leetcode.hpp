@@ -688,8 +688,29 @@ public:
 };
 class Solution268 {
 public:
+    // Accepted
     class BinarySearch {
     private:
+        bool binarySearch(int _l,
+                          int _r,
+                          int _target,
+                          const std::vector<int> &_k_nums) {
+            if (_l <= _r) {
+                int mid { _l + (_r - _l) / 2 };
+                if (_k_nums[mid] == _target) {
+                    return true;
+                }
+                else if (_k_nums[mid] > _target) {
+                    return binarySearch(_l, mid - 1, _target, _k_nums);
+                }
+                else {
+                    return binarySearch(mid + 1, _r, _target, _k_nums);
+                }
+            }
+
+            return false;
+        }
+
         void merge(int _l,
                    int _m,
                    int _r,
@@ -700,6 +721,47 @@ public:
             int tpos { };
             std::vector<int> temp { };
             temp.resize(size);
+            while ((lpos <= _m) && (rpos <= _r)) {
+                if (_nums[lpos] < _nums[rpos]) {
+                    temp[tpos++] = _nums[lpos++];
+                }
+                else {
+                    temp[tpos++] = _nums[rpos++];
+                }
+            }
+            while (lpos <= _m) {
+                temp[tpos++] = _nums[lpos++];
+            }
+            while (rpos <= _r) {
+                temp[tpos++] = _nums[rpos++];
+            }
+            for (size_t i { }; i < size; ++i) {
+                _nums[_l + i] = temp[i];
+            }
+        }
+        void mergeSort(int _l,
+                       int _r,
+                       std::vector<int> &_nums) {
+            if (_l < _r) {
+                int mid { (_l + _r) / 2 };
+                mergeSort(_l, mid, _nums);
+                mergeSort(mid + 1, _r, _nums);
+                merge(_l, mid, _r, _nums);
+            }
+        }
+
+    public:
+        int missingNumber(std::vector<int> &_nums) {
+            int left_bound { };
+            int right_bound { static_cast<int>(_nums.size() - 1) };
+            mergeSort(left_bound, right_bound, _nums);
+            for (int num { }; num <= _nums.back(); ++num) {
+                if (!binarySearch(left_bound, right_bound, num, _nums)) {
+                    return num;
+                }
+            }
+
+            return _nums.back() + 1;
         }
     };
 };
