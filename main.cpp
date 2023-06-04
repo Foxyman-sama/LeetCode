@@ -4,16 +4,19 @@
 void print(TreeNode *_p_root) noexcept;
 
 int main()  {
-    setlocale(0, "");
+    setlocale(0,  "");
 
-    Solution347::DivideAndConquer sol { };
-    std::vector<int> nums { 1, 1, 1, 2, 2, 3 };
-    std::vector<int> nums2 { 4, 1, -1, 2, -1, 2, 3 };
-    auto result { sol.topKFrequent(nums2, 2) };
-    for (auto &&el : result) {
-        std::cout << el << '\n';
-    }
-
+    Solution240::BinarySearch sol { };
+    Vec2D<int> vec {
+        { 1, 4, 7, 11, 15 },
+        { 2, 5, 8, 12, 19 },
+        { 3, 6, 9, 16, 22 },
+        { 10, 13, 14, 17, 24 },
+        { 18, 21, 23, 26, 30 }
+    };
+    Vec2D<int> vec2 { { -5 } };
+    Vec2D<int> vec3 { { 1, 1 } };
+    std::cout << sol.searchMatrix(vec2, -5) << '\n';
     system("pause");
 }
 

@@ -648,6 +648,61 @@ public:
         }
     };
 };
+class Solution240 {
+public:
+    // Accepted
+    class BinarySearch {
+    private:
+        bool binarySearch(int _l,
+                          int _r,
+                          const std::vector<int> &_k_matrix,
+                          int _target) {
+            if (_l <= _r) {
+                int mid { _l + (_r - _l) / 2 };
+                if (_k_matrix[mid] == _target) {
+                    return true;
+                }
+                else if (_k_matrix[mid] > _target) {
+                    return binarySearch(_l, mid - 1, _k_matrix, _target);
+                }
+                else {
+                    return binarySearch(mid + 1, _r, _k_matrix, _target);
+                }
+            }
+
+            return false;
+        }
+
+    public:
+        bool searchMatrix(const std::vector<std::vector<int>> &_k_matrix, 
+                          int _target) {
+            for (auto &&row : _k_matrix) {
+                if (binarySearch(0, row.size() - 1, row, _target)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    };
+};
+class Solution268 {
+public:
+    class BinarySearch {
+    private:
+        void merge(int _l,
+                   int _m,
+                   int _r,
+                   std::vector<int> &_nums) {
+            int size { (_r - _l) + 1 };
+            int lpos { _l };
+            int rpos { _m + 1 };
+            int tpos { };
+            std::vector<int> temp { };
+            temp.resize(size);
+        }
+    };
+};
 class Solution347 {
 public:
     // Accepted
