@@ -282,6 +282,37 @@ public:
         }
     };
 };
+class Solution69 {
+public:
+    // Accepted
+    class BinarySearch {
+    private:
+        double binarySearch(double _l,
+                            double _r,
+                            int _target) {
+            if (_l <= _r) {
+                double mid { (_l + _r) / 2 };
+                double pow { mid * mid };
+                if (std::floor(pow) == _target) {
+                    return mid;
+                }
+                else if (pow > _target) {
+                    return binarySearch(_l, mid, _target);
+                }
+                else {
+                    return binarySearch(mid, _r, _target);
+                }
+            }
+
+            return DBL_MIN;
+        }
+
+    public:
+        int mySqrt(int _x) {
+            return binarySearch(0, _x, _x);
+        }
+    };
+};
 class Solution108 {
 public:
     class DivideAndConquer {
@@ -762,6 +793,41 @@ public:
             }
 
             return _nums.back() + 1;
+        }
+    };
+    // Accepted
+    class HashTable {
+    private:
+        int findMax(int _l,
+                    int _r,  
+                    const std::vector<int> &_k_nums) {
+            if (_l == _r) {
+                return _k_nums[_l];
+            }
+
+            int mid { (_l + _r) / 2 };
+            int p { findMax(_l, mid, _k_nums) };
+            int q { findMax(mid + 1, _r, _k_nums) };
+            return std::max(p, q);
+        }
+
+    public:
+        int missingNumber(const std::vector<int> &_k_nums) {
+            size_t size { _k_nums.size() };
+            int right_bound { findMax(0, size - 1, _k_nums) };
+            std::unordered_map<int, bool> hash { };
+            for (size_t i { }; i < size; ++i) {
+                hash[_k_nums[i]] = true;
+            }
+
+            int num { };
+            for (; num < right_bound; ++num) {
+                if (hash.find(num) == hash.end()) {
+                    return num;
+                }
+            }
+            
+            return num + 1;
         }
     };
 };
@@ -1273,6 +1339,44 @@ public:
         int countServers(std::vector<std::vector<int>> &_grid) {
             toId(_grid);
             return count();
+        }
+    };
+};
+class Solution1382 {
+public:
+    // Accepted
+    class DivideAndConquer {
+    private:
+        TreeNode* balance(int _l,
+                          int _r,
+                          const std::vector<TreeNode *> &_k_nodes) {
+            if (_l > _r) {
+                return nullptr;
+            }
+
+            int mid { (_l + _r) / 2 };
+            TreeNode *p_root { _k_nodes[mid] };
+            p_root->left = balance(_l, mid - 1, _k_nodes);
+            p_root->right = balance(mid + 1, _r, _k_nodes);
+            return p_root;
+        }
+
+        void toVector(TreeNode *_p_root,
+                      std::vector<TreeNode *> &_nodes) {
+            if (!_p_root) {
+                return;
+            }
+
+            toVector(_p_root->left, _nodes);
+            _nodes.emplace_back(_p_root);
+            toVector(_p_root->right, _nodes);
+        }
+
+    public:
+        TreeNode *balanceBST(TreeNode *_p_root) {
+            std::vector<TreeNode *> nodes { };
+            toVector(_p_root, nodes);
+            return balance(0, nodes.size() - 1, nodes);
         }
     };
 };
