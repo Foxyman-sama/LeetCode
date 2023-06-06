@@ -218,9 +218,9 @@ public:
 };
 class Solution66 {
 public:
+    // Accepted
     class Math {
     public:
-        // Accepted
         std::vector<int> plusOne(std::vector<int> &_digits) {
             _digits.back() += 1;
 
@@ -244,6 +244,7 @@ public:
 };
 class Solution67 {
 public:
+    // Accepted
     class String {
     public:
         std::string addBinary(std::string _a,
@@ -313,11 +314,50 @@ public:
         }
     };
 };
+class Solution74 {
+public:
+    // Accepted
+    class BinarySearch {
+    private:
+        bool binarySearch(int _l,
+                          int _r,
+                          int _target,
+                          const std::vector<int> &_k_nums) {
+            if (_l <= _r) {
+                int mid { _l + (_r - _l) / 2 };
+                int guess { _k_nums[mid] };
+                if (guess == _target) {
+                    return true;
+                }
+                else if (guess > _target) {
+                    return binarySearch(_l, mid - 1, _target, _k_nums);
+                }
+                else {
+                    return binarySearch(mid + 1, _r, _target, _k_nums);
+                }
+            }
+
+            return false;
+        }
+
+    public:
+        bool searchMatrix(const std::vector<std::vector<int>> &_k_matrix, 
+                          int _target) {
+            for (auto &&vector : _k_matrix) {
+                if (binarySearch(0, vector.size() - 1, _target, vector)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    };
+};
 class Solution108 {
 public:
+    // Accepted
     class DivideAndConquer {
     private:
-        // Accepted
         TreeNode *toTreeNode(int _l,
                              int _r,
                              const std::vector<int> &_k_nums) {
@@ -1110,6 +1150,52 @@ public:
         int maxAreaOfIsland(const std::vector<std::vector<int>> &_k_grid) {
             toId(_k_grid);
             return max(_k_grid);
+        }
+    };
+};
+class Solution744 {
+public:
+    // Accepted
+    class BinarySearch {
+    private:
+        bool binarySearch(int _l,
+                          int _r,
+                          char _target,
+                          const std::vector<char> &_k_letters) {
+            if (_l <= _r) {
+                int mid { _l + (_r - _l) / 2 };
+                char guess { _k_letters[mid] };
+                if (guess == _target) {
+                    return true;
+                }
+                else if (guess > _target) {
+                    return binarySearch(_l, mid - 1, _target, _k_letters);
+                }
+                else {
+                    return binarySearch(mid + 1, _r, _target, _k_letters);
+                }
+            }
+
+            return false;
+        }
+
+    public:
+        char nextGreatestLetter(const std::vector<char> &_k_letters, 
+                                char _target) {
+            int limit { 26 + 97 };
+            int it { _target + 1 };
+            while (true) {
+                if (it >= limit) {
+                    it = 97;
+                }
+                if (binarySearch(0, _k_letters.size() - 1, it, _k_letters)) {
+                    return it;
+                }
+
+                ++it;
+            }
+
+            return CHAR_MAX;
         }
     };
 };

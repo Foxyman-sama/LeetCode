@@ -6,8 +6,8 @@ void print(TreeNode *_p_root) noexcept;
 int main()  {
     setlocale(0,  "");
 
-    Solution69::BinarySearch sol { };
-    std::cout << sol.mySqrt(36) << '\n';
+    Solution744::BinarySearch sol { };
+    std::cout << sol.nextGreatestLetter({ 'x', 'x', 'y', 'y' }, 'z') << '\n';
     system("pause");
 }
 
