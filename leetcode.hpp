@@ -1575,6 +1575,92 @@ public:
         }
     };
 };
+class Solution2089 {
+public:
+    class BinarySearch {
+    private:
+        int binarySearch(int _l,
+                         int _r,
+                         int _target,
+                         const std::vector<int> &_nums) {
+            if (_l <= _r) {
+                int mid { _l + (_r - _l) / 2 };
+                int guess { _nums[mid] };
+                if (guess == _target) {
+                    return mid;
+                }
+                else if (guess > _target) {
+                    return binarySearch(_l, mid - 1, _target, _nums);
+                }
+                else {
+                    return binarySearch(mid + 1, _r, _target, _nums);
+                }
+            }
+
+            return INT_MIN;
+        }
+
+        void merge(int _l,
+                   int _m,
+                   int _r,
+                   std::vector<int> &_nums) {
+            int size { (_r - _l) + 1 };
+            int lpos { _l };
+            int rpos { _m + 1 };
+            int tpos { };
+            std::vector<int> temp { };
+            temp.resize(size);
+            while ((lpos <= _m) && (rpos <= _r)) {
+                if (_nums[lpos] < _nums[rpos]) {
+                    temp[tpos++] = _nums[lpos++];
+                }
+                else {
+                    temp[tpos++] = _nums[rpos++];
+                }
+            }
+            while (lpos <= _m) {
+                temp[tpos++] = _nums[lpos++];
+            }
+            while (rpos <= _r) {
+                temp[tpos++] = _nums[rpos++];
+            }
+            for (size_t i { }; i < size; ++i) {
+                _nums[_l + i] = temp[i];
+            }
+        }
+        void mergeSort(int _l,
+                       int _r,
+                       std::vector<int> &_nums) {
+            if (_l < _r) {
+                int mid { (_l + _r) / 2 };
+                mergeSort(_l, mid, _nums);
+                mergeSort(mid + 1, _r, _nums);
+                merge(_l, mid, _r, _nums);
+            }
+        }
+
+    public:    
+        std::vector<int> targetIndices(std::vector<int> &_nums, 
+                                       int _target) {
+            mergeSort(0, _nums.size() - 1, _nums);
+
+            int low { };
+            std::vector<int> result { };
+            for (int left_border { _target - 1 }; left_border > 0; --left_border) {
+                int index { binarySearch(0, _nums.size() - 1, left_border, _nums) };
+                if (index != INT_MIN) {
+                    low = index;
+                    break;
+                }
+            }
+            while ((++low < _nums.size()) && (_nums[low] == _target)) {
+                result.emplace_back(low);
+            }
+
+            return result;
+        }
+    };
+};
 class Solution2316 {
 public:
     // Accepted
