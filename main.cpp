@@ -6,7 +6,7 @@ void print(TreeNode *_p_root) noexcept;
 int main()  {
     setlocale(0,  "");
 
-    Solution2089::BinarySearch sol { };
+    Solution34::BinarySearch sol { };
     std::vector<int> nums { 1, 2, 5, 2, 3 };
     std::vector<int> nums2 { 1 };
     std::vector<int> nums3 {
@@ -14,7 +14,7 @@ int main()  {
         48, 20, 56, 4, 34, 19, 77, 54, 9,
         67, 38, 96, 71, 74, 44
     };
-    auto result { sol.targetIndices(nums3, 73) };
+    auto result { sol.searchRange(nums2, 1) };
     for (auto &&el : result) {
         std::cout << el << ' ';
     }

@@ -192,6 +192,49 @@ public:
         }
     };
 };
+class Solution34 {
+public:
+    class BinarySearch {
+    private:
+        int binarySearch(int _l,
+                         int _r,
+                         int _target,
+                         const std::vector<int> &_k_nums) {
+            if (_l <= _r) {
+                int mid { _l + (_r - _l) / 2 };
+                int guess { _k_nums[mid] };
+                if (guess == _target) {
+                    return mid;
+                }
+                else if (guess > _target) {
+                    return binarySearch(_l, mid - 1, _target, _k_nums);
+                }
+                else {
+                    return binarySearch(mid + 1, _r, _target, _k_nums);
+                }
+            }
+
+            return INT_MIN;
+        }
+
+    public:
+        std::vector<int> searchRange(const std::vector<int> &_k_nums,
+                                     int _target) {
+            int pos { binarySearch(0, _k_nums.size() - 1, _target, _k_nums) };
+            if (pos != INT_MIN) {
+                int left { pos };
+                while ((--left >= 0) && (_k_nums[left] == _target));
+                
+                int right { pos };
+                while ((++right < _k_nums.size()) && (_k_nums[right] == _target));
+
+                return { left + 1, right - 1 };
+            }
+        
+            return { -1, -1 };
+        }
+    };
+};
 class Solution58 {
 public:
     // Accepted
@@ -1577,6 +1620,7 @@ public:
 };
 class Solution2089 {
 public:
+    // Accepted
     class BinarySearch {
     private:
         int binarySearch(int _l,
@@ -1644,19 +1688,24 @@ public:
                                        int _target) {
             mergeSort(0, _nums.size() - 1, _nums);
 
-            int low { };
+            int root { binarySearch(0, _nums.size() - 1, _target, _nums) };
             std::vector<int> result { };
-            for (int left_border { _target - 1 }; left_border > 0; --left_border) {
-                int index { binarySearch(0, _nums.size() - 1, left_border, _nums) };
-                if (index != INT_MIN) {
-                    low = index;
-                    break;
+            result.reserve(_nums.size());
+            if (root != INT_MIN) {
+                result.emplace_back(root);
+
+                int left_board { root };
+                while ((--left_board >= 0) && (_nums[left_board] == _target)) {
+                    result.emplace_back(left_board);
+                }
+
+                int right_border { root };
+                while ((++right_border < _nums.size()) && (_nums[right_border] == _target)) {
+                    result.emplace_back(right_border);
                 }
             }
-            while ((++low < _nums.size()) && (_nums[low] == _target)) {
-                result.emplace_back(low);
-            }
 
+            mergeSort(0, result.size() - 1, result);
             return result;
         }
     };
