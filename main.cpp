@@ -1,30 +1,40 @@
 #include <iostream>
 #include "leetcode.hpp"
 
-void print(TreeNode *_p_root) noexcept;
+template<
+    typename T>
+void print(T _obj) noexcept;
 
 int main()  {
     setlocale(0,  "");
 
-    Solution34::BinarySearch sol { };
-    std::vector<int> nums { 1, 2, 5, 2, 3 };
-    std::vector<int> nums2 { 1 };
-    std::vector<int> nums3 { 5, 7, 7, 8, 8, 10 };
-    auto result { sol.searchRange(nums3, 8) };
-    for (auto &&el : result) {
-        std::cout << el << ' ';
-    }
-
-    std::cout << '\n';
+    Solution349::BinarySearch sol { };
+    std::vector<int> nums { 1, 2, 2, 1 };
+    std::vector<int> nums2 { 2, 2 };
+    print(sol.intersection(nums, nums2));
     system("pause");
 }
 
-void print(TreeNode *_p_root) noexcept {
-    if (!_p_root) {
+template<
+    typename T>
+void print(T _obj) noexcept {
+    std::cout << _obj << '\n';
+}
+template<>
+void print(TreeNode *_p_obj) noexcept {
+    if (!_p_obj) {
         return;
     }
 
-    std::cout << _p_root->val << '\n';
-    print(_p_root->left);
-    print(_p_root->right);
+    std::cout << _p_obj->val << '\n';
+    print(_p_obj->left);
+    print(_p_obj->right);
+}
+template<>
+void print(const std::vector<int> &_k_vec) noexcept {
+    for (size_t i { }; i < _k_vec.size(); ++i) {
+        std::cout << i << "#\r\t" << _k_vec[i] << '\n';
+    }
+    
+    std::cout << '\n';
 }

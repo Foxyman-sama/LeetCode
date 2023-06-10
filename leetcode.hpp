@@ -991,6 +991,40 @@ public:
         }
     };
 };
+class Solution349 {
+public:
+    class BinarySearch {
+    private:
+        bool binarySearch(int _l,
+                          int _r,
+                          int _target,
+                          const std::vector<int> &_k_nums) {
+            if (_l < _r) {
+                int mid { _l + (_r - _l) / 2 };
+                int guess { _k_nums[mid] };
+                if (guess == _target) {
+                    return true;
+                }
+                else if (guess > _target) {
+                    return binarySearch(_l, mid - 1, _target, _k_nums);
+                }  
+                else {
+                    return binarySearch(mid + 1, _r, _target, _k_nums);
+                }
+            }
+
+            return false;
+        }
+
+    public:
+        std::vector<int> intersection(const std::vector<int> &_k_nums1,
+                                      const std::vector<int> &_k_nums2) {
+            std::vector<int> result { };
+
+            return result;
+        }
+    };
+};
 class Solution547 {
 public:
     // Accepted
@@ -1780,61 +1814,6 @@ public:
                              std::vector<std::vector<int>> &_edges) {
             toId(_n, _edges);
             return count();
-        }
-    };
-};
-class Solution2529 {
-public:
-    class BinarySearch {
-    private:
-        int binarySearch(int _l,
-                         int _r,
-                         int _target,
-                         const std::vector<int> &_k_nums) {
-            if (_l < _r) {
-                int mid { _l + (_r - _l) / 2 };
-                int guess { _k_nums[mid] };
-                if (guess == _target) {
-                    return mid;
-                }
-                else if (guess > _target) {
-                    return binarySearch(_l, mid - 1, _target, _k_nums);
-                }
-                else {
-                    return binarySearch(mid + 1, _r, _target, _k_nums); 
-                }
-            }
-
-            return INT_MIN;
-        }
-
-    public:
-        int maximumCount(const std::vector<int> &_k_nums) {
-            auto binded_fn { 
-                std::bind(
-                    &BinarySearch::binarySearch,
-                    this,
-                    0,
-                    _k_nums.size() - 1,
-                    std::placeholders::_1,
-                    std::cref(_k_nums)
-                )
-            };
-            int positive_pos { INT_MIN };
-            int it { };
-            while (positive_pos != INT_MIN) {
-                positive_pos = binded_fn(++it);
-            }
-
-            int negative_pos { INT_MIN };
-            it = 0;
-            while (negative_pos != INT_MIN) {
-                negative_pos = binded_fn(--it);
-            }
-
-            int min_count { static_cast<int>(_k_nums.size()) - negative_pos };
-            int max_count { static_cast<int>(_k_nums.size()) - positive_pos - negative_pos };
-            return std::max(min_count, max_count);
         }
     };
 };
