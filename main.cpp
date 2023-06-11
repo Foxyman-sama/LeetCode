@@ -3,7 +3,17 @@
 
 template<
     typename T>
-void print(T _obj) noexcept;
+void print(const T &_k_obj) noexcept {
+    std::cout << _k_obj << '\n';
+}
+template<>
+void print(const std::vector<int> &_k_vec) noexcept {
+    for (size_t i { }; i < _k_vec.size(); ++i) {
+        std::cout << i << "#\r\t" << _k_vec[i] << '\n';
+    }
+
+    std::cout << '\n';
+}
 
 int main()  {
     setlocale(0,  "");
@@ -11,30 +21,7 @@ int main()  {
     Solution349::BinarySearch sol { };
     std::vector<int> nums { 1, 2, 2, 1 };
     std::vector<int> nums2 { 2, 2 };
-    print(sol.intersection(nums, nums2));
+    auto result { sol.intersection(nums, nums2) };
+    print(result);
     system("pause");
-}
-
-template<
-    typename T>
-void print(T _obj) noexcept {
-    std::cout << _obj << '\n';
-}
-template<>
-void print(TreeNode *_p_obj) noexcept {
-    if (!_p_obj) {
-        return;
-    }
-
-    std::cout << _p_obj->val << '\n';
-    print(_p_obj->left);
-    print(_p_obj->right);
-}
-template<>
-void print(const std::vector<int> &_k_vec) noexcept {
-    for (size_t i { }; i < _k_vec.size(); ++i) {
-        std::cout << i << "#\r\t" << _k_vec[i] << '\n';
-    }
-    
-    std::cout << '\n';
 }

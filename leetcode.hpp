@@ -999,7 +999,7 @@ public:
                           int _r,
                           int _target,
                           const std::vector<int> &_k_nums) {
-            if (_l < _r) {
+            if (_l <= _r) {
                 int mid { _l + (_r - _l) / 2 };
                 int guess { _k_nums[mid] };
                 if (guess == _target) {
@@ -1016,10 +1016,59 @@ public:
             return false;
         }
 
+        void merge(int _l,
+                   int _m,
+                   int _r,
+                   std::vector<int> &_vec) {
+            int size { _r - _l + 1 };
+            int lpos { _l };
+            int rpos { _m + 1 };
+            int tpos { };
+            std::vector<int> temp { };
+            temp.resize(size);
+            while ((lpos <= _m) && (rpos <= _r)) {
+                if (_vec[lpos] < _vec[rpos]) {
+                    temp[tpos++] = _vec[lpos++];
+                }
+                else {
+                    temp[tpos++] = _vec[rpos++];
+                }
+            }
+            while (lpos <= _m) {
+                temp[tpos++] = _vec[lpos++];
+            }
+            while (rpos <= _r) {
+                temp[tpos++] = _vec[rpos++];
+            }
+            for (size_t i { }; i < size; ++i) {
+                _vec[_l + i] = temp[i];
+            }
+        }
+        void mergeSort(int _l,
+                       int _r,
+                       std::vector<int> &_vec) {
+            if (_l < _r) {
+                int mid { (_l + _r) / 2 };
+                mergeSort(_l, mid, _vec);
+                mergeSort(mid + 1, _r, _vec);
+                merge(_l, mid, _r, _vec);
+            }
+        }
+
     public:
-        std::vector<int> intersection(const std::vector<int> &_k_nums1,
-                                      const std::vector<int> &_k_nums2) {
+        std::vector<int> intersection(std::vector<int> &_nums1,
+                                      std::vector<int> &_nums2) {
+            mergeSort(0, _nums1.size() - 1, _nums1);
+            mergeSort(0, _nums2.size() - 1, _nums2);
+
             std::vector<int> result { };
+            for (auto &&el : _nums1) {
+                bool is_first { binarySearch(0, _nums2.size() - 1, el, _nums2) };
+                bool is_second { !binarySearch(0, result.size() - 1, el, result)};
+                if ((is_first) && (is_second)) {
+                    result.emplace_back(el);
+                }
+            }
 
             return result;
         }
