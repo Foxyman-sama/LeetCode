@@ -993,6 +993,7 @@ public:
 };
 class Solution349 {
 public:
+    // Accepted
     class BinarySearch {
     private:
         bool binarySearch(int _l,
@@ -1553,6 +1554,71 @@ public:
         int countServers(std::vector<std::vector<int>> &_grid) {
             toId(_grid);
             return count();
+        }
+    };
+};
+class Solution1365 {
+public:
+    class Sorting {
+    private:
+        void merge(int _l,
+                   int _m,
+                   int _r,
+                   std::vector<int> &_nums) {
+            int size { _r - _l + 1 };
+            int lpos { _l };
+            int rpos { _m + 1 };
+            int tpos { };
+            std::vector<int> temp { };
+            temp.resize(size);
+            while ((lpos <= _m) && (rpos <= _r)) {
+                if (_nums[lpos] < _nums[rpos]) {
+                    temp[tpos++] = _nums[lpos++];
+                }
+                else {
+                    temp[tpos++] = _nums[rpos++];
+                }
+            }
+            while (lpos <= _m) {
+                temp[tpos++] = _nums[lpos++];
+            }
+            while (rpos <= _r) {
+                temp[tpos++] = _nums[rpos++];
+            }
+            for (size_t i { }; i < size; ++i) {
+                _nums[_l + i] = temp[i];
+            }
+        }
+        void mergeSort(int _l,
+                       int _r,
+                       std::vector<int> &_nums) {
+            if (_l < _r) {
+                int mid { (_l + _r) / 2 };
+                mergeSort(_l, mid, _nums);
+                mergeSort(mid + 1, _r, _nums);
+                merge(_l, mid, _r, _nums);
+            }
+        }
+
+    public:
+        std::vector<int> smallerNumbersThanCurrent(std::vector<int> &_nums) {
+            mergeSort(0, _nums.size() - 1, _nums);
+            
+            std::vector<int> result { };
+            int it { -1 };
+            int counter { };
+            int max { INT_MIN };
+            for (auto &&el : _nums.crbegin()) {
+                if (el > max) {
+                    max = el;
+                    ++it;
+                }
+
+                ++counter;
+                result.emplace_back(it);
+            }
+
+            return result;
         }
     };
 };
