@@ -1075,8 +1075,68 @@ public:
         }
     };
 };
+class Solution350 {
+public:
+    class Sorting {
+    private:
+        int partition(int _l,
+                      int _r,
+                      std::vector<int> &_nums) {
+            int value { _nums[(_l + _r) / 2] };
+            while (_l <= _r) {
+                while (_nums[_l] < value) {
+                    ++_l;
+                }
+                while (_nums[_r] > value) {
+                    --_r;
+                }
+
+                if (_l >= _r) {
+                    break;
+                }
+
+                std::swap(_nums[_l++], _nums[_r--]);
+            }
+
+            return _r;
+        }
+
+        void quickSort(int _l,
+                       int _r,
+                       std::vector<int> &_nums) {
+            if (_l < _r) {
+                int q { partition(_l, _r, _nums) };
+                quickSort(_l, q, _nums);
+                quickSort(q + 1, _r, _nums);
+            }    
+        }
+
+    public:
+        std::vector<int> intersect(std::vector<int> &_nums1, 
+                                   std::vector<int> &_nums2) {
+            quickSort(0, _nums1.size() - 1, _nums1);
+            quickSort(0, _nums2.size() - 1, _nums2);
+
+            int left { };
+            int right { };
+            std::vector<int> result { };
+            while ((left < _nums1.size()) && (right < _nums2.size())) {
+                if (_nums1[left] == _nums2[right]) {
+                    result.emplace_back(_nums1[left]);
+                    ++left;
+                }
+                else {
+                    ++right;
+                }
+            }
+
+            return result;
+        }
+    };
+};
 class Solution374 {
 public:
+    // Accepted
     class BinarySearch {
     private:
         int binarySearch(int _l,
@@ -1084,7 +1144,7 @@ public:
                          int _target) {
             if (_l < _r) {
                 int mid { _l + (_r - _l) / 2 };
-                int guess_num { };
+                int guess_num { /* guess(mid) */ };
                 if (!guess_num) {
                     return mid;
                 }
