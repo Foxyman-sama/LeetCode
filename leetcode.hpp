@@ -1100,7 +1100,7 @@ public:
 
             return _r;
         }
-        bool binarySearch(int _l,
+        int binarySearch(int _l,
                           int _r,
                           int _target,
                           const std::vector<int> &_k_nums) {
@@ -1108,7 +1108,7 @@ public:
                 int mid { _l + (_r - _l) / 2 };
                 int guess { _k_nums[mid] };
                 if (_k_nums[mid] == _target) {
-                    return true;
+                    return mid;
                 }
                 else if (guess > _target) {
                     return binarySearch(_l, mid - 1, _target, _k_nums);
@@ -1118,7 +1118,7 @@ public:
                 }
             }
 
-            return false;
+            return INT_MIN;
         }
 
         void quickSort(int _l,
@@ -1131,19 +1131,40 @@ public:
             }    
         }
 
+    public:/*
+        std::vector<int> intersect(std::vector<int> &_nums1, 
+                                   std::vector<int> &_nums2) {
+            quickSort(0, _nums1.size() - 1, _nums1);
+            quickSort(0, _nums2.size() - 1, _nums2);
+
+            std::vector<int> result { };
+            for (auto &&el : _nums1) {
+                int pos { binarySearch(0, _nums2.size() - 1, el, _nums2) };
+                if (pos != INT_MIN) {
+                    result.emplace_back(el);
+                    _nums2[pos] = -1;
+                }
+            }
+
+            return result;
+        }*/
+
+    };
+    // Accepted
+    class HashTable {
     public:
         std::vector<int> intersect(std::vector<int> &_nums1, 
                                    std::vector<int> &_nums2) {
-            size_t size_of_nums1 { _nums1.size() };
-            size_t size_of_nums2 { _nums2.size() };
-            quickSort(0, size_of_nums1 - 1, _nums1);
-            quickSort(0, size_of_nums2 - 1, _nums2);
+            std::unordered_map<int, int> hash { };
+            for (auto &&el : _nums1) {
+                ++hash[el];
+            }
 
             std::vector<int> result { };
-            auto vec { size_of_nums1 > size_of_nums2 ? _nums2 : _nums1 };
-            for (auto &&el : vec) {
-                if (binarySearch(0, size_of_nums2 - 1, el, _nums2)) {
+            for (auto &&el : _nums2) {
+                if (hash[el]) {
                     result.emplace_back(el);
+                    --hash[el];
                 }
             }
 
