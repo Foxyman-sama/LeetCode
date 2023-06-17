@@ -1128,11 +1128,11 @@ public:
                 int q { partition(_l, _r, _nums) };
                 quickSort(_l, q, _nums);
                 quickSort(q + 1, _r, _nums);
-            }    
+            }
         }
 
-    public:/*
-        std::vector<int> intersect(std::vector<int> &_nums1, 
+    public:
+        std::vector<int> intersect(std::vector<int> &_nums1,
                                    std::vector<int> &_nums2) {
             quickSort(0, _nums1.size() - 1, _nums1);
             quickSort(0, _nums2.size() - 1, _nums2);
@@ -1147,8 +1147,7 @@ public:
             }
 
             return result;
-        }*/
-
+        }
     };
     // Accepted
     class HashTable {
