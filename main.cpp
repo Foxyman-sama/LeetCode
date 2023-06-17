@@ -10,7 +10,7 @@ int main()  {
     std::vector<int> nums2 { 2, 2 };
     std::vector<int> nums3 { 4, 9, 5 };
     std::vector<int> nums4 { 9, 4, 9, 8, 4 };
-    auto result { sol.intersect(nums3, nums4) };
+    auto result { sol.intersect(nums1, nums2) };
     for (auto &&el : result) {
         std::cout << el << '\n';
     }

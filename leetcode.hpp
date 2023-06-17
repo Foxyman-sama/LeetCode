@@ -1138,11 +1138,22 @@ public:
             quickSort(0, _nums2.size() - 1, _nums2);
 
             std::vector<int> result { };
-            for (auto &&el : _nums1) {
-                int pos { binarySearch(0, _nums2.size() - 1, el, _nums2) };
-                if (pos != INT_MIN) {
-                    result.emplace_back(el);
-                    _nums2[pos] = -1;
+            if ((_nums1.size() == _nums2.size()) || (_nums1.size() < _nums2.size())) {
+                for (auto &&el : _nums1) {
+                    int pos { binarySearch(0, _nums2.size() - 1, el, _nums2) };
+                    if (pos != INT_MIN) {
+                        result.emplace_back(el);
+                        _nums2.erase(_nums2.begin() + pos);
+                    }
+                }
+            }
+            else {
+                for (auto &&el : _nums2) {
+                    int pos { binarySearch(0, _nums1.size() - 1, el, _nums1) };
+                    if (pos != INT_MIN) {
+                        result.emplace_back(el);
+                        _nums1.erase(_nums2.begin() + pos);
+                    }
                 }
             }
 
