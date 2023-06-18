@@ -1696,15 +1696,6 @@ public:
         }
     };
 };
-class Solution1351 {
-public:
-    class BinarySearch {
-    public:
-        int countNegatives(const std::vector<std::vector<int>> &_k_grid) {
-
-        }
-    };
-};
 class Solution1382 {
 public:
     // Accepted
@@ -1740,6 +1731,46 @@ public:
             std::vector<TreeNode *> nodes { };
             toVector(_p_root, nodes);
             return balance(0, nodes.size() - 1, nodes);
+        }
+    };
+};
+class Solution1539 {
+public:
+    class BinarySearch {
+    private:
+        bool binarySearch(int _l,
+                          int _r,
+                          int _target,
+                          const std::vector<int> &_k_vec) {
+            if (_l <= _r) {
+                int mid { _l + (_r - _l) / 2 };
+                int guess { _k_vec[mid] };
+                if (guess == _target) {
+                    return true;
+                }
+                else if (guess > _target) {
+                    return binarySearch(_l, mid - 1, _target, _k_vec);
+                }
+                else {
+                    return binarySearch(mid + 1, _r, _target, _k_vec);
+                }
+            }
+
+            return false;
+        }
+
+    public:
+        int findKthPositive(const std::vector<int> &_k_vec, 
+                            int _k) {
+            int index { };
+            for (int i { 1 }; i <= 1000; ++i) {
+                bool is_finded { binarySearch(0, _k_vec.size() - 1, i, _k_vec) };
+                if ((!is_finded) && (++index == _k)) {
+                    return i;
+                }
+            }
+
+            return INT_MIN;
         }
     };
 };
