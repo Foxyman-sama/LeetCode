@@ -1077,6 +1077,7 @@ public:
 };
 class Solution350 {
 public:
+    // Accepted
     class Sorting {
     private:
         int partition(int _l,
@@ -1152,7 +1153,7 @@ public:
                     int pos { binarySearch(0, _nums1.size() - 1, el, _nums1) };
                     if (pos != INT_MIN) {
                         result.emplace_back(el);
-                        _nums1.erase(_nums2.begin() + pos);
+                        _nums1.erase(_nums1.begin() + pos);
                     }
                 }
             }
@@ -1692,6 +1693,15 @@ public:
         int countServers(std::vector<std::vector<int>> &_grid) {
             toId(_grid);
             return count();
+        }
+    };
+};
+class Solution1351 {
+public:
+    class BinarySearch {
+    public:
+        int countNegatives(const std::vector<std::vector<int>> &_k_grid) {
+
         }
     };
 };
