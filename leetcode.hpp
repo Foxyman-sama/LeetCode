@@ -1736,6 +1736,7 @@ public:
 };
 class Solution1539 {
 public:
+    // Accepted
     class BinarySearch {
     private:
         bool binarySearch(int _l,
@@ -1763,8 +1764,11 @@ public:
         int findKthPositive(const std::vector<int> &_k_vec, 
                             int _k) {
             int index { };
-            for (int i { 1 }; i <= 1000; ++i) {
-                bool is_finded { binarySearch(0, _k_vec.size() - 1, i, _k_vec) };
+            for (int i { 1 }; ; ++i) {
+                bool is_finded { };
+                if (i <= _k_vec.back()) {
+                    is_finded = binarySearch(0, _k_vec.size() - 1, i, _k_vec);
+                }
                 if ((!is_finded) && (++index == _k)) {
                     return i;
                 }

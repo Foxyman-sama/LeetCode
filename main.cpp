@@ -1,19 +1,45 @@
 #include <iostream>
+#include <fstream>
 #include "leetcode.hpp"
 #include "print.hpp"
 
-int main()  {
+template<
+    typename T>
+[[nodiscard]]
+constexpr std::vector<T> readInput(const std::string &_k_path) noexcept;
+
+int main() {
     setlocale(0,  "");
 
-    Solution350::Sorting sol { };
-    std::vector<int> nums1 { 1, 2, 2, 1 };
-    std::vector<int> nums2 { 2, 2 };
-    std::vector<int> nums3 { 4, 9, 5 };
-    std::vector<int> nums4 { 9, 4, 9, 8, 4 };
-    auto result { sol.intersect(nums1, nums2) };
-    for (auto &&el : result) {
-        std::cout << el << '\n';
+    Solution1539::BinarySearch sol { };
+    auto result { readInput<int>("input.txt") };
+    std::cout << sol.findKthPositive(result, 724) << '\n';
+    system("pause");
+}
+
+template<
+    typename T>
+[[nodiscard]]
+constexpr std::vector<T> readInput(const std::string &_k_path) noexcept {
+    std::ifstream fin { _k_path };
+    if (!fin.is_open()) {
+        std::cerr << "It isn`t can be opened: " << _k_path << '\n';
+        return { };
     }
 
-    system("pause");
+    constexpr size_t k_buf_size { 256 };
+    std::vector<T> result { };
+    std::string buf { };
+    buf.resize(k_buf_size);
+    while ((fin.getline(buf.data(), k_buf_size, ',')) ||
+           (fin.getline(buf.data(), k_buf_size, ']'))) {
+        if constexpr (std::is_arithmetic_v<T>) {
+            result.emplace_back(std::stod(buf));
+        }
+        else {
+            result.emplace_back(buf);
+        }
+    }
+
+    return result;
 }
