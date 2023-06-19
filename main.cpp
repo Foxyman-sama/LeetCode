@@ -6,13 +6,13 @@
 template<
     typename T>
 [[nodiscard]]
-constexpr std::vector<T> readInput(const std::string &_k_path) noexcept;
+constexpr std::vector<T> readInput(const std::string &_k_path = "input.txt") noexcept;
 
 int main() {
     setlocale(0,  "");
 
     Solution1539::BinarySearch sol { };
-    auto result { readInput<int>("input.txt") };
+    auto result { readInput<int>() };
     std::cout << sol.findKthPositive(result, 724) << '\n';
     system("pause");
 }
