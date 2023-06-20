@@ -1573,13 +1573,30 @@ public:
 class Solution1237 {
 public:
     class BinarySearch {
-    private:
-
-
     public:
         std::vector<std::vector<int>> findSolution(CustomFunction &_callback,
                                                    int _expected) {
-            
+            std::vector<std::vector<int>> result { };
+            for (int begin { 1 }, end { 1001 }; begin < end; ++begin) {
+                int l { begin };
+                int r { end };
+                while (l < r) {
+                    int mid { (l + r) / 2 };
+                    int value { _callback.f(l, r) };
+                    if (value == _expected) {
+                        result.emplace_back(std::vector<int> { l, r });
+                        break;
+                    }
+                    else if (value > _expected) {
+                        r = mid - 1;
+                    }
+                    else {
+                        l = mid + 1;
+                    }
+                }
+            }
+
+            return result;
         }
     };
 };

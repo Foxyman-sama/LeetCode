@@ -33,7 +33,7 @@ public:
     int f(int _x, 
           int _y) {
         // do something
-        return 0;
+        return _x + _y;
     }
 };
 

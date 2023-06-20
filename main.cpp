@@ -11,9 +11,17 @@ constexpr std::vector<T> readInput(const std::string &_k_path = "input.txt") noe
 int main() {
     setlocale(0,  "");
 
-    Solution1539::BinarySearch sol { };
-    auto result { readInput<int>() };
-    std::cout << sol.findKthPositive(result, 724) << '\n';
+    Solution1237::BinarySearch sol { };
+    CustomFunction fn { };
+    auto result { sol.findSolution(fn, 5) };
+    for (auto &&row : result) {
+        for (auto &&field : row) {
+            std::cout << ' ' << field;
+        }
+
+        std::cout << '\n';
+    }
+
     system("pause");
 }
 
