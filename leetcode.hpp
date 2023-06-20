@@ -1600,11 +1600,28 @@ public:
             return result;
         }
     };
+    // Accepted
     class TwoPointers {
     public:
         std::vector<std::vector<int>> findSolution(CustomFunction &_callback,
                                                    int _expected) { 
-            
+            int x { 1 };
+            int y { 1000 };
+            std::vector<std::vector<int>> result { };
+            while ((x <= 1000) && (y >= 1)) {
+                int value { _callback.f(x, y) };
+                if (value == _expected) {
+                    result.emplace_back(std::vector<int> { x++, y-- });
+                }
+                else if (value > _expected) {
+                    --y;
+                }
+                else {
+                    ++x;
+                }
+            }
+
+            return result;
         }
     };
 };

@@ -11,7 +11,7 @@ constexpr std::vector<T> readInput(const std::string &_k_path = "input.txt") noe
 int main() {
     setlocale(0,  "");
 
-    Solution1237::BinarySearch sol { };
+    Solution1237::TwoPointers sol { };
     CustomFunction fn { };
     auto result { sol.findSolution(fn, 5) };
     for (auto &&row : result) {
