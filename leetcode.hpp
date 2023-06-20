@@ -1572,31 +1572,39 @@ public:
 };
 class Solution1237 {
 public:
+    // Accepted
     class BinarySearch {
     public:
         std::vector<std::vector<int>> findSolution(CustomFunction &_callback,
                                                    int _expected) {
             std::vector<std::vector<int>> result { };
-            for (int begin { 1 }, end { 1001 }; begin < end; ++begin) {
-                int l { begin };
-                int r { end };
+            for (int x { 1 }; x <= 1000; ++x) {
+                int l { 1 };
+                int r { 1000 };
                 while (l < r) {
                     int mid { (l + r) / 2 };
-                    int value { _callback.f(l, r) };
-                    if (value == _expected) {
-                        result.emplace_back(std::vector<int> { l, r });
-                        break;
-                    }
-                    else if (value > _expected) {
-                        r = mid - 1;
+                    int value { _callback.f(x, mid) };
+                    if (r >= _expected) {
+                        r = mid;
                     }
                     else {
                         l = mid + 1;
                     }
                 }
+
+                if (_callback.f(x, l) == _expected) {
+                    result.emplace_back(std::vector<int> { x, l });
+                }
             }
 
             return result;
+        }
+    };
+    class TwoPointers {
+    public:
+        std::vector<std::vector<int>> findSolution(CustomFunction &_callback,
+                                                   int _expected) { 
+            
         }
     };
 };
