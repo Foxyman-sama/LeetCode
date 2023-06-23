@@ -1752,6 +1752,50 @@ public:
         }
     };
 };
+class Solution1365 {
+public:
+    class Sorting {
+    private:
+        int partition(int _l,
+                      int _r,
+                      std::vector<int> &_nums) {
+            int value { _nums[(_l + _r) / 2] };
+            while (_l <= _r) {
+                while (_nums[_l] < value) {
+                    ++_l;
+                }
+                while (_nums[_r] > value) {
+                    --_r;
+                }
+
+                if (_l >= _r) {
+                    break;
+                }
+
+                std::swap(_nums[_l++], _nums[_r--]);
+            }
+
+            return _r;
+        }
+
+        void quickSort(int _l,
+                       int _r,
+                       std::vector<int> &_nums) {
+            if (_l < _r) {
+                int q { partition(_l, _r, _nums) };
+                quickSort(_l, q, _nums);
+                quickSort(q + 1, _r, _nums);
+            }
+        }
+
+    public:
+        std::vector<int> smallerNumbersThanCurrent(std::vector<int> &_nums) {
+            quickSort(0, _nums.size() - 1, _nums);
+
+            int array[] = new int[2] { };
+        }
+    };
+};
 class Solution1382 {
 public:
     // Accepted
