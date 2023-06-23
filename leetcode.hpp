@@ -1158,6 +1158,32 @@ public:
         }
     };
 };
+class Solution367 {
+public:
+    // Accepted
+    class BinarySearch {
+    public:
+        bool isPerfectSquare(int _num) {
+            int l { };
+            int r { _num };
+            while (l <= r) {
+                long long mid { (l + r) / 2 };
+                long long pow { mid * mid };
+                if (pow == _num) {
+                    return true;
+                }
+                else if (pow > _num) {
+                    r = mid - 1;
+                }
+                else {
+                    l = mid + 1;
+                }
+            }
+
+            return false;
+        }
+    };
+};
 class Solution374 {
 public:
     // Accepted
@@ -1600,7 +1626,7 @@ public:
             return result;
         }
     };
-    // Accepted
+    // Accepted O(X + Y)
     class TwoPointers {
     public:
         std::vector<std::vector<int>> findSolution(CustomFunction &_callback,

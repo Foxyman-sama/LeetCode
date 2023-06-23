@@ -11,17 +11,8 @@ constexpr std::vector<T> readInput(const std::string &_k_path = "input.txt") noe
 int main() {
     setlocale(0,  "");
 
-    Solution1237::TwoPointers sol { };
-    CustomFunction fn { };
-    auto result { sol.findSolution(fn, 5) };
-    for (auto &&row : result) {
-        for (auto &&field : row) {
-            std::cout << ' ' << field;
-        }
-
-        std::cout << '\n';
-    }
-
+    Solution367::BinarySearch sol { };
+    std::cout << sol.isPerfectSquare(14) << '\n';
     system("pause");
 }
 
