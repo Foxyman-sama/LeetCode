@@ -1754,6 +1754,7 @@ public:
 };
 class Solution1365 {
 public:
+    // TO DO
     class Sorting {
     private:
         int partition(int _l,
@@ -1792,7 +1793,7 @@ public:
         std::vector<int> smallerNumbersThanCurrent(std::vector<int> &_nums) {
             quickSort(0, _nums.size() - 1, _nums);
 
-            int array[] = new int[2] { };
+
         }
     };
 };
@@ -2147,6 +2148,45 @@ public:
                              std::vector<std::vector<int>> &_edges) {
             toId(_n, _edges);
             return count();
+        }
+    };
+};
+class Solution2540 {
+public:
+    // Accepted
+    class BinarySearch {
+    private:
+        bool binarySearch(const std::vector<int> &_k_nums,
+                          int _target) {
+            int l { };
+            int r { static_cast<int>(_k_nums.size() - 1) };
+            while (l <= r) {
+                int mid { l + (r - l) / 2 };
+                int guess { _k_nums[mid] };
+                if (guess == _target) {
+                    return true;
+                }
+                else if (guess > _target) {
+                    r = mid - 1;
+                }
+                else {
+                    l = mid + 1;
+                }
+            }
+
+            return false;
+        }
+
+    public:
+        int getCommon(const std::vector<int> &_k_nums1,
+                      const std::vector<int> &_k_nums2) {
+            for (auto &&el : _k_nums1) {
+                if (binarySearch(_k_nums2, el)) {
+                    return el;
+                }
+            }
+
+            return -1;
         }
     };
 };
