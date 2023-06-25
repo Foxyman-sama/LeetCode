@@ -1754,18 +1754,18 @@ public:
 };
 class Solution1365 {
 public:
-    // TO DO
+    // Accepted
     class Sorting {
     private:
-        int partition(int _l,
-                      int _r,
-                      std::vector<int> &_nums) {
-            int value { _nums[(_l + _r) / 2] };
+        int partition(std::vector<int> &_vec,
+                      int _l,
+                      int _r) {
+            int value { _vec[(_l + _r) / 2] };
             while (_l <= _r) {
-                while (_nums[_l] < value) {
+                while (_vec[_l] < value) {
                     ++_l;
                 }
-                while (_nums[_r] > value) {
+                while (_vec[_r] > value) {
                     --_r;
                 }
 
@@ -1773,26 +1773,43 @@ public:
                     break;
                 }
 
-                std::swap(_nums[_l++], _nums[_r--]);
+                std::swap(_vec[_l++], _vec[_r--]);
             }
 
             return _r;
         }
 
-        void quickSort(int _l,
-                       int _r,
-                       std::vector<int> &_nums) {
+        void quickSort(std::vector<int> &_nums,
+                       int _l,
+                       int _r) {
             if (_l < _r) {
-                int q { partition(_l, _r, _nums) };
-                quickSort(_l, q, _nums);
-                quickSort(q + 1, _r, _nums);
+                int q { partition(_nums, _l, _r) };
+                quickSort(_nums, _l, q);
+                quickSort(_nums, q + 1, _r);
             }
         }
 
     public:
-        std::vector<int> smallerNumbersThanCurrent(std::vector<int> &_nums) {
-            quickSort(0, _nums.size() - 1, _nums);
+        std::vector<int> smallerNumbersThanCurrent(const std::vector<int> &_k_nums) {
+            std::vector<int> tvec { _k_nums };
+            quickSort(tvec, 0, tvec.size() - 1);
 
+            std::unordered_map<int, int> hash { };
+            int counter { };
+            for (auto &&el : tvec) {
+                if (hash.find(el) == hash.end()) {
+                    hash[el] = counter;
+                }
+
+                ++counter;
+            }
+
+            std::vector<int> result { };
+            for (auto &&el : _k_nums) {
+                result.emplace_back(hash[el]);
+            }
+
+            return result;
         }
     };
 };
