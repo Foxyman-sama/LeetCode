@@ -11,8 +11,10 @@ constexpr std::vector<T> readInput(const std::string &_k_path = "input.txt") noe
 int main() {
     setlocale(0,  "");
 
-    Solution367::BinarySearch sol { };
-    std::cout << sol.isPerfectSquare(14) << '\n';
+    Solution1365::HashTable sol { };
+    auto vec { readInput<int>() };
+    auto result { sol.smallerNumbersThanCurrent(vec) };
+    print(result);
     system("pause");
 }
 
@@ -22,7 +24,7 @@ template<
 constexpr std::vector<T> readInput(const std::string &_k_path) noexcept {
     std::ifstream fin { _k_path };
     if (!fin.is_open()) {
-        std::cerr << "It isn`t can be opened: " << _k_path << '\n';
+        std::cerr << "This file isn`t can be opened: " << _k_path << '\n';
         return { };
     }
 
@@ -30,8 +32,7 @@ constexpr std::vector<T> readInput(const std::string &_k_path) noexcept {
     std::vector<T> result { };
     std::string buf { };
     buf.resize(k_buf_size);
-    while ((fin.getline(buf.data(), k_buf_size, ',')) ||
-           (fin.getline(buf.data(), k_buf_size, ']'))) {
+    while (fin.getline(buf.data(), k_buf_size, ',')) {
         if constexpr (std::is_arithmetic_v<T>) {
             result.emplace_back(std::stod(buf));
         }
