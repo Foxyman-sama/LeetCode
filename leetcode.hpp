@@ -1267,71 +1267,24 @@ public:
         }
     };
     // Accepted
-    class Sorting2 {
-    private:
-        int partition(std::string &_str, 
-                      int _l,
-                      int _r) {
-            char value { _str[(_l + _r) / 2] };
-            while (_l <= _r) {
-                while (_str[_l] < value) {
-                    ++_l;
-                }
-                while (_str[_r] > value) {
-                    --_r;
-                }
-
-                if (_l >= _r) {
-                    break;
-                }
-
-                std::swap(_str[_l++], _str[_r--]);
-            }
-
-            return _r;
-        }
-        bool binarySearch(const std::string &_k_str,
-                          int _l,
-                          int _r,
-                          int _target) {
-            if (_l <= _r) {
-                int mid { _l + (_r - _l) / 2 };
-                int guess { _k_str[mid] };
-                if (guess == _target) {
-                    return true;
-                }
-                else if (guess > _target) {
-                    return binarySearch(_k_str, _l, mid - 1, _target);
-                }
-                else {
-                    return binarySearch(_k_str, mid + 1, _r, _target);
-                }
-            }
-
-            return false;
-        }
-
-        void quickSort(std::string &_str,
-                       int _l,
-                       int _r) {
-            if (_l < _r) {
-                int q { partition(_str, _l, _r) };
-                quickSort(_str, _l, q);
-                quickSort(_str, q + 1, _r);
-            }
-        }
-
+    class HashTable {
     public:
-        char findTheDifference(std::string &_fstr, 
-                               std::string &_sstr) {
-            quickSort(_fstr, 0, _fstr.size() - 1);
-            for (auto &&el : _sstr) {
-                if (!binarySearch(_fstr, 0, _fstr.size() - 1, el)) {
-                    return el;
+        char findTheDifference(const std::string &_k_s, 
+                               const std::string &_k_t) {
+            std::unordered_map<char, int> hash { };
+            for (auto &&el : _k_t) {
+                ++hash[el];
+            }
+            for (auto &&el : _k_s) {
+                --hash[el];
+            }
+            for (auto &&[key, value] : hash) {
+                if (value) {
+                    return value;
                 }
             }
 
-            return _sstr.back();
+            return CHAR_MIN;
         }
     };
 };

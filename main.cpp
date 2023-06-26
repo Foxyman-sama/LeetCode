@@ -11,10 +11,8 @@ constexpr std::vector<T> readInput(const std::string &_k_path = "input.txt") noe
 int main() {
     setlocale(0,  "");
 
-    Solution1365::Sorting sol { };
-    auto vec { readInput<int>() };
-    auto result { sol.smallerNumbersThanCurrent(vec) };
-    print(result);
+    Solution389::HashTable sol { };
+    std::cout << sol.findTheDifference("abcd", "abcde") << '\n';
     system("pause");
 }
 
