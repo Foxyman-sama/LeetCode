@@ -1272,19 +1272,39 @@ public:
         char findTheDifference(const std::string &_k_s, 
                                const std::string &_k_t) {
             std::unordered_map<char, int> hash { };
-            for (auto &&el : _k_t) {
+            for (auto &&el: _k_t) {
                 ++hash[el];
             }
-            for (auto &&el : _k_s) {
+            for (auto &&el: _k_s) {
                 --hash[el];
             }
-            for (auto &&[key, value] : hash) {
+            for (auto &&[key, value]: hash) {
                 if (value) {
                     return value;
                 }
             }
 
             return CHAR_MIN;
+        }
+    };
+};
+class Solution509 {
+public:
+    class DynamicProgramming {
+    public:
+        int fib(int _n) {
+            static std::vector<int> s_cache { []() {
+                std::vector<int> cache { 0, 1 };
+                cache.resize(31);
+                return cache;
+            }() };
+            if (!s_cache[_n]) {
+                for (size_t i { 2 }; i <= _n; ++i) {
+                    s_cache[i] = s_cache[i - 1] + s_cache[i - 2];
+                }
+            }
+
+            return s_cache[_n];
         }
     };
 };
