@@ -1293,11 +1293,9 @@ public:
     class DynamicProgramming {
     public:
         int fib(int _n) {
-            static std::vector<int> s_cache { []() {
-                std::vector<int> cache { 0, 1 };
-                cache.resize(31);
-                return cache;
-            }() };
+            static std::unordered_map<int, int> s_cache { 
+                std::pair { 0, 0 }, std::pair { 1, 1 }
+            };
             if (!s_cache[_n]) {
                 for (size_t i { 2 }; i <= _n; ++i) {
                     s_cache[i] = s_cache[i - 1] + s_cache[i - 2];

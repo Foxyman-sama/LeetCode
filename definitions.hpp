@@ -32,7 +32,6 @@ class CustomFunction {
 public:
     int f(int _x, 
           int _y) {
-        // do something
         return _x + _y;
     }
 };
