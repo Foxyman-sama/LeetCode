@@ -1290,6 +1290,7 @@ public:
 };
 class Solution509 {
 public:
+    // Accepted
     class DynamicProgramming {
     public:
         int fib(int _n) {
@@ -1686,6 +1687,22 @@ public:
             return _base_str;
         }
     };
+};
+class Solution1137 {
+public:
+    // Accepted
+    int tribonacci(int _n) {
+        static std::unordered_map<int, int> s_cache {
+            std::pair { 0, 0 }, std::pair { 1, 1 }, std::pair { 2, 1 }
+        };
+        if (!s_cache[_n]) {
+            for (size_t i { 3 }; i <= _n; ++i) {
+                s_cache[i] = s_cache[i - 1] + s_cache[i - 2] + s_cache[i - 3];
+            }
+        }
+
+        return s_cache[_n];
+    }
 };
 class Solution1237 {
 public:
