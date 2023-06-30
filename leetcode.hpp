@@ -2026,6 +2026,27 @@ public:
         }
     };
 };
+class Solution1748 {
+public:
+    class HashTable {
+    public:
+        int sumOfUnique(const std::vector<int> &_k_nums) {
+            std::unordered_map<int, int> hash { };
+            for (auto &&el: _k_nums) {
+                ++hash[el];
+            }
+
+            int sum { };
+            for (auto &&[key, value]: hash) {
+                if(value == 1) {
+                    sum += key;
+                }
+            }
+
+            return sum;
+        }
+    };
+};
 class Solution1920 {
 public:
     // Accepted
@@ -2328,6 +2349,7 @@ public:
 };
 class Solution2418 {
 public:
+    // Accepted
     class Sorting {
     private:
         int partition(std::vector<int> &_vec,
