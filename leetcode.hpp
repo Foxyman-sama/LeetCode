@@ -2311,9 +2311,6 @@ public:
             for (auto &&el : _k_key) {
                 if ((!isspace(el)) && (!hash[el])) {
                     hash[el] = index++;
-                    if (index > 122) {
-                        index = 97;
-                    }
                 }
             }
             for (auto &&el : _k_message) {
@@ -2323,6 +2320,61 @@ public:
                 else {
                     result += el;
                 }
+            }
+
+            return result;
+        }
+    };
+};
+class Solution2418 {
+public:
+    class Sorting {
+    private:
+        int partition(std::vector<int> &_vec,
+                      int _l,
+                      int _r) {
+            int value { _vec[(_l + _r) / 2] };
+            while (_l <= _r) {
+                while (_vec[_l] > value) {
+                    ++_l;
+                }
+                while (_vec[_r] < value) {
+                    --_r;
+                }
+
+                if (_l >= _r) {
+                    break;
+                }
+
+                std::swap(_vec[_l++], _vec[_r--]);
+            }
+
+            return _r;
+        }
+
+        void quickSort(std::vector<int> &_vec,
+                       int _l,
+                       int _r) {
+            if (_l < _r) {
+                int q { partition(_vec, _l, _r) };
+                quickSort(_vec, _l, q);
+                quickSort(_vec, q + 1, _r);
+            }
+        }
+
+    public:
+        std::vector<std::string> sortPeople(const std::vector<std::string> &_k_names, 
+                                            std::vector<int> &_heights) {
+            std::unordered_map<int, std::string> hash { };
+            for (size_t i { }; i < _k_names.size(); ++i) {
+                hash[_heights[i]] = _k_names[i];
+            }
+
+            quickSort(_heights, 0, _heights.size() - 1);
+            
+            std::vector<std::string> result { };
+            for (auto &&el : _heights) {
+                result.emplace_back(hash[el]);
             }
 
             return result;
