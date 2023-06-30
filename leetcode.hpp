@@ -1560,6 +1560,29 @@ public:
         }
     };
 };
+class Solution771 {
+public:
+    // Accepted
+    class HashTable {
+    public:
+        int numJewelsInStones(const std::string &_k_jewels, 
+                              const std::string &_k_stones) {
+            std::unordered_map<int, int> hash { };
+            for (auto &&el : _k_jewels) {
+                ++hash[el];
+            }
+
+            int amount { };
+            for (auto &&el : _k_stones) {
+                if (hash[el]) {
+                    ++amount;
+                }
+            }
+
+            return amount;
+        }
+    };
+};
 class Solution1061 {
 public:
     // Accepted
