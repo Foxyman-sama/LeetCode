@@ -2298,6 +2298,37 @@ public:
         }
     };
 };
+class Solution2325 {
+public:
+    // Accepted
+    class HashTable {
+    public:
+        std::string decodeMessage(const std::string &_k_key, 
+                                  const std::string &_k_message) {
+            std::string result { };
+            std::unordered_map<char, char> hash { };
+            int index { 97 };
+            for (auto &&el : _k_key) {
+                if ((!isspace(el)) && (!hash[el])) {
+                    hash[el] = index++;
+                    if (index > 122) {
+                        index = 97;
+                    }
+                }
+            }
+            for (auto &&el : _k_message) {
+                if (isspace(el)) {
+                    result += ' ';
+                }
+                else {
+                    result += el;
+                }
+            }
+
+            return result;
+        }
+    };
+};
 class Solution2540 {
 public:
     // Accepted
