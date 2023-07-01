@@ -2079,19 +2079,15 @@ public:
 };
 class Solution1832 {
 public:
-    // Accepted but need better
+    // Accepted
     class HashTable {
         bool checkIfPangram(const std::string &_k_sentence) {
-            static constexpr std::string_view sk_alphabet { "abcdefghijklmnopqrstuvwxyz" };
-            std::unordered_map<char, int> hash { };
-            for (auto &&el: sk_alphabet) {
-                hash[el] = 1;
-            }
+            std::string alphabet { "abcdefghijklmnopqrstuvwxyz" };
             for (auto &&el: _k_sentence) {
-                --hash[el];
+                alphabet[el - 97] = '0';
             }
-            for (auto &&[key, value]: hash) {
-                if (value > 0) {
+            for (auto &&el: alphabet) {
+                if (el != '0') {
                     return false;
                 }
             }
