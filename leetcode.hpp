@@ -10,6 +10,7 @@
 #include <vector>
 #include <unordered_map>
 #include <bitset>
+#include <random>
 #include "definitions.hpp"
 
 class Solution1 {
@@ -1307,6 +1308,34 @@ public:
         }
     };
 };
+class Solution535 {
+public:
+    // Accepted
+    class HashTable {
+    private:
+        static constexpr std::string_view sk_symbols_ { 
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" 
+        };       
+        static constexpr std::string_view sk_url_ { "http://tinyurl.com/" };
+        static inline std::unordered_map<std::string, std::string> s_references_ { };
+
+    public:
+        std::string encode(const std::string &_k_long_url) {
+            std::string result { };
+            size_t iter { _k_long_url.size() - 1 };
+            while (_k_long_url[iter] != '/') {
+                result += sk_symbols_[_k_long_url[iter] % 62];
+            }
+
+            result = sk_url_.data() + result;
+            s_references_[result] = _k_long_url;
+            return result;
+        }
+        std::string decode(const std::string &_k_short_url) {
+            return s_references_[_k_short_url];
+        }
+    };
+};
 class Solution547 {
 public:
     // Accepted
@@ -2028,6 +2057,7 @@ public:
 };
 class Solution1748 {
 public:
+    // Accepted
     class HashTable {
     public:
         int sumOfUnique(const std::vector<int> &_k_nums) {
