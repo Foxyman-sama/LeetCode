@@ -2077,6 +2077,29 @@ public:
         }
     };
 };
+class Solution1832 {
+public:
+    // Accepted but need better
+    class HashTable {
+        bool checkIfPangram(const std::string &_k_sentence) {
+            static constexpr std::string_view sk_alphabet { "abcdefghijklmnopqrstuvwxyz" };
+            std::unordered_map<char, int> hash { };
+            for (auto &&el: sk_alphabet) {
+                hash[el] = 1;
+            }
+            for (auto &&el: _k_sentence) {
+                --hash[el];
+            }
+            for (auto &&[key, value]: hash) {
+                if (value > 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    };
+};
 class Solution1920 {
 public:
     // Accepted
