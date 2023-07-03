@@ -2205,6 +2205,23 @@ public:
         }
     };
 };
+class Solution2032 {
+public:
+    class HashTable {
+    public:
+        std::vector<int> twoOutOfThree(const std::vector<int> &_k_nums1,
+                                       const std::vector<int> &_k_nums2, 
+                                       const std::vector<int> &_k_nums3) {
+            std::unordered_map<int, int> hash { };
+            std::vector<const std::vector<int> *> vecs { &_k_nums1, &_k_nums2, &_k_nums3 };
+            for (auto &&p_el: vecs) {
+                for (auto &&el: *p_el) {
+
+                }
+            }
+        }
+    };
+};
 class Solution2089 {
 public:
     // Accepted
