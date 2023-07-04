@@ -2205,23 +2205,6 @@ public:
         }
     };
 };
-class Solution2032 {
-public:
-    class HashTable {
-    public:
-        std::vector<int> twoOutOfThree(const std::vector<int> &_k_nums1,
-                                       const std::vector<int> &_k_nums2, 
-                                       const std::vector<int> &_k_nums3) {
-            std::unordered_map<int, int> hash { };
-            std::vector<const std::vector<int> *> vecs { &_k_nums1, &_k_nums2, &_k_nums3 };
-            for (auto &&p_el: vecs) {
-                for (auto &&el: *p_el) {
-
-                }
-            }
-        }
-    };
-};
 class Solution2089 {
 public:
     // Accepted
@@ -2310,6 +2293,38 @@ public:
             }
 
             mergeSort(0, result.size() - 1, result);
+            return result;
+        }
+    };
+};
+class Solution2215 {
+public:
+    class HashTable {
+    public:
+        std::vector<std::vector<int>> findDifference(const std::vector<int> &_k_nums1, 
+                                                     const std::vector<int> &_k_nums2) {
+            std::vector<int> result1 { };
+            std::vector<int> result2 { };
+            std::unordered_map<int, bool> hash1 { };
+            std::unordered_map<int, bool> hash2 { };
+            for (auto &&el: _k_nums1) {
+                hash1[el] = true;
+            }
+            for (auto &&el: _k_nums2) {
+                hash2[el] = true;
+            }
+            for (auto &&el: _k_nums2) {
+                if (hash1[el]) {
+                    result1.emplace_back(el);
+                }
+            }
+            for (auto &&el: _k_nums1) {
+                if (hash2[el]) {
+                    result2.emplace_back(el);
+                }
+            }
+
+            std::vector<std::vector<int>> result { result1, result2 };
             return result;
         }
     };
