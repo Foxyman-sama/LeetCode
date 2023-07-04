@@ -4,6 +4,8 @@
 #include <iostream>
 #include <map>
 #include <memory>
+#include <set>
+#include <unordered_set>
 #include <functional>
 #include <algorithm>
 #include <string>
@@ -2299,32 +2301,25 @@ public:
 };
 class Solution2215 {
 public:
+    // Accepted
     class HashTable {
     public:
         std::vector<std::vector<int>> findDifference(const std::vector<int> &_k_nums1, 
                                                      const std::vector<int> &_k_nums2) {
-            std::vector<int> result1 { };
-            std::vector<int> result2 { };
-            std::unordered_map<int, bool> hash1 { };
-            std::unordered_map<int, bool> hash2 { };
-            for (auto &&el: _k_nums1) {
-                hash1[el] = true;
-            }
-            for (auto &&el: _k_nums2) {
-                hash2[el] = true;
-            }
-            for (auto &&el: _k_nums2) {
-                if (hash1[el]) {
-                    result1.emplace_back(el);
+            std::vector<std::vector<int>> result { std::vector<int> { }, std::vector<int> { } };
+            std::unordered_set<int> set1 { _k_nums1.begin(), _k_nums1.end() };
+            std::unordered_set<int> set2 { _k_nums2.begin(), _k_nums2.end() };
+            for (auto &&el: set1) {
+                if (set2.find(el) == set2.end()) {
+                    result[0].emplace_back(el);
                 }
             }
-            for (auto &&el: _k_nums1) {
-                if (hash2[el]) {
-                    result2.emplace_back(el);
+            for (auto &&el: set2) {
+                if (set1.find(el) == set1.end()) {
+                    result[1].emplace_back(el);
                 }
             }
 
-            std::vector<std::vector<int>> result { result1, result2 };
             return result;
         }
     };
