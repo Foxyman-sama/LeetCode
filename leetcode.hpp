@@ -2207,6 +2207,33 @@ public:
         }
     };
 };
+class Solution2032 {
+    // Accepted
+public:
+    std::vector<int> twoOutOfThree(const std::vector<int> &_k_nums1, 
+                                   const std::vector<int> &_k_nums2, 
+                                   const std::vector<int> &_k_nums3) {
+        std::unordered_set<int> set1 { _k_nums1.begin(), _k_nums1.end() };
+        std::unordered_set<int> set2 { _k_nums2.begin(), _k_nums2.end() };
+        std::unordered_set<int> set3 { _k_nums3.begin(), _k_nums3.end() };
+        std::vector<int> result { };
+        for (auto &&el: set1) {
+            if ((set2.find(el) != set2.end()) || 
+                (set3.find(el) != set3.end()) && 
+                (std::find(result.begin(), result.end(), el) == result.end())) {
+                result.emplace_back(el);
+            }
+        }        
+        for (auto &&el: set2) {
+            if ((set3.find(el) != set3.end()) && 
+                (std::find(result.begin(), result.end(), el) == result.end())) {
+                result.emplace_back(el);
+            }
+        }
+
+        return result;
+    }
+};
 class Solution2089 {
 public:
     // Accepted
