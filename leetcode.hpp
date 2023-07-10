@@ -6,6 +6,7 @@
 #include <memory>
 #include <set>
 #include <unordered_set>
+#include <forward_list>
 #include <functional>
 #include <algorithm>
 #include <string>
@@ -1542,6 +1543,47 @@ public:
         int maxAreaOfIsland(const std::vector<std::vector<int>> &_k_grid) {
             toId(_k_grid);
             return max(_k_grid);
+        }
+    };
+};
+class Solution705 {
+public:
+    class MyHashSet {
+    private:
+        std::list<int> set_;
+
+    private:
+        auto find(int _target) {
+            auto it { set_.begin() };
+            while (it != set_.end()) {
+                if (*it == _target) {
+                    return it;
+                }
+
+                ++it;
+            }
+
+            return it;
+        }        
+
+    public:
+        MyHashSet() noexcept
+            : set_ { } { }
+
+        bool contains(int _key) {
+            return find(_key) == set_.end() ? false : true;
+        }
+
+        void add(int _key) {
+            if (find(_key) == set_.end()) {
+                set_.emplace_front(_key);
+            }
+        }
+        void remove(int _key) {
+            auto pos { find(_key) };
+            if (pos != set_.end()) {
+                set_.erase(pos);
+            }
         }
     };
 };
