@@ -781,6 +781,29 @@ public:
         }
     };
 };
+class Solution242 {
+public:
+    class HashTable {
+    public:
+        bool isAnagram(const std::string &_k_s,
+                       const std::string &_k_t) {
+            std::unordered_map<char, int> hash { };
+            for (auto &&el: _k_s) {
+                ++hash[el];
+            }
+            for (auto &&el: _k_t) {
+                --hash[el];
+            }
+            for (auto &&[key, value]: hash) {
+                if (value) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    };
+};
 class Solution268 {
 public:
     // Accepted
@@ -1548,6 +1571,7 @@ public:
 };
 class Solution705 {
 public:
+    // Accepted
     class MyHashSet {
     private:
         std::list<int> set_;
@@ -1576,7 +1600,7 @@ public:
 
         void add(int _key) {
             if (find(_key) == set_.end()) {
-                set_.emplace_front(_key);
+                set_.emplace_back(_key);
             }
         }
         void remove(int _key) {
@@ -1584,6 +1608,28 @@ public:
             if (pos != set_.end()) {
                 set_.erase(pos);
             }
+        }
+    };
+    // Accepted
+    class MyHashSet2 {
+    private:
+        std::vector<bool> set_;
+
+    public:
+        MyHashSet2() noexcept
+            : set_ { } { 
+            set_.resize(1'000'001);
+        }
+
+        bool contains(int _key) {
+            return set_[_key];
+        }
+
+        void add(int _key) {
+            set_[_key] = true;
+        }
+        void remove(int _key) {
+            set_[_key] = false;
         }
     };
 };
