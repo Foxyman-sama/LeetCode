@@ -458,6 +458,34 @@ public:
         }
     };
 };
+class Solution125 {
+public:
+    // Accepted
+    class TwoPointers {
+    public:
+        bool isPalindrome(const std::string &_k_s) {
+            int l { };
+            int r { static_cast<int>(_k_s.size() - 1) };
+            while (l < r) {
+                while ((l < _k_s.size()) && (!isalnum(_k_s[l]))) {
+                    ++l;
+                }
+                while ((r >= 0) && (!isalnum(_k_s[r]))) {
+                    --r;
+                }
+
+                if (l > r) {
+                    break;
+                }
+                if (tolower(_k_s[l++]) != tolower(_k_s[r--])) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    };
+};
 class Solution169 {
 public:
     // Accepted
@@ -783,6 +811,7 @@ public:
 };
 class Solution242 {
 public:
+    // Accepted
     class HashTable {
     public:
         bool isAnagram(const std::string &_k_s,

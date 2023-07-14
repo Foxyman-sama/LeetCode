@@ -7,12 +7,8 @@
 int main() {
     setlocale(0,  "");
 
-    Solution2215::HashTable sol { };
-    auto result { sol.findDifference({ 1, 2, 3 }, { 2, 4, 6 }) };
-    for (auto &&el: result) {
-        print(el);
-    }
-
-    
+    Solution125::TwoPointers sol { };
+    auto result { sol.isPalindrome("A man, a plan, a canal: Panama") };
+    print(result);
     system("pause");
 }
