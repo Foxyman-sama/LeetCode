@@ -1731,6 +1731,58 @@ public:
         }
     };
 };
+class Solution959 {
+public:
+    class UnionFind {
+    private:
+        std::vector<int> id_;
+        std::vector<int> sz_;
+
+    private:
+        int find(int _p) noexcept {
+            for (; _p != id_[_p]; _p = id_[_p]);
+            
+            return _p;
+        }
+
+        void merge(int _p,
+                   int _q) noexcept {
+            int i { find(_p) };
+            int j { find(_q) };
+            if (i == j) {
+                return;
+            }
+            if (sz_[i] > sz_[j]) {
+                id_[j] = i;
+                sz_[i] += sz_[j];
+            }
+            else {
+                id_[i] = j;
+                sz_[j] += sz_[i];
+            }
+        }
+        void toId(const std::vector<std::string> &_k_grid) {
+            size_t rows { _k_grid.size() };
+            size_t columns { _k_grid[0].size() };
+            size_t size { rows * columns };
+            sz_.resize(size, 1);
+            id_.resize(size);
+            for (size_t i { }; i < size; ++i) {
+                id_[i] = i;
+            }
+            for (size_t i { }; i < rows; ++i) {
+                for (size_t j { }; j < columns; ++j) {
+                    size_t index { i * rows + j };
+                }
+            }
+        }
+
+    public:
+        int regionsBySlashes(const std::vector<std::string> &_k_grid) {
+
+        }
+    };
+};
 class Solution1061 {
 public:
     // Accepted
@@ -1856,6 +1908,25 @@ public:
             }
 
             return _base_str;
+        }
+    };
+};
+class Solution1108 {
+public:   
+    // Accepted
+    class String {
+        std::string defangIPaddr(const std::string &_k_address) {
+            std::string result { };
+            for (auto &&el: _k_address) {
+                if (el == '.') {
+                    result += "[.]";
+                }
+                else {
+                    result += el;
+                }
+            }
+
+            return result;
         }
     };
 };
