@@ -7,8 +7,8 @@
 int main() {
     setlocale(0,  "");
 
-    Solution125::TwoPointers sol { };
-    auto result { sol.isPalindrome("A man, a plan, a canal: Panama") };
+    Solution959::UnionFind sol { };
+    auto result { sol.regionsBySlashes({ " /", "/ " }) };
     print(result);
     system("pause");
 }

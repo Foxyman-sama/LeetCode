@@ -1737,8 +1737,12 @@ public:
     private:
         std::vector<int> id_;
         std::vector<int> sz_;
+        int max_;
 
     private:
+        UnionFind() noexcept
+            : max_ { } { }
+
         int find(int _p) noexcept {
             for (; _p != id_[_p]; _p = id_[_p]);
             
@@ -1770,16 +1774,43 @@ public:
             for (size_t i { }; i < size; ++i) {
                 id_[i] = i;
             }
-            for (size_t i { }; i < rows; ++i) {
-                for (size_t j { }; j < columns; ++j) {
-                    size_t index { i * rows + j };
+            for (int i { }; i < rows; ++i) {
+                for (int j { }; j < columns; ++j) {
+                    char ch { _k_grid[i][j] };
+                    if (ch != ' ') {
+                        if ((i + 1 < rows) && (j + 1 < columns) && (_k_grid[i + 1][j + 1] != ' ')) {
+                            merge(i * rows + j, (i + 1) * rows + (j + 1));
+                        }                        
+                        else if ((i + 1 < rows) && (j - 1 >= 0) && (_k_grid[i + 1][j - 1] != ' ')) {
+                            merge(i * rows + j, (i + 1) * rows + (j - 1));
+                        }                        
+                        else if ((i > 1) && (j - 1 == 0) && ((ch == '/') || (ch == '\\'))) {
+                            ++max_;
+                        }                     
+                        else if ((i > 1) && (j + 1 == columns - 1) && ((ch == '/') || (ch == '\\'))) {
+                            ++max_;
+                        } 
+                    }
                 }
             }
+        }
+        void max() {
+            int result { 1 };
+            for (size_t i { }; i < id_.size(); ++i) {
+                int root { find(i) };
+                if ((root != i) && (sz_[root] > result)) {
+                    result = sz_[root];
+                }
+            }
+
+            max_ += result;
         }
 
     public:
         int regionsBySlashes(const std::vector<std::string> &_k_grid) {
-
+            toId(_k_grid);
+            max();
+            return max_;
         }
     };
 };
