@@ -1735,82 +1735,70 @@ class Solution959 {
 public:
     class UnionFind {
     private:
-        std::vector<int> id_;
-        std::vector<int> sz_;
-        int max_;
+        class DisjointSet {
+        private:
+            std::vector<size_t> id_;
+            std::vector<size_t> sz_;
 
-    private:
-        UnionFind() noexcept
-            : max_ { } { }
-
-        int find(int _p) noexcept {
-            for (; _p != id_[_p]; _p = id_[_p]);
-            
-            return _p;
-        }
-
-        void merge(int _p,
-                   int _q) noexcept {
-            int i { find(_p) };
-            int j { find(_q) };
-            if (i == j) {
-                return;
-            }
-            if (sz_[i] > sz_[j]) {
-                id_[j] = i;
-                sz_[i] += sz_[j];
-            }
-            else {
-                id_[i] = j;
-                sz_[j] += sz_[i];
-            }
-        }
-        void toId(const std::vector<std::string> &_k_grid) {
-            size_t rows { _k_grid.size() };
-            size_t columns { _k_grid[0].size() };
-            size_t size { rows * columns };
-            sz_.resize(size, 1);
-            id_.resize(size);
-            for (size_t i { }; i < size; ++i) {
-                id_[i] = i;
-            }
-            for (int i { }; i < rows; ++i) {
-                for (int j { }; j < columns; ++j) {
-                    char ch { _k_grid[i][j] };
-                    if (ch != ' ') {
-                        if ((i + 1 < rows) && (j + 1 < columns) && (_k_grid[i + 1][j + 1] != ' ')) {
-                            merge(i * rows + j, (i + 1) * rows + (j + 1));
-                        }                        
-                        else if ((i + 1 < rows) && (j - 1 >= 0) && (_k_grid[i + 1][j - 1] != ' ')) {
-                            merge(i * rows + j, (i + 1) * rows + (j - 1));
-                        }                        
-                        else if ((i > 1) && (j - 1 == 0) && ((ch == '/') || (ch == '\\'))) {
-                            ++max_;
-                        }                     
-                        else if ((i > 1) && (j + 1 == columns - 1) && ((ch == '/') || (ch == '\\'))) {
-                            ++max_;
-                        } 
-                    }
-                }
-            }
-        }
-        void max() {
-            int result { 1 };
-            for (size_t i { }; i < id_.size(); ++i) {
-                int root { find(i) };
-                if ((root != i) && (sz_[root] > result)) {
-                    result = sz_[root];
+        public:
+            explicit DisjointSet(size_t _size) noexcept
+                : id_ { }
+                , sz_ { } {
+                sz_.resize(_size, 1);
+                id_.resize(_size);
+                for (size_t i { }; i < _size; ++i) {
+                    id_[i] = i;
                 }
             }
 
-            max_ += result;
-        }
+            int find(int _p) noexcept {
+                for (; _p != id_[_p]; _p = id_[_p]);
+
+                return _p;
+            }
+
+            void merge(int _p,
+                       int _q) noexcept {
+                int i { find(_p) };
+                int j { find(_q) };
+                if (i == j) {
+                    return;
+                }
+                if (sz_[i] > sz_[j]) {
+                    id_[j] = i;
+                    sz_[i] += sz_[j];
+                }
+                else {
+                    id_[i] = j;
+                    sz_[j] += sz_[i];
+                }
+            }
+        };
 
     public:
         int regionsBySlashes(const std::vector<std::string> &_k_grid) {
-            toId(_k_grid);
-            max();
-            return max_;
+            size_t rows { _k_grid.size() };
+            size_t columns { _k_grid[0].size() };
+            size_t size { rows * columns };
+            DisjointSet set { size };
+            for (size_t i { }; i < rows; ++i) {
+                for (size_t j { }; j < columns; ++j) {
+                    if (_k_grid[i][j] != ' ') {
+                        if ((i == 0) || (i == rows - 1) || (j == 0) || (j == columns - 1)) {
+                            set.merge(i * rows + j, 0);
+                        }
+                    }
+                }
+            }
+            for (size_t i { }; i < rows; ++i) {
+                for (size_t j { }; j < columns; ++j) {
+                    if (_k_grid[i][j] == '/') {
+                        
+                    }
+                }
+            }
+
+            return sz_[0];
         }
     };
 };

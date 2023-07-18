@@ -8,7 +8,7 @@ int main() {
     setlocale(0,  "");
 
     Solution959::UnionFind sol { };
-    auto result { sol.regionsBySlashes({ " /", "/ " }) };
+    auto result { sol.regionsBySlashes({ " /", "  " }) };
     print(result);
     system("pause");
 }
