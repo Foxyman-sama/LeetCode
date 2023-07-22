@@ -1779,26 +1779,45 @@ public:
         int regionsBySlashes(const std::vector<std::string> &_k_grid) {
             size_t rows { _k_grid.size() };
             size_t columns { _k_grid[0].size() };
-            size_t size { rows * columns };
-            DisjointSet set { size };
-            for (size_t i { }; i < rows; ++i) {
-                for (size_t j { }; j < columns; ++j) {
-                    if (_k_grid[i][j] != ' ') {
-                        if ((i == 0) || (i == rows - 1) || (j == 0) || (j == columns - 1)) {
-                            set.merge(i * rows + j, 0);
-                        }
-                    }
-                }
-            }
-            for (size_t i { }; i < rows; ++i) {
-                for (size_t j { }; j < columns; ++j) {
-                    if (_k_grid[i][j] == '/') {
-                        
+            size_t max_rows { rows + 1 };
+            size_t max_columns { columns + 1 };
+            DisjointSet set { max_rows * max_columns };
+            for (size_t i { }; i <= rows; ++i) {
+                for (size_t j { }; j <= columns; ++j) {
+                    if ((i == 0) || (i == rows) || (j == 0) || (j == columns)) {
+                        size_t dot { i * (rows + 1) + j };
+                        set.merge(dot, 0);
                     }
                 }
             }
 
-            return sz_[0];
+            int result { 1 };
+            for (size_t i { }; i < rows; ++i) {
+                for (size_t j { }; j < columns; ++j) {
+                    if (_k_grid[i][j] == '/') {
+                        size_t first_dot { (i * max_rows + (j + 1)) };
+                        size_t second_dot { ((i + 1) * max_rows + j) };
+                        if (set.find(first_dot) != set.find(second_dot)) {
+                            set.merge(first_dot, second_dot);
+                        }
+                        else {
+                            ++result;
+                        }
+                    }
+                    else if (_k_grid[i][j] == '\\') {
+                        size_t first_dot { (i * max_rows + j) };
+                        size_t second_dot { ((i + 1) * max_rows + (j + 1)) };
+                        if (set.find(first_dot) != set.find(second_dot)) {
+                            set.merge(first_dot, second_dot);
+                        }
+                        else {
+                            ++result;
+                        }
+                    }
+                }
+            }
+
+            return result;
         }
     };
 };
