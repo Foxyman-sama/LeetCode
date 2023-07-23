@@ -1733,6 +1733,7 @@ public:
 };
 class Solution959 {
 public:
+    // Accepted
     class UnionFind {
     private:
         class DisjointSet {
@@ -1751,16 +1752,22 @@ public:
                 }
             }
 
-            int find(int _p) noexcept {
-                for (; _p != id_[_p]; _p = id_[_p]);
+            size_t find(size_t _p) noexcept {
+                size_t root { _p };
+                for (; root != id_[root]; root = id_[root]);
+                while (id_[_p] != root) {
+                    size_t parent { id_[_p] };
+                    id_[_p] = root;
+                    _p = parent;
+                }
 
-                return _p;
+                return root;
             }
 
-            void merge(int _p,
-                       int _q) noexcept {
-                int i { find(_p) };
-                int j { find(_q) };
+            void merge(size_t _p,
+                       size_t _q) noexcept {
+                size_t i { find(_p) };
+                size_t j { find(_q) };
                 if (i == j) {
                     return;
                 }
@@ -1785,7 +1792,7 @@ public:
             for (size_t i { }; i <= rows; ++i) {
                 for (size_t j { }; j <= columns; ++j) {
                     if ((i == 0) || (i == rows) || (j == 0) || (j == columns)) {
-                        size_t dot { i * (rows + 1) + j };
+                        size_t dot { i * (max_rows) + j };
                         set.merge(dot, 0);
                     }
                 }
@@ -2302,6 +2309,29 @@ public:
             }
 
             return sum;
+        }
+    };
+};
+class Solution1768 {
+public:
+    // Accepted
+    class TwoPointers {
+    public:
+        std::string mergeAlternately(const std::string &_k_word1, 
+                                     const std::string &_k_word2) {
+            std::string result { };
+            size_t i { };
+            size_t j { };
+            while ((i < _k_word1.size()) || (j < _k_word2.size())) {
+                if (i < _k_word1.size()) {
+                    result += _k_word1[i++];
+                }
+                if (j < _k_word2.size()) {
+                    result += _k_word2[j++];
+                }
+            }
+
+            return result;
         }
     };
 };
