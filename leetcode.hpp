@@ -1956,6 +1956,30 @@ public:
         }
     };
 };
+class Solution1071 {
+public:
+    class String {
+    public:
+        std::string gcdOfStrings(const std::string &_k_str1, 
+                                 const std::string &_k_str2) {
+            std::string divisor { };
+            size_t it { };
+            while ((_k_str1[it] == _k_str2[it]) && (divisor.front() != _k_str1[it])) {
+                divisor += _k_str1[it++];
+            }
+
+            if (divisor.size()) {
+                for (size_t i { }; i < _k_str1.size(); ++i) {
+                    if (divisor[i % divisor.size()] != _k_str1[i]) {
+                        break;
+                    }
+                }
+            }
+
+            return "";
+        }
+    };
+};
 class Solution1108 {
 public:   
     // Accepted
