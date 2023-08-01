@@ -2271,6 +2271,16 @@ public:
         }
     };
 };
+class Solution1431 {
+public:
+    class Array {
+    public:
+        std::vector<bool> kidsWithCandies(const std::vector<int> &_k_candies, 
+                                          int _extra_candies) {
+
+        }
+    };
+};
 class Solution1539 {
 public:
     // Accepted
