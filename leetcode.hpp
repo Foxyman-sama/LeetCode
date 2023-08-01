@@ -1958,6 +1958,7 @@ public:
 };
 class Solution1071 {
 public:
+    // Accepted
     class String {
     public:
         std::string gcdOfStrings(const std::string &_k_str1, 
