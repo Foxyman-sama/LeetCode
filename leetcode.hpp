@@ -2277,7 +2277,24 @@ public:
     public:
         std::vector<bool> kidsWithCandies(const std::vector<int> &_k_candies, 
                                           int _extra_candies) {
+            int max { };
+            for (auto &&el: _k_candies) {
+                if (el > max) {
+                    max = el;
+                }
+            }
 
+            std::vector<bool> result { };
+            for (auto &&el: _k_candies) {
+                if ((el + _extra_candies) >= max) {
+                    result.emplace_back(true);
+                }
+                else {
+                    result.emplace_back(false);
+                }
+            }
+
+            return result;
         }
     };
 };
