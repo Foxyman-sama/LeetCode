@@ -1962,21 +1962,18 @@ public:
     public:
         std::string gcdOfStrings(const std::string &_k_str1, 
                                  const std::string &_k_str2) {
-            std::string divisor { };
-            size_t it { };
-            while ((_k_str1[it] == _k_str2[it]) && (divisor.front() != _k_str1[it])) {
-                divisor += _k_str1[it++];
+            if (_k_str2.size() > _k_str1.size()) {
+                return gcdOfStrings(_k_str2, _k_str1);
             }
-
-            if (divisor.size()) {
-                for (size_t i { }; i < _k_str1.size(); ++i) {
-                    if (divisor[i % divisor.size()] != _k_str1[i]) {
-                        break;
-                    }
-                }
+            else if (_k_str1.find(_k_str2) != 0) {
+                return "";
             }
-
-            return "";
+            else if (_k_str2.empty()) {
+                return _k_str1;
+            }
+            else {
+                return gcdOfStrings(_k_str1.substr(_k_str2.size()), _k_str2);
+            }
         }
     };
 };
@@ -2002,18 +1999,21 @@ public:
 class Solution1137 {
 public:
     // Accepted
-    int tribonacci(int _n) {
-        static std::unordered_map<int, int> s_cache {
-            std::pair { 0, 0 }, std::pair { 1, 1 }, std::pair { 2, 1 }
-        };
-        if (!s_cache[_n]) {
-            for (size_t i { 3 }; i <= _n; ++i) {
-                s_cache[i] = s_cache[i - 1] + s_cache[i - 2] + s_cache[i - 3];
+    class DynamicProgramming {
+    public:
+        int tribonacci(int _n) {
+            static std::unordered_map<int, int> s_cache {
+                std::pair { 0, 0 }, std::pair { 1, 1 }, std::pair { 2, 1 }
+            };
+            if (!s_cache[_n]) {
+                for (size_t i { 3 }; i <= _n; ++i) {
+                    s_cache[i] = s_cache[i - 1] + s_cache[i - 2] + s_cache[i - 3];
+                }
             }
-        }
 
-        return s_cache[_n];
-    }
+            return s_cache[_n];
+        }
+    };
 };
 class Solution1237 {
 public:
