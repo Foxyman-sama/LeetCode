@@ -2273,6 +2273,7 @@ public:
 };
 class Solution1431 {
 public:
+    // Accepted
     class Array {
     public:
         std::vector<bool> kidsWithCandies(const std::vector<int> &_k_candies, 
