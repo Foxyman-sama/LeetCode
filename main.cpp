@@ -7,8 +7,8 @@
 int main() {
     setlocale(0,  "");
 
-    Solution959::UnionFind sol { };
-    auto result { sol.regionsBySlashes({ "/\\", "\\/" }) };
-    print(result);
+    Solution605::Array sol { };
+    std::vector<int> temp { 1, 0, 0, 0, 1 };
+    sol.canPlaceFlowers(temp, 2);
     system("pause");
 }

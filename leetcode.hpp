@@ -1506,6 +1506,39 @@ public:
         }
     };
 };
+class Solution605 {
+public:
+    class Array {
+    private:
+        int getElem(const std::vector<int> &_k_flowerbed,
+                    size_t _index) noexcept {
+            if ((_index >= 0) && (_index < _k_flowerbed.size())) {
+                return _k_flowerbed[_index];
+            }
+
+            return 0;
+        }
+
+    public:
+        bool canPlaceFlowers(std::vector<int> &_flowerbed, 
+                             int _n) {
+            for (size_t i { }; i < _flowerbed.size(); ++i) {
+                if ((getElem(_flowerbed, i) == 0) &&
+                    (getElem(_flowerbed, i - 1) == 0) &&
+                    (getElem(_flowerbed, i + 1) == 0)) {
+                    _flowerbed[i] = 1;
+                    --_n;
+                }
+            }
+
+            if (_n > 0) {
+                return false;
+            }
+
+            return true;
+        }
+    };
+};
 class Solution695 {
 public:
     // Accepted
