@@ -7,8 +7,9 @@
 int main() {
     setlocale(0,  "");
 
-    Solution605::Array sol { };
-    std::vector<int> temp { 1, 0, 0, 0, 1 };
-    sol.canPlaceFlowers(temp, 2);
+    Solution345::TwoPointers sol { };
+    std::string temp { ".," };
+    auto result { sol.reverseVowels(temp) };
+    print(temp);
     system("pause");
 }

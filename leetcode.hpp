@@ -947,6 +947,45 @@ public:
         }
     };
 };
+class Solution345 {
+public:
+    // Accepted
+    class TwoPointers {
+    private:
+        bool isVowel(char _ch) noexcept {
+            constexpr char k_vowels[] { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+            for (auto &&el: k_vowels) {
+                if (_ch == el) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+    public:
+        std::string reverseVowels(std::string &_s) {
+            size_t i { };
+            size_t j { _s.size() - 1 };
+            while (i < j) {
+                while ((i < j) && (!isVowel(_s[i]))) {
+                    ++i;
+                }               
+                while ((i < j) && (!isVowel(_s[j]))) {
+                    --j;
+                }
+                
+                if (i >= j) {
+                    break;
+                }
+
+                std::swap(_s[i++], _s[j--]);
+            }
+
+            return _s;
+        }
+    };
+};
 class Solution347 {
 public:
     // Accepted
@@ -1508,6 +1547,7 @@ public:
 };
 class Solution605 {
 public:
+    // Accepted
     class Array {
     private:
         int getElem(const std::vector<int> &_k_flowerbed,
