@@ -486,6 +486,58 @@ public:
         }
     };
 };
+class Solution151 {
+public:
+    // Accepted
+    class TwoPointers {
+    private:
+        std::string getFormatedString(const std::string &_k_s) noexcept {
+            int amount_of_spaces { 1 };
+            size_t i { };
+            std::string result { };
+            while (i < _k_s.size()) {
+                if (_k_s[i] == ' ') {
+                    ++amount_of_spaces;
+                }
+                else {
+                    amount_of_spaces = 0;
+                }
+                if (amount_of_spaces < 2) {
+                    result += _k_s[i];
+                }
+
+                ++i;
+            }
+
+            if (result.back() != ' ') {
+                result += ' ';
+            }
+
+            return result;
+        }
+
+    public:
+        std::string reverseWords(const std::string &_k_s) {
+            std::string temp { getFormatedString(_k_s) };
+            size_t i { temp.size() - 1 };
+            size_t j { i };
+            std::string result { };
+            while (i != std::string::npos) {
+                i = temp.rfind(' ', i - 1);
+                if (i != std::string::npos) {
+                    result += std::string { temp.begin() + i + 1, temp.begin() + j };
+                    result += ' ';
+                    j = i;
+                }
+                else {
+                    result += std::string { temp.begin(), temp.begin() + j };
+                }
+            }
+            
+            return result;
+        }
+    };
+};
 class Solution169 {
 public:
     // Accepted

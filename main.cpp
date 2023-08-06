@@ -7,9 +7,9 @@
 int main() {
     setlocale(0,  "");
 
-    Solution345::TwoPointers sol { };
-    std::string temp { ".," };
-    auto result { sol.reverseVowels(temp) };
-    print(temp);
+    Solution151::TwoPointers sol { };
+    std::string temp { "a good   example" };
+    auto result { sol.reverseWords(temp) };
+    print(result);
     system("pause");
 }
