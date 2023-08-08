@@ -829,8 +829,7 @@ public:
     public:
         std::vector<int> productExceptSelf(const std::vector<int> &_k_nums) {
             std::vector<int> result { };
-            result.resize(_k_nums.size());
-            result[0] = 1;
+            result.resize(_k_nums.size(), 1);
             for (int i { 1 }; i < _k_nums.size(); ++i) {
                 result[i] = result[i - 1] * _k_nums[i - 1];
             }
