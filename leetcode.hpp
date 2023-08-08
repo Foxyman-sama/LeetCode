@@ -825,19 +825,26 @@ public:
 };
 class Solution238 {
 public:
+    // Accepted
     class Array {
     public:
         std::vector<int> productExceptSelf(const std::vector<int> &_k_nums) {
-            std::vector<int> result { };
-            result.resize(_k_nums.size(), 1);
+            std::vector<int> left { };
+            left.resize(_k_nums.size(), 1);
             for (int i { 1 }; i < _k_nums.size(); ++i) {
-                result[i] = result[i - 1] * _k_nums[i - 1];
+                left[i] = left[i - 1] * _k_nums[i - 1];
+            }          
+            
+            std::vector<int> right { };
+            right.resize(_k_nums.size(), 1);
+            for (int i { static_cast<int>(_k_nums.size() - 2) }; i >= 0; --i) {
+                right[i] = right[i + 1] * _k_nums[i + 1];
             }
 
-            int mul { 1 };
-            for (int i { static_cast<int>(_k_nums.size() - 1) }; i >= 0; --i) {
-                result[i] *= mul;
-                mul *= _k_nums[i];
+            std::vector<int> result { };
+            result.resize(_k_nums.size());
+            for (size_t i { }; i < _k_nums.size(); ++i) {
+                result[i] = left[i] * right[i];
             }
 
             return result;
