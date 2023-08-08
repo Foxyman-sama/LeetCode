@@ -823,6 +823,28 @@ public:
         }
     };
 };
+class Solution238 {
+public:
+    class Array {
+    public:
+        std::vector<int> productExceptSelf(const std::vector<int> &_k_nums) {
+            std::vector<int> result { };
+            result.resize(_k_nums.size());
+            result[0] = 1;
+            for (int i { 1 }; i < _k_nums.size(); ++i) {
+                result[i] = result[i - 1] * _k_nums[i - 1];
+            }
+
+            int mul { 1 };
+            for (int i { static_cast<int>(_k_nums.size() - 1) }; i >= 0; --i) {
+                result[i] *= mul;
+                mul *= _k_nums[i];
+            }
+
+            return result;
+        }
+    };
+};
 class Solution240 {
 public:
     // Accepted

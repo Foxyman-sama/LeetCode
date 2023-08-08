@@ -7,9 +7,9 @@
 int main() {
     setlocale(0,  "");
 
-    Solution151::TwoPointers sol { };
-    std::string temp { "a good   example" };
-    auto result { sol.reverseWords(temp) };
+    Solution238::Array sol { };
+    std::vector<int> temp { 1, 2, 3, 4 };
+    auto result { sol.productExceptSelf(temp) };
     print(result);
     system("pause");
 }
