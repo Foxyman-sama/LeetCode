@@ -842,9 +842,30 @@ public:
             }
 
             std::vector<int> result { };
-            result.resize(_k_nums.size());
+            result.resize(_k_nums.size(), 1);
             for (size_t i { }; i < _k_nums.size(); ++i) {
                 result[i] = left[i] * right[i];
+            }
+
+            return result;
+        }
+    };
+    // Accepted
+    class Array2 {
+    public:
+        std::vector<int> productExceptSelf(const std::vector<int> &_k_nums) {
+            int temp { 1 };
+            std::vector<int> result { };
+            result.resize(_k_nums.size(), 1);
+            for (int i { }; i < _k_nums.size(); ++i) {
+                result[i] = temp;
+                temp *= _k_nums[i];
+            }          
+            
+            temp = 1;
+            for (int i { static_cast<int>(_k_nums.size() - 1) }; i >= 0; --i) {
+                result[i] *= temp;
+                temp *= _k_nums[i];
             }
 
             return result;
