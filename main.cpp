@@ -7,9 +7,9 @@
 int main() {
     setlocale(0,  "");
 
-    Solution238::Array sol { };
-    std::vector<int> temp { 1, 2, 3, 4 };
-    auto result { sol.productExceptSelf(temp) };
+    Solution334::Array sol { };
+    std::vector<int> temp { 1, 2, 3, 4, 5 };
+    auto result { sol.increasingTriplet(temp) };
     print(result);
     system("pause");
 }

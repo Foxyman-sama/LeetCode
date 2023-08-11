@@ -1048,6 +1048,31 @@ public:
         }
     };
 };
+class Solution334 {
+public:
+    // Accepted
+    class Array {
+    public:
+        bool increasingTriplet(const std::vector<int> &_k_nums) {
+            int i { INT_MAX };
+            int j { INT_MAX };
+            int k { INT_MAX };
+            for (auto &&el: _k_nums) {
+                if (el <= i) {
+                    i = el;
+                }
+                else if (el <= j) {
+                    j = el;
+                }
+                else {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+    };
+};
 class Solution345 {
 public:
     // Accepted
