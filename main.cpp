@@ -7,9 +7,9 @@
 int main() {
     setlocale(0,  "");
 
-    Solution334::Array sol { };
-    std::vector<int> temp { 1, 2, 3, 4, 5 };
-    auto result { sol.increasingTriplet(temp) };
+    Solution443::String sol { };
+    std::vector<char> temp { 'a', 'a', 'b', 'b', 'c', 'c', 'c' };
+    auto result { sol.compress(temp) };
     print(result);
     system("pause");
 }

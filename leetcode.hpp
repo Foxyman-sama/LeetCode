@@ -1509,6 +1509,44 @@ public:
         }
     };
 };
+class Solution443 {
+public:
+    // Accepted
+    class String {
+    private:
+        void compressSymbol(std::vector<char> &_dest,
+                            char _ch,
+                            int _amount) noexcept {
+            _dest.emplace_back(_ch);
+            if (_amount > 1) {
+                std::string number { std::to_string(_amount) };
+                for (auto &&ch: number) {
+                    _dest.emplace_back(ch);
+                }
+            }
+        }
+
+    public:
+        int compress(std::vector<char> &_chars) {
+            std::vector<char> temp { };
+            int amount { };
+            char prev { _chars[0] };
+            for (auto &&el: _chars) {
+                if (el != prev) {
+                    compressSymbol(temp, prev, amount);
+                    prev = el;
+                    amount = 0;
+                }
+
+                ++amount;
+            }
+
+            compressSymbol(temp, prev, amount);
+            _chars = temp;
+            return temp.size();
+        }
+    };
+};
 class Solution509 {
 public:
     // Accepted
