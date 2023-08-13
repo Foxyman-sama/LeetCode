@@ -58,6 +58,31 @@ public:
         }
     };
 };
+class Solution11 {
+public:
+    // Accepted
+    class TwoPointers { 
+    public:
+        int maxArea(const std::vector<int> &_k_heighs) {
+            int max { INT_MIN };
+            int l { };
+            int r { static_cast<int>(_k_heighs.size() - 1) };
+            while (l < r) {
+                int areas_amount { r - l };
+                int current_height { std::min(_k_heighs[r], _k_heighs[l]) };
+                max = std::max(max, areas_amount * current_height);
+                if (_k_heighs[l] > _k_heighs[r]) {
+                    --r;
+                }
+                else {
+                    ++l;
+                }
+            }
+
+            return max;
+        }
+    };
+};
 class Solution13 {
 public:
     // Accepted
