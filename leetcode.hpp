@@ -1528,6 +1528,28 @@ public:
         }
     };
 };
+class Solution392 {
+public:
+    // Accepted
+    class TwoPointers {
+    public:
+        bool isSubsequence(const std::string &_k_s, 
+                           const std::string &_k_t) {
+            int l { };
+            for (size_t r { }; r < _k_t.size(); ++r) {
+                if (_k_s[l] == _k_t[r]) {
+                    ++l;
+                }
+            }
+
+            if (l == _k_s.size()) {
+                return true;
+            }
+
+            return false;
+        }
+    };
+};
 class Solution443 {
 public:
     // Accepted

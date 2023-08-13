@@ -7,10 +7,10 @@
 int main() {
     setlocale(0,  "");
 
-    Solution283::TwoPointers sol { };
-    std::vector temp { 0, 1, 0, 3, 12 };
-    std::vector temp2 { 1, 0 };
-    sol.moveZeroes(temp2);
+    Solution392::TwoPointers sol { };
+    std::string temp { "" };
+    std::string temp2 { "c" };
+    sol.isSubsequence(temp, temp2);
     //auto result { sol.moveZeroes(temp) };
     //print(result);
     system("pause");
