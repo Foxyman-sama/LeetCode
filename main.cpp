@@ -7,9 +7,11 @@
 int main() {
     setlocale(0,  "");
 
-    Solution443::String sol { };
-    std::vector<char> temp { 'a', 'a', 'b', 'b', 'c', 'c', 'c' };
-    auto result { sol.compress(temp) };
-    print(result);
+    Solution283::TwoPointers sol { };
+    std::vector temp { 0, 1, 0, 3, 12 };
+    std::vector temp2 { 1, 0 };
+    sol.moveZeroes(temp2);
+    //auto result { sol.moveZeroes(temp) };
+    //print(result);
     system("pause");
 }

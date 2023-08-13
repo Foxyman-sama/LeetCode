@@ -1048,6 +1048,25 @@ public:
         }
     };
 };
+class Solution283 {
+public:
+    // Accepted
+    class TwoPointers {
+    public:
+        void moveZeroes(std::vector<int> &_nums) {
+            int l { };
+            for (int r { }; r < _nums.size(); ++r) {
+                while ((l < r) && (_nums[l] != 0)) {
+                    ++l;
+                }
+
+                if (_nums[r] > 0) { 
+                    std::swap(_nums[l], _nums[r]);
+                }
+            }
+        }
+    };
+};
 class Solution334 {
 public:
     // Accepted
