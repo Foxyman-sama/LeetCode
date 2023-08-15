@@ -7,9 +7,9 @@
 int main() {
     setlocale(0,  "");
 
-    Solution11::TwoPointers sol { };
-    std::vector temp { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
-    sol.maxArea(temp);
+    Solution1679::TwoPointers sol { };
+    std::vector temp { 1, 2, 3, 4 };
+    sol.maxOperations(temp, 5);
     //auto result { sol.moveZeroes(temp) };
     //print(result);
     system("pause");

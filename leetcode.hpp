@@ -2646,6 +2646,67 @@ public:
         }
     };
 };
+class Solution1679 {
+public:
+    // Accepted
+    class TwoPointers {
+    private:
+        int partition(std::vector<int> &_nums,
+                       int _l,
+                       int _r) {
+            int mid { _nums[_l + (_r - _l) / 2] };
+            while (true) {
+                while (_nums[_l] < mid) {
+                    ++_l;
+                }                
+                while (_nums[_r] > mid) {
+                    --_r;
+                }
+
+                if (_l >= _r) {
+                    break;
+                }
+
+                std::swap(_nums[_l++], _nums[_r--]);
+            }
+
+            return _r;
+        }
+        void quickSort(std::vector<int> &_nums,
+                       int _l,
+                       int _r) {
+            if (_l < _r) {
+                int p { partition(_nums, _l, _r) };
+                quickSort(_nums, _l, p);
+                quickSort(_nums, p + 1, _r);
+            }
+        }
+
+    public:
+        int maxOperations(std::vector<int> &_nums, 
+                          int _k) {
+            quickSort(_nums, 0, _nums.size() - 1);
+
+            int operations_amount { };
+            int l { };
+            int r { static_cast<int>(_nums.size() - 1) };
+            while (l < r) {
+                if ((_nums[l] + _nums[r]) == _k) {
+                    --r;
+                    ++l;
+                }
+                else if ((_nums[l] + _nums[r]) > _k) {
+                    --r;
+                }
+                else {
+                    ++l;
+                }
+            }
+
+            return operations_amount;
+        }
+    };
+};
 class Solution1748 {
 public:
     // Accepted
