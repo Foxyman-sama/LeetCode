@@ -1809,6 +1809,30 @@ public:
         }
     };
 };
+class Solution643 {
+public:
+    // Accepted
+    class SlidingWindow {
+    public:
+        double findMaxAverage(const std::vector<int> &_k_nums, 
+                              int _k) {
+            int l { };
+            double sum { };
+            double max { INT_MIN };
+            for (int r { }; r < _k_nums.size(); ++r) {
+                sum += _k_nums[r];
+                
+                int range { r - l + 1 };
+                if (range == _k) {
+                    max = std::max(max, sum);
+                    sum -= _k_nums[l++];
+                }
+            }
+
+            return max / _k;
+        }
+    };
+};
 class Solution695 {
 public:
     // Accepted

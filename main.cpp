@@ -7,9 +7,10 @@
 int main() {
     setlocale(0,  "");
 
-    Solution1679::TwoPointers sol { };
-    std::vector temp { 1, 2, 3, 4 };
-    sol.maxOperations(temp, 5);
+    Solution643::SlidingWindow sol { };
+    std::vector temp { 1, 12, -5, -6, 50, 3 };
+    std::vector temp2 { 0, 4, 0, 3, 2 };
+    sol.findMaxAverage(temp, 4);
     //auto result { sol.moveZeroes(temp) };
     //print(result);
     system("pause");
