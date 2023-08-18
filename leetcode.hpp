@@ -14,6 +14,7 @@
 #include <unordered_map>
 #include <bitset>
 #include <random>
+#include <array>
 #include "definitions.hpp"
 
 class Solution1 {
@@ -1123,8 +1124,8 @@ public:
     class TwoPointers {
     private:
         bool isVowel(char _ch) noexcept {
-            constexpr char k_vowels[] { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
-            for (auto &&el: k_vowels) {
+            constexpr char sk_vowels[] { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+            for (auto &&el: sk_vowels) {
                 if (_ch == el) {
                     return true;
                 }
@@ -2623,6 +2624,39 @@ public:
             }
 
             return result;
+        }
+    };
+};
+class Solution1456 {
+public:
+    // Accepted
+    class SlidingWindow {
+    private:
+        bool isVowel(char _ch) const noexcept {
+            return _ch == 'a' || _ch == 'e' || _ch == 'i' || _ch == 'o' || _ch == 'u';
+        }
+
+    public:
+        int maxVowels(const std::string &_k_s, 
+                      int _k) {
+            int l { };
+            int max { INT_MIN };
+            int sum { };
+            for (int r { }; r < _k_s.size(); ++r) {
+                if (isVowel(_k_s[r])) {
+                    ++sum;
+                }
+
+                int range { r - l + 1 };
+                if (range == _k) {
+                    max = std::max(sum, max);
+                    if (isVowel(_k_s[l++])) {
+                        --sum;
+                    }
+                }
+            }
+
+            return max;
         }
     };
 };
