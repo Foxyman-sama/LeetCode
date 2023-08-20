@@ -15,6 +15,8 @@
 #include <bitset>
 #include <random>
 #include <array>
+#include <queue>
+#include <stack>
 #include "definitions.hpp"
 
 class Solution1 {
@@ -2153,6 +2155,33 @@ public:
             }
 
             return result;
+        }
+    };
+};
+class Solution1004 {
+public:
+    class SlidingWindow {
+    public:
+        int longestOnes(const std::vector<int> &_k_nums, 
+                        int _k) {
+            int l { };
+            int r { };
+            while (r < _k_nums.size()) {
+                if (_k_nums[r] == 0) {
+                    --_k;
+                }
+                if (_k < 0) {
+                    if (_k_nums[l] == 0) {
+                        ++_k;
+                    }
+
+                    ++l;
+                }
+
+                ++r;
+            }
+
+            return r - l;
         }
     };
 };

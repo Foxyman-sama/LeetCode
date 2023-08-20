@@ -7,10 +7,10 @@
 int main() {
     setlocale(0,  "");
 
-    Solution643::SlidingWindow sol { };
-    std::vector temp { 1, 12, -5, -6, 50, 3 };
-    std::vector temp2 { 0, 4, 0, 3, 2 };
-    sol.findMaxAverage(temp, 4);
+    Solution1004::SlidingWindow sol { };
+    std::vector temp { 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1 };
+    std::vector temp2 { 0, 1, 1 };
+    sol.longestOnes(temp, 0);
     //auto result { sol.moveZeroes(temp) };
     //print(result);
     system("pause");
