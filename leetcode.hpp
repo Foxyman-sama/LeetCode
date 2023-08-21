@@ -2689,6 +2689,34 @@ public:
         }
     };
 };
+class Solution1493 {
+public:
+    // Accepted
+    class SlidingWindow {
+    public:
+        int longestSubarray(const std::vector<int> &_k_nums) {
+            int l { };
+            int r { };
+            int number_of_delete { 1 };
+            while (r < _k_nums.size()) {
+                if (_k_nums[r] == 0) {
+                    --number_of_delete;
+                }
+                if (number_of_delete < 0) {
+                    if (_k_nums[l] == 0) {
+                        ++number_of_delete;
+                    }
+
+                    ++l;
+                }
+
+                ++r;
+            }
+
+            return r - l - 1;
+        }
+    };
+};
 class Solution1539 {
 public:
     // Accepted
