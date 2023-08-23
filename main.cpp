@@ -7,10 +7,9 @@
 int main() {
     setlocale(0,  "");
 
-    Solution1004::SlidingWindow sol { };
-    std::vector temp { 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1 };
-    std::vector temp2 { 0, 1, 1 };
-    sol.longestOnes(temp, 0);
+    Solution1493::SlidingWindow sol { };
+    std::vector temp { 0,1,1,1,0,1,1,0,1 };
+    sol.longestSubarray(temp);
     //auto result { sol.moveZeroes(temp) };
     //print(result);
     system("pause");

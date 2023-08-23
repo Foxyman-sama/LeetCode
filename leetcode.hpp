@@ -2822,6 +2822,27 @@ public:
         }
     };
 };
+class Solution1732 {
+public:
+    // Accepted
+    class PrefixSum {
+    public:
+        int largestAltitude(std::vector<int> &_gain) {
+            for (size_t i { 1 }; i < _gain.size(); ++i) {
+                _gain[i] = _gain[i - 1] + _gain[i];
+            }
+
+            int max { }; 
+            for (auto &&el: _gain) {
+                if (el > 0) {
+                    max = std::max(el, max);
+                }
+            }
+
+            return max;
+        }
+    };
+};
 class Solution1748 {
 public:
     // Accepted
