@@ -2398,6 +2398,30 @@ public:
         }
     };
 };
+class Solution1207 {
+public:
+    // Accepted
+    class HashTable {
+    public:
+        bool uniqueOccurrences(const std::vector<int> &_k_arr) {
+            std::unordered_map<int, int> hash { };
+            for (auto &&el: _k_arr) {
+                ++hash[el];
+            }
+
+            std::unordered_set<int> temp { };
+            for (auto &&[key, value]: hash) {
+                if (temp.find(value) != temp.end()) {
+                    return false;
+                }
+
+                temp.insert(value);
+            }
+
+            return true;
+        }
+    };
+};
 class Solution1237 {
 public:
     // Accepted
