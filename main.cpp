@@ -7,9 +7,9 @@
 int main() {
     setlocale(0,  "");
 
-    Solution1493::SlidingWindow sol { };
-    std::vector temp { 0,1,1,1,0,1,1,0,1 };
-    sol.longestSubarray(temp);
+    Solution724::PrefixSum sol { };
+    std::vector temp { 1,7,3,6,5,6 };
+    sol.pivotIndex(temp);
     //auto result { sol.moveZeroes(temp) };
     //print(result);
     system("pause");

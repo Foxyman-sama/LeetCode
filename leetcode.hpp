@@ -1992,6 +1992,31 @@ public:
         }
     };
 };
+class Solution724 {
+public:
+    // Accepted
+    class PrefixSum {
+    public:
+        int pivotIndex(const std::vector<int> &_k_nums) {
+            std::vector<int> right_sum { };
+            right_sum.resize(_k_nums.size());
+            right_sum.back() = _k_nums.back();
+            for (int i { static_cast<int>(_k_nums.size() - 2) }; i >= 0; --i) {
+                right_sum[i] = right_sum[i + 1] + _k_nums[i];
+            }
+
+            int temp { };
+            for (int i { }; i < _k_nums.size(); ++i) {
+                temp += _k_nums[i];
+                if (temp == right_sum[i]) {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+    };
+};
 class Solution744 {
 public:
     // Accepted
