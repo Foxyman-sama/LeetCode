@@ -3167,9 +3167,11 @@ public:
     public:
         std::vector<std::vector<int>> findDifference(const std::vector<int> &_k_nums1, 
                                                      const std::vector<int> &_k_nums2) {
-            std::vector<std::vector<int>> result { std::vector<int> { }, std::vector<int> { } };
-            std::unordered_set<int> set1 { _k_nums1.begin(), _k_nums1.end() };
-            std::unordered_set<int> set2 { _k_nums2.begin(), _k_nums2.end() };
+            std::vector<std::vector<int>> result { };
+            result.resize(2);
+
+            std::set<int> set1 { _k_nums1.begin(), _k_nums1.end() };
+            std::set<int> set2 { _k_nums2.begin(), _k_nums2.end() };
             for (auto &&el: set1) {
                 if (set2.find(el) == set2.end()) {
                     result[0].emplace_back(el);
