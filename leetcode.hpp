@@ -2810,6 +2810,68 @@ public:
         }
     };
 };
+class Solution1657 {
+public:
+    // Accepted
+    class HashTable {
+    public:
+        bool closeStrings(const std::string &_k_word1, 
+                          const std::string &_k_word2) {
+            if (_k_word1.size() != _k_word2.size()) {
+                return false;
+            }
+                 
+            std::unordered_set<char> alphabet_word1 { };
+            for (auto &&el: _k_word1) {
+                alphabet_word1.insert(el);
+            }
+
+            std::unordered_set<char> alphabet_word2 { };
+            for (auto &&el: _k_word2) {
+                alphabet_word2.insert(el);
+            }
+
+            if (alphabet_word1.size() != alphabet_word2.size()) {
+                return false;
+            }
+
+            for (auto &&el: alphabet_word1) {
+                auto pos { alphabet_word2.find(el) };
+                if (pos == alphabet_word2.end()) {
+                    return false;
+                }
+            }
+            for (auto &&el: alphabet_word2) {
+                auto pos { alphabet_word1.find(el) };
+                if (pos == alphabet_word1.end()) {
+                    return false;
+                }
+            }
+
+            std::vector<int> vec_word1 { };
+            vec_word1.resize(26);
+            for (auto &&el: _k_word1) {
+                ++vec_word1[el - 'a'];
+            }
+                 
+            std::vector<int> vec_word2 { };
+            vec_word2.resize(26);
+            for (auto &&el: _k_word2) {
+                ++vec_word2[el - 'a'];
+            }
+
+            std::sort(vec_word1.begin(), vec_word1.end());
+            std::sort(vec_word2.begin(), vec_word2.end());
+            for (size_t i { }; i < 26; ++i) {
+                if (vec_word1[i] != vec_word2[i]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    };
+};
 class Solution1679 {
 public:
     // Accepted

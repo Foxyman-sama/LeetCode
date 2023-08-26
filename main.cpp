@@ -7,10 +7,9 @@
 int main() {
     setlocale(0,  "");
 
-    Solution1207::HashTable sol { };
-    std::vector temp { 1,2,2,1,1,3 };
-    sol.uniqueOccurrences(temp);
+    Solution1657::HashTable sol { };
+    std::cout << sol.closeStrings("abc", "bca") << '\n';
     //auto result { sol.moveZeroes(temp) };
     //print(result);
-    system("pause");
+    std::cin.ignore();
 }
