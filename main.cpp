@@ -7,8 +7,10 @@
 int main() {
     setlocale(0,  "");
 
-    Solution1657::HashTable sol { };
-    std::cout << sol.closeStrings("abc", "bca") << '\n';
+    Solution2352::HashTable sol { };
+    std::vector<std::vector<int>> matrix { { 3,2,1 }, { 1,7,6 }, { 2,7,7 } };
+    std::vector<std::vector<int>> matrix2 { { 13, 13 }, { 13, 13 } };
+    std::cout << sol.equalPairs(matrix) << '\n';
     //auto result { sol.moveZeroes(temp) };
     //print(result);
     std::cin.ignore();

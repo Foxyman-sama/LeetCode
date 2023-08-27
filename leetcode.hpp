@@ -14,6 +14,7 @@
 #include <unordered_map>
 #include <bitset>
 #include <random>
+#include <sstream>
 #include <array>
 #include <queue>
 #include <stack>
@@ -3365,6 +3366,33 @@ public:
                 }
                 else {
                     result += el;
+                }
+            }
+
+            return result;
+        }
+    };
+};
+class Solution2352 {
+public:
+    // Accepted
+    class HashTable {
+    public:
+        int equalPairs(const std::vector<std::vector<int>> &_k_grid) {
+            std::map<std::vector<int>, int> map { };
+            for (auto &&row: _k_grid) {
+                ++map[row];
+            }      
+
+            int result { };
+            for (size_t i { }; i < _k_grid.size(); ++i) {
+                std::vector<int> temp { };
+                for (size_t j { }; j < _k_grid[i].size(); ++j) {
+                    temp.emplace_back(_k_grid[j][i]);
+                }
+
+                if (map.find(temp) != map.end()) {
+                    result += map[temp];
                 }
             }
 
