@@ -3400,6 +3400,33 @@ public:
         }
     };
 };
+class Solution2390 {
+public:
+    // Accepted
+    class Stack {
+    public:
+        std::string removeStars(const std::string &_k_s) {
+            std::stack<char> stack { };
+            for (auto &&el: _k_s) {
+                if (el != '*') {
+                    stack.push(el);
+                }
+                else {
+                    stack.pop();
+                }
+            }
+
+            std::string result { };
+            while (!stack.empty()) {
+                result += stack.top();
+                stack.pop();
+            }
+
+            std::reverse(result.begin(), result.end());
+            return result;
+        }
+    };
+};
 class Solution2418 {
 public:
     // Accepted
