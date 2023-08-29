@@ -2018,6 +2018,44 @@ public:
         }
     };
 };
+class Solution735 {
+public:
+    // Accepted
+    class Stack {
+    public:
+        std::vector<int> asteroidCollision(const std::vector<int> &_k_asteroids) {
+            std::vector<int> result { };
+            for (auto &&el: _k_asteroids) {
+                if ((result.empty() == true) || (el > 0)) {
+                    result.emplace_back(el);
+                }
+                else {
+                    if (-el == result.back()) {
+                        result.pop_back();
+                    }
+                    else if (result.back() < 0) {
+                        result.emplace_back(el);
+                    }
+                    else {
+                        while (-el > result.back()) {
+                            result.pop_back();
+                            if ((result.empty() == true) || (result.back() < 0)) {
+                                result.emplace_back(el);
+                                break;
+                            }
+                            else if (-el == result.back()) {
+                                result.pop_back();
+                                break;
+                            }
+                        }                    
+                    }
+                }
+            }
+
+            return result;
+        }
+    };
+};
 class Solution744 {
 public:
     // Accepted

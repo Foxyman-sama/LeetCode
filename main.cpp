@@ -7,10 +7,15 @@
 int main() {
     setlocale(0,  "");
 
-    Solution2352::HashTable sol { };
-    std::vector<std::vector<int>> matrix { { 3,2,1 }, { 1,7,6 }, { 2,7,7 } };
-    std::vector<std::vector<int>> matrix2 { { 13, 13 }, { 13, 13 } };
-    std::cout << sol.equalPairs(matrix) << '\n';
+    Solution735::Stack sol { };
+    std::vector<int> test_case { 10, 5, -5 };
+    std::vector<int> test_case2 { 10, 2, -5 };
+    std::vector<int> test_case3 { -2, 2, 1, -2 };
+    auto result { sol.asteroidCollision(test_case3) };
+    for (auto &&el: result) {
+        std::cout << el << ' ';
+    }
+
     //auto result { sol.moveZeroes(temp) };
     //print(result);
     std::cin.ignore();
