@@ -7,11 +7,8 @@
 int main() {
     setlocale(0,  "");
 
-    Solution735::Stack sol { };
-    std::vector<int> test_case { 10, 5, -5 };
-    std::vector<int> test_case2 { 10, 2, -5 };
-    std::vector<int> test_case3 { -2, 2, 1, -2 };
-    auto result { sol.asteroidCollision(test_case3) };
+    Solution394::Stack sol { };
+    auto result { sol.decodeString("2[20[bc]31[xy]]xd4[rt]") };
     for (auto &&el: result) {
         std::cout << el << ' ';
     }

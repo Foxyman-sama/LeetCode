@@ -1557,6 +1557,57 @@ public:
         }
     };
 };
+class Solution394 {
+public:
+    // Accepted
+    class Stack {
+    public:
+        std::string decodeString(const std::string &_k_s) {
+            std::stack<std::string> strs { };
+            std::stack<std::string> nums { };
+            std::string num_buf { };
+            for (auto &&el: _k_s) {
+                if (isdigit(el)) {
+                    num_buf += el;
+                }
+                else if (el == ']') {
+                    std::string temp { };
+                    while (strs.top() != "[") {
+                        temp = strs.top() + temp;
+                        strs.pop();
+                    }
+
+                    strs.pop();
+
+                    std::string temp2 { };
+                    int number { std::stoi(nums.top()) };
+                    for (size_t j { }; j < number; ++j) {
+                        temp2 += temp;
+                    }
+
+                    strs.push(temp2);
+                    nums.pop();
+                }
+                else {
+                    if (el == '[') {
+                        nums.push(num_buf);
+                        num_buf.clear();
+                    }
+
+                    strs.push(std::string { el });
+                }
+            }
+
+            std::string result { };
+            while (strs.empty() == false) {
+                result = strs.top() + result;
+                strs.pop();
+            }
+
+            return result;
+        }
+    };
+};
 class Solution392 {
 public:
     // Accepted
