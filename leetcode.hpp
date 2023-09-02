@@ -2176,6 +2176,43 @@ public:
         }
     };
 };
+class Solution933 {
+public:
+    // Accepted
+    class Queue {
+    public:
+        class RecentCounter {
+        private:
+            std::queue<int> queue_;
+            int counter_;
+
+        public:
+            RecentCounter() 
+                : queue_ { }
+                , counter_ { } { }
+
+            int ping(int _t) {
+                if (queue_.empty()) {
+                    queue_.push(_t);
+                    return 0;
+                }
+
+                int range { _t - 3'000 };
+                while (queue_.empty() == false) {
+                    if ((queue_.front() < range) || (queue_.front() > _t)) { 
+                        queue_.pop();
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+                queue_.push(_t);
+                return queue_.size();
+            }
+        };
+    };
+};
 class Solution959 {
 public:
     // Accepted

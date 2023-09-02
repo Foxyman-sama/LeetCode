@@ -7,11 +7,11 @@
 int main() {
     setlocale(0,  "");
 
-    Solution394::Stack sol { };
-    auto result { sol.decodeString("2[20[bc]31[xy]]xd4[rt]") };
-    for (auto &&el: result) {
-        std::cout << el << ' ';
-    }
+    Solution933::Queue::RecentCounter sol { };
+    sol.ping(1);
+    sol.ping(100);
+    sol.ping(3001);
+    sol.ping(3002);
 
     //auto result { sol.moveZeroes(temp) };
     //print(result);
