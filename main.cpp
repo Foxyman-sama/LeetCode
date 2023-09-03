@@ -7,11 +7,14 @@
 int main() {
     setlocale(0,  "");
 
-    Solution933::Queue::RecentCounter sol { };
-    sol.ping(1);
-    sol.ping(100);
-    sol.ping(3001);
-    sol.ping(3002);
+    Solution649::Queue sol { };
+    auto input { readInput<std::string>("input.txt") };
+    std::string str { };
+    for (auto &&el: input) {
+        str += el;
+    }
+
+    sol.predictPartyVictory(str);
 
     //auto result { sol.moveZeroes(temp) };
     //print(result);

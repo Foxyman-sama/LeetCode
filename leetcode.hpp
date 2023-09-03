@@ -18,6 +18,8 @@
 #include <array>
 #include <queue>
 #include <stack>
+#include <deque>
+#include <utility>
 #include "definitions.hpp"
 
 class Solution1 {
@@ -1885,6 +1887,40 @@ public:
             }
 
             return max / _k;
+        }
+    };
+};
+class Solution649 {
+public:
+    // Accepted
+    class Queue {
+    public:
+        std::string predictPartyVictory(const std::string &_k_senate) {
+            size_t n { _k_senate.size() };
+            std::queue<size_t> radiants { };
+            std::queue<size_t> dires { };
+            for (size_t i { }; i < _k_senate.size(); ++i) {
+                char el { _k_senate[i] };
+                if (el == 'D') {
+                    dires.push(i);
+                }
+                else if (el == 'R') {
+                    radiants.push(i);
+                }
+            }
+            while ((radiants.empty() == false) && (dires.empty() == false)) {
+                if (dires.front() < radiants.front()) {
+                    dires.push(n++);
+                }
+                else {
+                    radiants.push(n++);
+                }
+
+                radiants.pop();
+                dires.pop();
+            }
+
+            return radiants.empty() == true ? "Dire" : "Radiant";
         }
     };
 };
