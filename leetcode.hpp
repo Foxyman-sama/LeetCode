@@ -3409,6 +3409,30 @@ public:
         }
     };
 };
+class Solution2095 {
+public:
+    // Accepted
+    class LinkedList {
+    public:
+        ListNode* deleteMiddle(ListNode *_p_head) {
+            if (_p_head->next == nullptr) {
+                return nullptr;
+            }
+
+            ListNode *p_fast { _p_head->next };
+            ListNode *p_slow { _p_head };
+            while ((p_fast != nullptr) && (p_fast->next != nullptr)) {
+                p_fast = p_fast->next->next;
+                if (p_fast != nullptr) {
+                    p_slow = p_slow->next;
+                }
+            }
+
+            p_slow->next = p_slow->next->next;
+            return _p_head;
+        }
+    };
+};
 class Solution2215 {
 public:
     // Accepted
