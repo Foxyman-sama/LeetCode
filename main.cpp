@@ -7,16 +7,10 @@
 int main() {
     setlocale(0,  "");
 
-    Solution649::Queue sol { };
-    auto input { readInput<std::string>("input.txt") };
-    std::string str { };
-    for (auto &&el: input) {
-        str += el;
-    }
+    Solution328::LinkedList sol { };
+    ListNode *p_head { new ListNode { 1, new ListNode { 2,
+        new ListNode { 3, new ListNode { 4, new ListNode { 5 } } } } } };
 
-    sol.predictPartyVictory(str);
-
-    //auto result { sol.moveZeroes(temp) };
-    //print(result);
+    sol.oddEvenList(p_head);
     std::cin.ignore();
 }

@@ -1098,6 +1098,41 @@ public:
         }
     };
 };
+class Solution328 {
+public:
+    // Accepted
+    class LinkedList {
+    public:
+        ListNode *oddEvenList(ListNode *_p_head) {
+            if ((_p_head == nullptr) || (_p_head->next == nullptr)) {
+                return _p_head;
+            }
+            
+            ListNode *p_odd_head { new ListNode { } };
+            ListNode *p_odd { p_odd_head };
+            ListNode *p_even_head { new ListNode { } };
+            ListNode *p_even { p_even_head };
+            int counter { };
+            while (_p_head != nullptr) {
+                if (counter % 2 == 0) {
+                    p_even->next = _p_head;
+                    p_even = p_even->next;
+                }
+                else {
+                    p_odd->next = _p_head;
+                    p_odd = p_odd->next;
+                }
+
+                ++counter;
+                _p_head = _p_head->next;
+            }
+            
+            p_odd->next = nullptr;
+            p_even->next = p_odd_head->next;
+            return p_even_head->next;
+        }
+    };
+};
 class Solution334 {
 public:
     // Accepted
