@@ -800,6 +800,28 @@ public:
         }
     };
 };
+class Solution206 {
+public:
+    // Accepted
+    class LinkedList {
+    public:
+        ListNode *reverseList(ListNode *_p_head) {
+            if (_p_head == nullptr) {
+                return _p_head;
+            }
+
+            ListNode *p_reversed { };
+            while (_p_head != nullptr) {
+                ListNode *p_temp { _p_head->next };
+                _p_head->next = p_reversed;
+                p_reversed = _p_head;
+                _p_head = p_temp;
+            }
+
+            return _p_head;
+        }
+    };
+};
 class Solution215 {
 public:
     // Accepted
