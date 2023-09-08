@@ -3490,6 +3490,42 @@ public:
         }
     };
 };
+class Solution2130 {
+public:
+    // Accepted
+    class LinkedList {
+    public:
+        int pairSum(ListNode *_p_head) {
+            ListNode *p_slow { _p_head };
+            ListNode *p_fast { _p_head };
+            while ((p_fast != nullptr) && (p_fast->next != nullptr)) {
+                p_fast = p_fast->next->next;
+                if (p_fast != nullptr) {
+                    p_slow = p_slow->next; 
+                }
+            }
+
+            ListNode *p_normal { p_slow->next };
+            ListNode *p_reversed { };
+            while (_p_head != p_normal) {
+                ListNode *p_temp { _p_head->next };
+                _p_head->next = p_reversed;
+                p_reversed = _p_head;
+                _p_head = p_temp;
+            }
+
+
+            int max { INT_MIN };
+            while (p_normal != nullptr) {
+                max = std::max(max, p_normal->val + p_reversed->val);
+                p_normal = p_normal->next;
+                p_reversed = p_reversed->next;
+            }
+
+            return max;
+        }
+    };
+};
 class Solution2215 {
 public:
     // Accepted
