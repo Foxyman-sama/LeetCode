@@ -408,6 +408,33 @@ public:
         }
     };
 };
+class Solution104 {
+public:
+    // Accepted
+    class BinaryTreeDFS {
+    private:
+        int searchMaxDepth(TreeNode *_p_root, int _cdepth) {
+            int mdepth { _cdepth };
+            if (_p_root->right != nullptr) {
+                mdepth = std::max(
+                    searchMaxDepth(_p_root->right, _cdepth + 1),
+                    mdepth);
+            }
+            if (_p_root->left != nullptr) {
+                mdepth = std::max(
+                    searchMaxDepth(_p_root->left, _cdepth + 1),
+                    mdepth);
+            }
+
+            return mdepth;
+        }
+
+    public:
+        int maxDepth(TreeNode *_p_root) {
+            return searchMaxDepth(_p_root, 0);
+        }
+    };
+};
 class Solution108 {
 public:
     // Accepted
