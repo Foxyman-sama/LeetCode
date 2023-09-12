@@ -7,11 +7,14 @@
 int main() {
     setlocale(0,  "");
 
-    Solution2130::LinkedList sol { };
-    ListNode *p_head { new ListNode { 5, new ListNode { 4,
-        new ListNode { 2, new ListNode { 1 } } } } };
-    ListNode *p_head2 { new ListNode { 1, new ListNode { 100000 } } };
-    auto result { sol.pairSum(p_head2) };
+    Solution872::TreeNodeDFS sol { };
+    TreeNode *p_froot { new TreeNode { 1, new TreeNode { 2 },
+        new TreeNode { 3 } } };
+    TreeNode *p_sroot { new TreeNode { 1, new TreeNode { 3 },
+        new TreeNode { 2 } } };
+    TreeNode *p_froot2 { new TreeNode { 1 } };
+    TreeNode *p_sroot2 { new TreeNode { 2 } };
+    auto result { sol.leafSimilar(p_froot2, p_sroot2) };
     std::cout << result << '\n';
     std::cin.ignore();
 }

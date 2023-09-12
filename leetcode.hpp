@@ -2296,6 +2296,36 @@ public:
         }
     };
 };
+class Solution872 {
+public:
+    // Accepted
+    class TreeNodeDFS {
+    private:
+        void nodesToVector(TreeNode *_p_current, 
+                           std::vector<int> &_nodes) {
+            if ((_p_current->left == nullptr) ||
+                (_p_current->right == nullptr)) {
+                _nodes.emplace_back(_p_current->val);
+                return;
+            }
+            if (_p_current->left != nullptr) {
+                nodesToVector(_p_current->left, _nodes);
+            }
+            if (_p_current->right != nullptr) {
+                nodesToVector(_p_current->right, _nodes);
+            }
+        }       
+
+    public:
+        bool leafSimilar(TreeNode *_p_root1, TreeNode *_p_root2) {
+            std::vector<int> root1_nodes { };
+            std::vector<int> root2_nodes { };
+            nodesToVector(_p_root1, root1_nodes);
+            nodesToVector(_p_root2, root2_nodes);
+            return root1_nodes == root2_nodes;
+        }
+    };
+};
 class Solution933 {
 public:
     // Accepted

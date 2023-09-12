@@ -2,8 +2,7 @@
 #define LEETCODE_INPUT_HPP
 
 
-template<
-    typename T>
+template<typename T>
 [[nodiscard]]
 constexpr std::vector<T> readInput(const std::string &_k_path) noexcept {
     std::ifstream fin { _k_path };
@@ -27,5 +26,10 @@ constexpr std::vector<T> readInput(const std::string &_k_path) noexcept {
 
     return result;
 }
+template<typename... Args>
+constexpr TreeNode *createTreeNode(Args... _args) noexcept {
+    
+}
+
 
 #endif
