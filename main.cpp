@@ -7,14 +7,12 @@
 int main() {
     setlocale(0,  "");
 
-    Solution872::TreeNodeDFS sol { };
-    TreeNode *p_froot { new TreeNode { 1, new TreeNode { 2 },
-        new TreeNode { 3 } } };
-    TreeNode *p_sroot { new TreeNode { 1, new TreeNode { 3 },
-        new TreeNode { 2 } } };
-    TreeNode *p_froot2 { new TreeNode { 1 } };
-    TreeNode *p_sroot2 { new TreeNode { 2 } };
-    auto result { sol.leafSimilar(p_froot2, p_sroot2) };
+    Solution1448::TreeNodeDFS sol { };
+    TreeNode *p_root { 
+        new TreeNode { 3, 
+        new TreeNode { 1, new TreeNode { 3 }, nullptr }, 
+        new TreeNode { 4, new TreeNode { 1 }, new TreeNode { 5 } } } };
+    auto result { sol.goodNodes(p_root) };
     std::cout << result << '\n';
     std::cin.ignore();
 }

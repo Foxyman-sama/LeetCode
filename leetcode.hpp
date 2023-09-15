@@ -2982,6 +2982,37 @@ public:
         }
     };
 };
+class Solution1448 {
+public:
+    // Accepted
+    class TreeNodeDFS {
+    private:
+        int counter_;
+
+        void count(TreeNode *_p_current, int _max) {
+            if (_p_current == nullptr) {
+                return;
+            }
+            if (_p_current->val >= _max) {
+                _max = _p_current->val;
+                ++counter_;
+            }
+            if (_p_current->left != nullptr) {
+                count(_p_current->left, _max);
+            }
+            if (_p_current->right != nullptr) {
+                count(_p_current->right, _max);
+            }
+        }
+
+    public:
+        int goodNodes(TreeNode *_p_root) {
+            int max { _p_root->val };
+            count(_p_root, max);
+            return counter_;
+        }
+    };
+};
 class Solution1456 {
 public:
     // Accepted
