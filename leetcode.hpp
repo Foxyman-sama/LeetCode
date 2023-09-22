@@ -1716,6 +1716,43 @@ public:
         }
     };
 };
+class Solution437 {
+public:
+    // Accepted
+    class TreeNodeDFS {
+    private:
+        int count_;
+        std::unordered_map<int, int> umap_;
+
+        void count(TreeNode *_p_root, int _tsum, int _sum) {
+            if (_p_root == nullptr) {
+                return;
+            }
+
+            _sum += _p_root->val;
+            if (_sum == _tsum) {
+                ++count_;
+            }
+            if (umap_.find(_sum - _tsum) != umap_.end()) {
+                count_ += umap_[_sum - _tsum];
+            }
+            
+            ++umap_[_sum];
+            count(_p_root->left, _tsum, _sum);
+            count(_p_root->right, _tsum, _sum);
+            --umap_[_sum];
+        }  
+
+    public:
+        TreeNodeDFS() noexcept
+            : count_ { } { }
+
+        int pathSum(TreeNode *_p_root, int _tsum) {
+            count(_p_root, _tsum, 0);
+            return count_;
+        }
+    };
+};
 class Solution443 {
 public:
     // Accepted

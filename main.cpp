@@ -7,12 +7,12 @@
 int main() {
     setlocale(0,  "");
 
-    Solution1448::TreeNodeDFS sol { };
-    TreeNode *p_root { 
-        new TreeNode { 3, 
-        new TreeNode { 1, new TreeNode { 3 }, nullptr }, 
-        new TreeNode { 4, new TreeNode { 1 }, new TreeNode { 5 } } } };
-    auto result { sol.goodNodes(p_root) };
-    std::cout << result << '\n';
+    Solution437::TreeNodeDFS sol { };
+    Tree tree { };
+    std::vector<int> nodes { 
+        10, 5, -3, 3, 2, INT_MIN, 11, 3, -2, INT_MIN, 1
+    };
+    auto p_root { tree.createTree(nodes) };
+    sol.pathSum(p_root, 8);
     std::cin.ignore();
 }
