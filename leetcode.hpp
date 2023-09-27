@@ -2953,6 +2953,42 @@ public:
         }
     };
 };
+class Solution1372 {
+public:
+    // Accepted
+    class TreeNodeDFS {
+    private:
+        enum Dir : bool {
+            LEFT, 
+            RIGHT
+        };
+
+        int max_;
+
+        void findMaxZigZagPath(TreeNode *_p_root, int _height, Dir _dir) {
+            if (_p_root == nullptr) {
+                return;
+            }
+
+            max_ = std::max(max_, _height);
+            if (_dir == LEFT) {
+                findMaxZigZagPath(_p_root->right, _height + 1, RIGHT);
+                findMaxZigZagPath(_p_root->left, 1, _dir);
+            }
+            else {
+                findMaxZigZagPath(_p_root->left, _height + 1, LEFT);
+                findMaxZigZagPath(_p_root->right, 1, _dir);
+            }
+        }
+
+    public:
+        int longestZigZag(TreeNode *_p_root) {
+            findMaxZigZagPath(_p_root, 0, LEFT);
+            findMaxZigZagPath(_p_root, 0, RIGHT);
+            return max_;
+        }
+    };
+};
 class Solution1382 {
 public:
     // Accepted

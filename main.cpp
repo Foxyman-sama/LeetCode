@@ -7,12 +7,13 @@
 int main() {
     setlocale(0,  "");
 
-    Solution437::TreeNodeDFS sol { };
+    Solution1372::TreeNodeDFS sol { };
     Tree tree { };
     std::vector<int> nodes { 
-        10, 5, -3, 3, 2, INT_MIN, 11, 3, -2, INT_MIN, 1
+        1, INT_MIN, 1, 1, 1, INT_MIN, INT_MIN, 1, 1,
+        INT_MIN, 1, INT_MIN, INT_MIN, INT_MIN, 1
     };
     auto p_root { tree.createTree(nodes) };
-    sol.pathSum(p_root, 8);
+    std::cout << sol.longestZigZag(p_root) << '\n';
     std::cin.ignore();
 }
