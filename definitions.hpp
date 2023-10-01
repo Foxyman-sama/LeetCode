@@ -69,7 +69,6 @@ public:
         }
     }
 };
-
 class Tree {
 private:
     auto addToNode(TreeNode *_p_root, int _left_val, int _right_val) noexcept {
@@ -134,9 +133,37 @@ public:
 
         return createTree(std::move(queue));
     }
+    TreeNode *getNode(TreeNode *_p_root, int _val) noexcept {
+        if (_p_root == nullptr) {
+            return nullptr;
+        }
+        if (_p_root->val == _val) {
+            return _p_root;
+        }
+
+        TreeNode *p_return { };
+        if (_p_root->left != nullptr) {
+            p_return = getNode(_p_root->left, _val);
+            if (p_return != nullptr) {
+                return p_return;
+            }
+        }
+        if (_p_root->right != nullptr) {
+            p_return = getNode(_p_root->right, _val);
+            if (p_return != nullptr) {
+                return p_return;
+            }
+        }
+
+        return nullptr;
+    }
     void print(TreeNode *_p_root) {
         std::queue<int> queue { };
         nodesValueToQueue(_p_root, queue);
+        while (queue.empty() == false) {
+            std::cout << queue.front() << ' ';
+            queue.pop();
+        }
     }
 };
 

@@ -903,6 +903,91 @@ public:
         }
     };
 };
+class Solution236 {
+public:
+    // Accepted
+    class TreeNodeDFS {
+    private:
+        int depth(TreeNode *_p_root, TreeNode *_p_searchable, int _height) {
+            if (_p_root == nullptr) {
+                return 0;
+            }
+            if (_p_root == _p_searchable) {
+                return _height;
+            }
+
+            int return_height { };
+            if (_p_root->left) {
+                return_height = depth(
+                    _p_root->left, _p_searchable, _height + 1);
+                if (return_height > 0) {
+                    return return_height;
+                }
+            }
+            if (_p_root->right) {          
+                return_height = depth(
+                    _p_root->right, _p_searchable, _height + 1);
+                if (return_height > 0) {
+                    return return_height;
+                }
+            }
+
+            return 0;
+        }        
+        TreeNode *parent(TreeNode *_p_root, TreeNode *_p_searching) {
+            if (_p_root == nullptr) {
+                return nullptr;
+            }
+
+            TreeNode *p_return { };
+            if (_p_root->left != nullptr) {
+                if (_p_root->left == _p_searching) {
+                    return _p_root;
+                }
+
+                p_return = parent(_p_root->left, _p_searching);
+                if (p_return != nullptr) {
+                    return p_return;
+                }
+            }
+            if (_p_root->right != nullptr) {
+                if (_p_root->right == _p_searching) {
+                    return _p_root;
+                }
+
+                p_return = parent(_p_root->right, _p_searching);
+                if (p_return != nullptr) {
+                    return p_return;
+                }
+            }
+
+            return p_return;
+        }
+        
+    public:
+        TreeNode* lowestCommonAncestor(TreeNode* _p_root, TreeNode* _p_p, 
+                                       TreeNode* _p_q) {
+            int p_depth { depth(_p_root, _p_p, 1) };
+            int q_depth { depth(_p_root, _p_q, 1) };
+            while (p_depth != q_depth) {
+                if (p_depth > q_depth) {
+                    _p_p = parent(_p_root, _p_p);
+                    p_depth -= 1;
+                }
+                else {
+                    _p_q = parent(_p_root, _p_q);
+                    q_depth -= 1;
+                }
+            }
+            while (_p_p != _p_q) {
+                _p_p = parent(_p_root, _p_p);
+                _p_q = parent(_p_root, _p_q);
+            }
+
+            return _p_p;
+        }
+    };
+};
 class Solution238 {
 public:
     // Accepted
