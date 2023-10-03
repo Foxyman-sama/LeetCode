@@ -2843,6 +2843,7 @@ public:
             queue.push(_p_root);
 
             int level { };
+            int depth { 1 };
             int max_sum { INT_MIN };
             while (queue.empty() == false) {
                 size_t level_size { queue.size() };
@@ -2859,7 +2860,12 @@ public:
                     }
                 }
 
-                max_sum = std::max(sum, max_sum);
+                if (max_sum < sum) {
+                    max_sum = sum;
+                    level = depth;
+                }
+
+                ++depth;
             }
 
             return level;
