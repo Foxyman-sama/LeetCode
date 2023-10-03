@@ -7,15 +7,13 @@
 int main() {
     setlocale(0,  "");
 
-    Solution236::TreeNodeDFS sol { };
+    Solution199::TreeNodeBFS sol { };
     Tree tree { };
-    std::vector<int> nodes { 
-       3, 5, 1, 6, 2, 0, 8, INT_MIN, INT_MIN, 7, 4
-    };
+    std::vector<int> nodes { 1, 2, 3, INT_MIN, 5, INT_MIN, 4 };
     auto p_root { tree.createTree(nodes) };
-    auto p_node { tree.getNode(p_root, 5) };
-    auto p_node2 { tree.getNode(p_root, 4) };
-    sol.lowestCommonAncestor(p_root, p_node, p_node2);
+    for (auto &&el: sol.rightSideView(p_root)) {
+        std::cout << el << ' ';
+    }
     //std::cout << sol.lowestCommonAncestor(p_root, ) << '\n';
     std::cin.ignore();
 }

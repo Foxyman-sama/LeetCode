@@ -735,6 +735,42 @@ public:
         }
     };
 };
+class Solution199 {
+public:
+    // Accepted
+    class TreeNodeBFS {
+    public:
+        std::vector<int> rightSideView(TreeNode *_p_root) {
+            if (_p_root == nullptr) {
+                return std::vector<int> { };
+            }
+
+            std::queue<TreeNode *> queue { };
+            queue.push(_p_root);
+
+            std::vector<int> result { };
+            int right_el { };
+            while (queue.empty() != true) {
+                size_t queue_size { queue.size() };
+                for (size_t i { }; i < queue_size; ++i) {
+                    TreeNode *p_temp { queue.front() };
+                    queue.pop();
+                    right_el = p_temp->val;
+                    if (p_temp->left != nullptr) {
+                        queue.push(p_temp->left);
+                    }
+                    if (p_temp->right != nullptr) {
+                        queue.push(p_temp->right);
+                    }
+                }
+
+                result.push_back(right_el);
+            }
+
+            return result;
+        }
+    };
+};
 class Solution200 {
 public:
     // Accepted
