@@ -2833,6 +2833,39 @@ public:
         }
     };
 };
+class Solution1161 {
+public:
+    // Accepted
+    class TreeNodeBFS {
+    public:
+        int maxLevelSum(TreeNode *_p_root) {
+            std::queue<TreeNode *> queue { };
+            queue.push(_p_root);
+
+            int level { };
+            int max_sum { INT_MIN };
+            while (queue.empty() == false) {
+                size_t level_size { queue.size() };
+                int sum { };
+                for (size_t i { }; i < level_size; ++i) {
+                    TreeNode *p_temp { queue.front() };
+                    queue.pop();
+                    sum += p_temp->val;
+                    if (p_temp->left != nullptr) {
+                        queue.push(p_temp->left);
+                    }
+                    if (p_temp->right != nullptr) {
+                        queue.push(p_temp->right);
+                    }
+                }
+
+                max_sum = std::max(sum, max_sum);
+            }
+
+            return level;
+        }
+    };
+};
 class Solution1207 {
 public:
     // Accepted
