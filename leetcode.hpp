@@ -2258,6 +2258,37 @@ public:
         }
     };
 };
+class Solution700 {
+public:
+    // Accepted
+    class BST {
+    private:
+        TreeNode *search(TreeNode *_p_root, int _val) {
+            TreeNode *p_it { _p_root };
+            while (true) {
+                if (p_it == nullptr) {
+                    return nullptr;
+                }
+                if (p_it->val == _val) {
+                    return p_it;
+                }
+                if ((p_it->left != nullptr) && (p_it->val >= _val)) {
+                    p_it = p_it->left;
+                }
+                if ((p_it->right != nullptr) && (p_it->val <= _val)) {
+                    p_it = p_it->right;
+                }
+            }
+            
+            return nullptr;
+        }
+
+    public:
+        TreeNode* searchBST(TreeNode *_p_root, int _val) {
+            return search(_p_root, _val);
+        }
+    };
+};
 class Solution705 {
 public:
     // Accepted
