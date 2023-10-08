@@ -1912,6 +1912,68 @@ public:
         }
     };
 };
+class Solution450 {
+public:
+    class BST {
+    private:
+        TreeNode *findMin(TreeNode *_p_root) {
+            TreeNode *p_result { };
+            int min { INT_MAX };
+            while (_p_root->left != nullptr) {
+                if (min > _p_root->val) {
+                    p_result = _p_root;
+                    min = _p_root->val;
+                }
+
+                _p_root = _p_root->left;
+            }
+
+            return _p_root;
+        }
+
+    public:
+        TreeNode *deleteNode(TreeNode *_p_root, int _key) {
+            // If _p_root is nullptr than return nullptr
+            if (_p_root == nullptr) {
+                return nullptr;
+            }
+            // Finds a value in a left subtree
+            if (_p_root->val > _key) {
+                _p_root->left = deleteNode(_p_root->left, _key);
+            }
+            // Finds a value in a right subtree
+            else if (_p_root->val < _key) {
+                _p_root->right = deleteNode(_p_root->right, _key);
+            }
+            // A value is found
+            else {
+                // If a value doesn`t have children than return nullptr
+                if ((_p_root->left == nullptr) && (_p_root->right == nullptr)) {
+                    return nullptr;
+                }
+                // If a value doesn`t have a left child than return a right child
+                else if (_p_root->left == nullptr) {
+                    return _p_root->right;
+                }
+                // If a value doesn`t have a right child than return a left child
+                else if (_p_root->right == nullptr) {
+                    return _p_root->left;
+                }
+                // If a value has both children
+                else {
+                    // Finds a minimum value in a right subtree
+                    TreeNode *p_min { findMin(_p_root->right) };
+                    // Replaces a value
+                    _p_root->val = p_min->val;
+                    // Deletes a minimum value from a right subtree
+                    _p_root->right = deleteNode(_p_root->right, p_min->val);
+                }
+            }
+
+            return _p_root;
+        }
+    };
+};
 class Solution509 {
 public:
     // Accepted
