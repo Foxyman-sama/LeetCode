@@ -2505,7 +2505,7 @@ public:
         }
 
     public:
-        char nextGreatestLetter(const std::vector<char> &_k_letters, 
+        char nextGreatestLetter(const std::vector<char> &_k_letters,
                                 char _target) {
             int limit { 26 + 97 };
             int it { _target + 1 };
@@ -2529,7 +2529,7 @@ public:
     // Accepted
     class HashTable {
     public:
-        int numJewelsInStones(const std::string &_k_jewels, 
+        int numJewelsInStones(const std::string &_k_jewels,
                               const std::string &_k_stones) {
             std::unordered_map<int, int> hash { };
             for (auto &&el : _k_jewels) {
@@ -2544,6 +2544,42 @@ public:
             }
 
             return amount;
+        }
+    };
+};
+class Solution841 {
+public:
+    // Accepted
+    class GraphDFS {
+    private:
+        using Matrix = std::vector<std::vector<int>>;
+
+        std::unordered_map<size_t, bool> opened_;
+
+        void dfs(int _start, const Matrix &_k_rooms) {
+            opened_[_start] = true;
+            for (size_t i { }; i < _k_rooms[_start].size(); ++i) {
+                auto door { _k_rooms[_start][i] };
+                if (opened_[door] == false) {
+                    dfs(door, _k_rooms);
+                }
+            }
+        }
+
+    public:
+        bool canVisitAllRooms(const Matrix &_k_rooms) {
+            for (size_t i { }; i < _k_rooms.size(); ++i) {
+                opened_[i] = false;
+            }
+
+            dfs(0, _k_rooms);
+            for (auto &&[ind, is_opened]: opened_) {
+                if (is_opened == false) {
+                    return false;
+                }
+            }
+
+            return true;
         }
     };
 };
