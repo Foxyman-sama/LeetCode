@@ -1135,17 +1135,20 @@ public:
     // Accepted
     class HashTable {
     public:
-        bool isAnagram(const std::string &_k_s,
-                       const std::string &_k_t) {
-            std::unordered_map<char, int> hash { };
+        bool isAnagram(const std::string &_k_s, const std::string &_k_t) {
+            if (_k_s.size() != _k_t.size()) {
+                return false;
+            }
+
+            std::unordered_map<int, int> hash { };
             for (auto &&el: _k_s) {
                 ++hash[el];
             }
             for (auto &&el: _k_t) {
                 --hash[el];
             }
-            for (auto &&[key, value]: hash) {
-                if (value) {
+            for (auto &&[key, val]: hash) {
+                if (val > 0) {
                     return false;
                 }
             }
