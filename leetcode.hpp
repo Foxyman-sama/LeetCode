@@ -939,6 +939,25 @@ public:
         }
     };
 };
+class Solution217 {
+public:
+    // Accepted
+    class HashTable {
+    public:
+        bool containsDuplicate(const std::vector<int> &_k_nums) {
+            std::unordered_map<int, bool> uniques { };
+            for (auto &&el: _k_nums) {
+                if (uniques[el] == true) {
+                    return true;
+                }
+
+                uniques[el] = true;
+            }
+
+            return false;
+        }
+    };
+};
 class Solution236 {
 public:
     // Accepted
@@ -2133,6 +2152,25 @@ public:
                     }
                 }
             }
+        }
+    };
+    class GraphDFS {
+    private:
+        using Matrix = std::vector<std::vector<int>>;
+
+        std::unordered_map<int, bool> visited { };
+
+        int getTotalNumberOfProvinces(int _v, const Matrix &_k_is_connected) {
+
+            for (auto it { _k_is_connected.begin() }; it != _k_is_connected.end(); ++it) {
+                
+            }
+        }
+
+    public:
+        int findCircleNum(const Matrix &_k_is_connected) {
+            
+
         }
     };
 };
