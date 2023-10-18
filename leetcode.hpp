@@ -27,17 +27,15 @@ public:
     // Accepted
     class HashTable {
     public:
-        std::vector<int> twoSum(std::vector<int> &_nums, 
-                                int _target) {
+        std::vector<int> twoSum(const std::vector<int> &_k_nums, int _target) {
             std::unordered_map<int, int> hash { };
-            for (int i { }; i < _nums.size(); ++i) {
-                int needed { _target - _nums[i] };
-                if (hash.find(needed) != hash.end()) {
-                    return { hash[needed], i };
+            for (int i { }; i < _k_nums.size(); ++i) {
+                if (hash.find(_k_nums[i]) != hash.end()) {
+                    return { i, _k_nums[i] };
                 }
 
-                hash[_nums[i]] = i;
-            }
+                hash[_target - _k_nums[i]] = i;
+            }           
 
             return { };
         }
