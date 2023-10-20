@@ -245,6 +245,35 @@ public:
         }
     };
 };
+class Solution49 {
+public:
+    // Accepted
+    class HashTable {
+    private:
+        using VectorString = std::vector<std::string>;
+
+    public:
+        std::vector<VectorString> groupAnagrams(const VectorString &_k_strs) {
+            std::unordered_map<std::string, std::vector<std::string>> hash { };
+            for (auto it { _k_strs.begin() }; it != _k_strs.end(); ++it) {
+                std::string temp { *it };
+                std::sort(temp.begin(), temp.end());
+                if (hash.find(temp) == hash.end()) {
+                    hash[temp] = { };
+                }
+
+                hash[temp].emplace_back(*it);
+            }
+
+            std::vector<std::vector<std::string>> result { };
+            for (auto &&[key, val]: hash) {
+                result.emplace_back(val);
+            }
+
+            return result;
+        }
+    };
+};
 class Solution58 {
 public:
     // Accepted
