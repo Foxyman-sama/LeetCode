@@ -1490,6 +1490,30 @@ public:
             return result;
         }
     };
+    // Accepted
+    class HashTable {
+    public:
+        std::vector<int> topKFrequent(const std::vector<int> &_k_nums, 
+                                      int _k) {
+            std::unordered_map<int, int> freq_elements { };
+            for (auto &&el: _k_nums) {
+                ++freq_elements[el];
+            }
+
+            std::priority_queue<std::pair<int, int>> freq_queue { };
+            for (auto &&[key, freq]: freq_elements) {
+                freq_queue.push({ freq, key });
+            }
+
+            std::vector<int> result { };
+            for (size_t i { }; i < _k; ++i) {
+                result.emplace_back(freq_queue.top().second);
+                freq_queue.pop();
+            }
+
+            return result;
+        }
+    };
 };
 class Solution349 {
 public:
