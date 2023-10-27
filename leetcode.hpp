@@ -245,6 +245,37 @@ public:
     }
   };
 };
+class Solution36 {
+public:
+  class HashTable {
+  public:
+    bool isValidSudoku(const std::vector<std::vector<char>> &board) {
+      for (size_t i { }; i < board.size(); ++i) {
+        std::unordered_map<int, bool> unique_elements_in_row { };
+        for (auto &&el: board[i]) {
+          if (unique_elements_in_row.find(el) != unique_elements_in_row.end()) {
+            return false;
+          }
+
+          unique_elements_in_row[el] = true;
+        }
+      }
+      for (size_t i { }; i < board.size(); ++i) {
+        std::unordered_map<int, bool> unique_elements_in_column { };
+        for (size_t j { }; j < board[i].size(); ++j) {
+          auto el { board[j][i] };
+          if (unique_elements_in_column.find(el) != unique_elements_in_column.end()) {
+            return false;
+          }
+
+          unique_elements_in_column[board[j][i]] = true;
+        }
+      }
+
+      return true;
+    }
+ };
+};
 class Solution49 {
 public:
   // Accepted
