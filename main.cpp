@@ -7,10 +7,9 @@
 int main() {
     setlocale(0,  "");
 
-    Solution347::HashTable sol { };
-    std::vector<int> nodes { 1, 1, 1, 2, 2, 3 };
-    auto vec { sol.topKFrequent(nodes, 2) };
-    print(vec);
-    //std::cout << sol.lowestCommonAncestor(p_root, ) << '\n';
-    std::cin.ignore();
+    Solution238::PrefixAndPostfixSum sol { };
+    std::vector<int> temp { 1, 2, 3, 4 };
+    auto result { sol.productExceptSelf(temp) };
+    print(result);
+    system("pause");
 }
