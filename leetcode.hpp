@@ -24,18 +24,18 @@
 
 class Solution1 {
 public:
-    // Accepted
-    class HashTable {
-    public:
-        std::vector<int> twoSum(const std::vector<int> &_k_nums, int _target) {
-            std::unordered_map<int, int> hash { };
-            for (int i { }; i < _k_nums.size(); ++i) {
-                if (hash.find(_k_nums[i]) != hash.end()) {
-                    return { i, _k_nums[i] };
-                }
+  // Accepted
+  class HashTable {
+  public:
+    std::vector<int> twoSum(const std::vector<int> &_k_nums, int _target) {
+      std::unordered_map<int, int> hash { };
+      for (int i { }; i < _k_nums.size(); ++i) {
+        if (hash.find(_k_nums[i]) != hash.end()) {
+          return { i, _k_nums[i] };
+        }
 
-                hash[_target - _k_nums[i]] = i;
-            }           
+        hash[_target - _k_nums[i]] = i;
+      }
 
       return { };
     }
@@ -64,28 +64,28 @@ public:
 };
 class Solution11 {
 public:
-    // Accepted
-    class TwoPointers { 
-    public:
-        int maxArea(const std::vector<int> &_k_heighs) {
-            int max { INT_MIN };
-            int l { };
-            int r { static_cast<int>(_k_heighs.size() - 1) };
-            while (l < r) {
-                int areas_amount { r - l };
-                int current_height { std::min(_k_heighs[r], _k_heighs[l]) };
-                max = std::max(max, areas_amount * current_height);
-                if (_k_heighs[l] > _k_heighs[r]) {
-                    --r;
-                }
-                else {
-                    ++l;
-                }
-            }
-
-            return max;
+  // Accepted
+  class TwoPointers {
+  public:
+    int maxArea(const std::vector<int> &_k_heighs) {
+      int max { INT_MIN };
+      int l { };
+      int r { static_cast<int>(_k_heighs.size() - 1) };
+      while (l < r) {
+        int areas_amount { r - l };
+        int current_height { std::min(_k_heighs[r], _k_heighs[l]) };
+        max = std::max(max, areas_amount * current_height);
+        if (_k_heighs[l] > _k_heighs[r]) {
+          --r;
         }
-    };
+        else {
+          ++l;
+        }
+      }
+
+      return max;
+    }
+  };
 };
 class Solution13 {
 public:
@@ -247,32 +247,32 @@ public:
 };
 class Solution49 {
 public:
-    // Accepted
-    class HashTable {
-    private:
-        using VectorString = std::vector<std::string>;
+  // Accepted
+  class HashTable {
+  private:
+    using VectorString = std::vector<std::string>;
 
-    public:
-        std::vector<VectorString> groupAnagrams(const VectorString &_k_strs) {
-            std::unordered_map<std::string, std::vector<std::string>> hash { };
-            for (auto it { _k_strs.begin() }; it != _k_strs.end(); ++it) {
-                std::string temp { *it };
-                std::sort(temp.begin(), temp.end());
-                if (hash.find(temp) == hash.end()) {
-                    hash[temp] = { };
-                }
-
-                hash[temp].emplace_back(*it);
-            }
-
-            std::vector<std::vector<std::string>> result { };
-            for (auto &&[key, val]: hash) {
-                result.emplace_back(val);
-            }
-
-            return result;
+  public:
+    std::vector<VectorString> groupAnagrams(const VectorString &_k_strs) {
+      std::unordered_map<std::string, std::vector<std::string>> hash { };
+      for (auto it { _k_strs.begin() }; it != _k_strs.end(); ++it) {
+        std::string temp { *it };
+        std::sort(temp.begin(), temp.end());
+        if (hash.find(temp) == hash.end()) {
+          hash[temp] = { };
         }
-    };
+
+        hash[temp].emplace_back(*it);
+      }
+
+      std::vector<std::vector<std::string>> result { };
+      for (auto &&[key, val]: hash) {
+        result.emplace_back(val);
+      }
+
+      return result;
+    }
+  };
 };
 class Solution58 {
 public:
@@ -437,30 +437,30 @@ public:
 };
 class Solution104 {
 public:
-    // Accepted
-    class BinaryTreeDFS {
-    private:
-        int searchMaxDepth(TreeNode *_p_root, int _cdepth) {
-            int mdepth { _cdepth };
-            if (_p_root->right != nullptr) {
-                mdepth = std::max(
-                    searchMaxDepth(_p_root->right, _cdepth + 1),
-                    mdepth);
-            }
-            if (_p_root->left != nullptr) {
-                mdepth = std::max(
-                    searchMaxDepth(_p_root->left, _cdepth + 1),
-                    mdepth);
-            }
+  // Accepted
+  class BinaryTreeDFS {
+  private:
+    int searchMaxDepth(TreeNode *_p_root, int _cdepth) {
+      int mdepth { _cdepth };
+      if (_p_root->right != nullptr) {
+        mdepth = std::max(
+          searchMaxDepth(_p_root->right, _cdepth + 1),
+          mdepth);
+      }
+      if (_p_root->left != nullptr) {
+        mdepth = std::max(
+          searchMaxDepth(_p_root->left, _cdepth + 1),
+          mdepth);
+      }
 
-            return mdepth;
-        }
+      return mdepth;
+    }
 
-    public:
-        int maxDepth(TreeNode *_p_root) {
-            return searchMaxDepth(_p_root, 0);
-        }
-    };
+  public:
+    int maxDepth(TreeNode *_p_root) {
+      return searchMaxDepth(_p_root, 0);
+    }
+  };
 };
 class Solution108 {
 public:
@@ -758,45 +758,45 @@ public:
         _n >>= 1;
       }
 
-            return amount;
-        }
-    };
+      return amount;
+    }
+  };
 };
 class Solution199 {
 public:
-    // Accepted
-    class TreeNodeBFS {
-    public:
-        std::vector<int> rightSideView(TreeNode *_p_root) {
-            if (_p_root == nullptr) {
-                return std::vector<int> { };
-            }
+  // Accepted
+  class TreeNodeBFS {
+  public:
+    std::vector<int> rightSideView(TreeNode *_p_root) {
+      if (_p_root == nullptr) {
+        return std::vector<int> { };
+      }
 
-            std::queue<TreeNode *> queue { };
-            queue.push(_p_root);
+      std::queue<TreeNode *> queue { };
+      queue.push(_p_root);
 
-            std::vector<int> result { };
-            int right_el { };
-            while (queue.empty() != true) {
-                size_t queue_size { queue.size() };
-                for (size_t i { }; i < queue_size; ++i) {
-                    TreeNode *p_temp { queue.front() };
-                    queue.pop();
-                    right_el = p_temp->val;
-                    if (p_temp->left != nullptr) {
-                        queue.push(p_temp->left);
-                    }
-                    if (p_temp->right != nullptr) {
-                        queue.push(p_temp->right);
-                    }
-                }
-
-                result.push_back(right_el);
-            }
-
-            return result;
+      std::vector<int> result { };
+      int right_el { };
+      while (queue.empty() != true) {
+        size_t queue_size { queue.size() };
+        for (size_t i { }; i < queue_size; ++i) {
+          TreeNode *p_temp { queue.front() };
+          queue.pop();
+          right_el = p_temp->val;
+          if (p_temp->left != nullptr) {
+            queue.push(p_temp->left);
+          }
+          if (p_temp->right != nullptr) {
+            queue.push(p_temp->right);
+          }
         }
-    };
+
+        result.push_back(right_el);
+      }
+
+      return result;
+    }
+  };
 };
 class Solution200 {
 public:
@@ -883,34 +883,34 @@ public:
       }
     }
 
-    public:
-        int numIslands(std::vector<std::vector<char>> &_grid) {
-            toId(_grid);
-            return count(_grid);
-        }
-    };
+  public:
+    int numIslands(std::vector<std::vector<char>> &_grid) {
+      toId(_grid);
+      return count(_grid);
+    }
+  };
 };
 class Solution206 {
 public:
-    // Accepted
-    class LinkedList {
-    public:
-        ListNode *reverseList(ListNode *_p_head) {
-            if (_p_head == nullptr) {
-                return _p_head;
-            }
+  // Accepted
+  class LinkedList {
+  public:
+    ListNode *reverseList(ListNode *_p_head) {
+      if (_p_head == nullptr) {
+        return _p_head;
+      }
 
-            ListNode *p_reversed { };
-            while (_p_head != nullptr) {
-                ListNode *p_temp { _p_head->next };
-                _p_head->next = p_reversed;
-                p_reversed = _p_head;
-                _p_head = p_temp;
-            }
+      ListNode *p_reversed { };
+      while (_p_head != nullptr) {
+        ListNode *p_temp { _p_head->next };
+        _p_head->next = p_reversed;
+        p_reversed = _p_head;
+        _p_head = p_temp;
+      }
 
-            return _p_head;
-        }
-    };
+      return _p_head;
+    }
+  };
 };
 class Solution215 {
 public:
@@ -957,118 +957,118 @@ public:
       }
     }
 
-    public:
-        int findKthLargest(std::vector<int> &_nums,
-                           int _k) {
-            size_t size { _nums.size() };
-            mergeSort(0, size - 1, _nums);
-            return _nums[size - _k];
-        }
-    };
+  public:
+    int findKthLargest(std::vector<int> &_nums,
+                       int _k) {
+      size_t size { _nums.size() };
+      mergeSort(0, size - 1, _nums);
+      return _nums[size - _k];
+    }
+  };
 };
 class Solution217 {
 public:
-    // Accepted
-    class HashTable {
-    public:
-        bool containsDuplicate(const std::vector<int> &_k_nums) {
-            std::unordered_map<int, bool> uniques { };
-            for (auto &&el: _k_nums) {
-                if (uniques[el] == true) {
-                    return true;
-                }
-
-                uniques[el] = true;
-            }
-
-            return false;
+  // Accepted
+  class HashTable {
+  public:
+    bool containsDuplicate(const std::vector<int> &_k_nums) {
+      std::unordered_map<int, bool> uniques { };
+      for (auto &&el: _k_nums) {
+        if (uniques[el] == true) {
+          return true;
         }
-    };
+
+        uniques[el] = true;
+      }
+
+      return false;
+    }
+  };
 };
 class Solution236 {
 public:
-    // Accepted
-    class TreeNodeDFS {
-    private:
-        int depth(TreeNode *_p_root, TreeNode *_p_searchable, int _height) {
-            if (_p_root == nullptr) {
-                return 0;
-            }
-            if (_p_root == _p_searchable) {
-                return _height;
-            }
+  // Accepted
+  class TreeNodeDFS {
+  private:
+    int depth(TreeNode *_p_root, TreeNode *_p_searchable, int _height) {
+      if (_p_root == nullptr) {
+        return 0;
+      }
+      if (_p_root == _p_searchable) {
+        return _height;
+      }
 
-            int return_height { };
-            if (_p_root->left) {
-                return_height = depth(
-                    _p_root->left, _p_searchable, _height + 1);
-                if (return_height > 0) {
-                    return return_height;
-                }
-            }
-            if (_p_root->right) {          
-                return_height = depth(
-                    _p_root->right, _p_searchable, _height + 1);
-                if (return_height > 0) {
-                    return return_height;
-                }
-            }
-
-            return 0;
-        }        
-        TreeNode *parent(TreeNode *_p_root, TreeNode *_p_searching) {
-            if (_p_root == nullptr) {
-                return nullptr;
-            }
-
-            TreeNode *p_return { };
-            if (_p_root->left != nullptr) {
-                if (_p_root->left == _p_searching) {
-                    return _p_root;
-                }
-
-                p_return = parent(_p_root->left, _p_searching);
-                if (p_return != nullptr) {
-                    return p_return;
-                }
-            }
-            if (_p_root->right != nullptr) {
-                if (_p_root->right == _p_searching) {
-                    return _p_root;
-                }
-
-                p_return = parent(_p_root->right, _p_searching);
-                if (p_return != nullptr) {
-                    return p_return;
-                }
-            }
-
-            return p_return;
+      int return_height { };
+      if (_p_root->left) {
+        return_height = depth(
+          _p_root->left, _p_searchable, _height + 1);
+        if (return_height > 0) {
+          return return_height;
         }
-        
-    public:
-        TreeNode* lowestCommonAncestor(TreeNode* _p_root, TreeNode* _p_p, 
-                                       TreeNode* _p_q) {
-            int p_depth { depth(_p_root, _p_p, 1) };
-            int q_depth { depth(_p_root, _p_q, 1) };
-            while (p_depth != q_depth) {
-                if (p_depth > q_depth) {
-                    _p_p = parent(_p_root, _p_p);
-                    p_depth -= 1;
-                }
-                else {
-                    _p_q = parent(_p_root, _p_q);
-                    q_depth -= 1;
-                }
-            }
-            while (_p_p != _p_q) {
-                _p_p = parent(_p_root, _p_p);
-                _p_q = parent(_p_root, _p_q);
-            }
-
-            return _p_p;
+      }
+      if (_p_root->right) {
+        return_height = depth(
+          _p_root->right, _p_searchable, _height + 1);
+        if (return_height > 0) {
+          return return_height;
         }
-    };
+      }
+
+      return 0;
+    }
+    TreeNode *parent(TreeNode *_p_root, TreeNode *_p_searching) {
+      if (_p_root == nullptr) {
+        return nullptr;
+      }
+
+      TreeNode *p_return { };
+      if (_p_root->left != nullptr) {
+        if (_p_root->left == _p_searching) {
+          return _p_root;
+        }
+
+        p_return = parent(_p_root->left, _p_searching);
+        if (p_return != nullptr) {
+          return p_return;
+        }
+      }
+      if (_p_root->right != nullptr) {
+        if (_p_root->right == _p_searching) {
+          return _p_root;
+        }
+
+        p_return = parent(_p_root->right, _p_searching);
+        if (p_return != nullptr) {
+          return p_return;
+        }
+      }
+
+      return p_return;
+    }
+
+  public:
+    TreeNode* lowestCommonAncestor(TreeNode* _p_root, TreeNode* _p_p,
+                                   TreeNode* _p_q) {
+      int p_depth { depth(_p_root, _p_p, 1) };
+      int q_depth { depth(_p_root, _p_q, 1) };
+      while (p_depth != q_depth) {
+        if (p_depth > q_depth) {
+          _p_p = parent(_p_root, _p_p);
+          p_depth -= 1;
+        }
+        else {
+          _p_q = parent(_p_root, _p_q);
+          q_depth -= 1;
+        }
+      }
+      while (_p_p != _p_q) {
+        _p_p = parent(_p_root, _p_p);
+        _p_q = parent(_p_root, _p_q);
+      }
+
+      return _p_p;
+    }
+  };
 };
 class Solution238 {
 public:
@@ -1135,26 +1135,26 @@ public:
 };
 class Solution242 {
 public:
-    // Accepted
-    class HashTable {
-    public:
-        bool isAnagram(const std::string &_k_s, const std::string &_k_t) {
-            if (_k_s.size() != _k_t.size()) {
-                return false;
-            }
+  // Accepted
+  class HashTable {
+  public:
+    bool isAnagram(const std::string &_k_s, const std::string &_k_t) {
+      if (_k_s.size() != _k_t.size()) {
+        return false;
+      }
 
-            std::unordered_map<int, int> hash { };
-            for (auto &&el: _k_s) {
-                ++hash[el];
-            }
-            for (auto &&el: _k_t) {
-                --hash[el];
-            }
-            for (auto &&[key, val]: hash) {
-                if (val > 0) {
-                    return false;
-                }
-            }
+      std::unordered_map<int, int> hash { };
+      for (auto &&el: _k_s) {
+        ++hash[el];
+      }
+      for (auto &&el: _k_t) {
+        --hash[el];
+      }
+      for (auto &&[key, val]: hash) {
+        if (val > 0) {
+          return false;
+        }
+      }
 
       return true;
     }
@@ -1276,95 +1276,95 @@ public:
 };
 class Solution283 {
 public:
-    // Accepted
-    class TwoPointers {
-    public:
-        void moveZeroes(std::vector<int> &_nums) {
-            int l { };
-            for (int r { }; r < _nums.size(); ++r) {
-                while ((l < r) && (_nums[l] != 0)) {
-                    ++l;
-                }
-
-                if (_nums[r] > 0) { 
-                    std::swap(_nums[l], _nums[r]);
-                }
-            }
+  // Accepted
+  class TwoPointers {
+  public:
+    void moveZeroes(std::vector<int> &_nums) {
+      int l { };
+      for (int r { }; r < _nums.size(); ++r) {
+        while ((l < r) && (_nums[l] != 0)) {
+          ++l;
         }
-    };
+
+        if (_nums[r] > 0) {
+          std::swap(_nums[l], _nums[r]);
+        }
+      }
+    }
+  };
 };
 class Solution328 {
 public:
-    // Accepted
-    class LinkedList {
-    public:
-        ListNode *oddEvenList(ListNode *_p_head) {
-            if ((_p_head == nullptr) || (_p_head->next == nullptr)) {
-                return _p_head;
-            }
-            
-            ListNode *p_odd_head { new ListNode { } };
-            ListNode *p_odd { p_odd_head };
-            ListNode *p_even_head { new ListNode { } };
-            ListNode *p_even { p_even_head };
-            int counter { };
-            while (_p_head != nullptr) {
-                if (counter % 2 == 0) {
-                    p_even->next = _p_head;
-                    p_even = p_even->next;
-                }
-                else {
-                    p_odd->next = _p_head;
-                    p_odd = p_odd->next;
-                }
+  // Accepted
+  class LinkedList {
+  public:
+    ListNode *oddEvenList(ListNode *_p_head) {
+      if ((_p_head == nullptr) || (_p_head->next == nullptr)) {
+        return _p_head;
+      }
 
-                ++counter;
-                _p_head = _p_head->next;
-            }
-            
-            p_odd->next = nullptr;
-            p_even->next = p_odd_head->next;
-            return p_even_head->next;
+      ListNode *p_odd_head { new ListNode { } };
+      ListNode *p_odd { p_odd_head };
+      ListNode *p_even_head { new ListNode { } };
+      ListNode *p_even { p_even_head };
+      int counter { };
+      while (_p_head != nullptr) {
+        if (counter % 2 == 0) {
+          p_even->next = _p_head;
+          p_even = p_even->next;
         }
-    };
+        else {
+          p_odd->next = _p_head;
+          p_odd = p_odd->next;
+        }
+
+        ++counter;
+        _p_head = _p_head->next;
+      }
+
+      p_odd->next = nullptr;
+      p_even->next = p_odd_head->next;
+      return p_even_head->next;
+    }
+  };
 };
 class Solution334 {
 public:
-    // Accepted
-    class Array {
-    public:
-        bool increasingTriplet(const std::vector<int> &_k_nums) {
-            int i { INT_MAX };
-            int j { INT_MAX };
-            int k { INT_MAX };
-            for (auto &&el: _k_nums) {
-                if (el <= i) {
-                    i = el;
-                }
-                else if (el <= j) {
-                    j = el;
-                }
-                else {
-                    return true;
-                }
-            }
-            
-            return false;
+  // Accepted
+  class Array {
+  public:
+    bool increasingTriplet(const std::vector<int> &_k_nums) {
+      int i { INT_MAX };
+      int j { INT_MAX };
+      int k { INT_MAX };
+      for (auto &&el: _k_nums) {
+        if (el <= i) {
+          i = el;
         }
-    };
+        else if (el <= j) {
+          j = el;
+        }
+        else {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  };
 };
 class Solution345 {
 public:
-    // Accepted
-    class TwoPointers {
-    private:
-        bool isVowel(char _ch) noexcept {
-            constexpr char sk_vowels[] { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
-            for (auto &&el: sk_vowels) {
-                if (_ch == el) {
-                    return true;
-                }
-            }
+  // Accepted
+  class TwoPointers {
+  private:
+    bool isVowel(char _ch) noexcept {
+      constexpr char sk_vowels[] { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+      for (auto &&el: sk_vowels) {
+        if (_ch == el) {
+          return true;
+        }
+      }
 
       return false;
     }
@@ -1463,33 +1463,33 @@ public:
         result.emplace_back(num);
       }
 
-            return result;
-        }
-    };
-    // Accepted
-    class HashTable {
-    public:
-        std::vector<int> topKFrequent(const std::vector<int> &_k_nums, 
-                                      int _k) {
-            std::unordered_map<int, int> freq_elements { };
-            for (auto &&el: _k_nums) {
-                ++freq_elements[el];
-            }
+      return result;
+    }
+  };
+  // Accepted
+  class HashTable {
+  public:
+    std::vector<int> topKFrequent(const std::vector<int> &_k_nums,
+                                  int _k) {
+      std::unordered_map<int, int> freq_elements { };
+      for (auto &&el: _k_nums) {
+        ++freq_elements[el];
+      }
 
-            std::priority_queue<std::pair<int, int>> freq_queue { };
-            for (auto &&[key, freq]: freq_elements) {
-                freq_queue.push({ freq, key });
-            }
+      std::priority_queue<std::pair<int, int>> freq_queue { };
+      for (auto &&[key, freq]: freq_elements) {
+        freq_queue.push({ freq, key });
+      }
 
-            std::vector<int> result { };
-            for (size_t i { }; i < _k; ++i) {
-                result.emplace_back(freq_queue.top().second);
-                freq_queue.pop();
-            }
+      std::vector<int> result { };
+      for (size_t i { }; i < _k; ++i) {
+        result.emplace_back(freq_queue.top().second);
+        freq_queue.pop();
+      }
 
-            return result;
-        }
-    };
+      return result;
+    }
+  };
 };
 class Solution349 {
 public:
@@ -1815,213 +1815,213 @@ public:
 };
 class Solution394 {
 public:
-    // Accepted
-    class Stack {
-    public:
-        std::string decodeString(const std::string &_k_s) {
-            std::stack<std::string> strs { };
-            std::stack<std::string> nums { };
-            std::string num_buf { };
-            for (auto &&el: _k_s) {
-                if (isdigit(el)) {
-                    num_buf += el;
-                }
-                else if (el == ']') {
-                    std::string temp { };
-                    while (strs.top() != "[") {
-                        temp = strs.top() + temp;
-                        strs.pop();
-                    }
-
-                    strs.pop();
-
-                    std::string temp2 { };
-                    int number { std::stoi(nums.top()) };
-                    for (size_t j { }; j < number; ++j) {
-                        temp2 += temp;
-                    }
-
-                    strs.push(temp2);
-                    nums.pop();
-                }
-                else {
-                    if (el == '[') {
-                        nums.push(num_buf);
-                        num_buf.clear();
-                    }
-
-                    strs.push(std::string { el });
-                }
-            }
-
-            std::string result { };
-            while (strs.empty() == false) {
-                result = strs.top() + result;
-                strs.pop();
-            }
-
-            return result;
+  // Accepted
+  class Stack {
+  public:
+    std::string decodeString(const std::string &_k_s) {
+      std::stack<std::string> strs { };
+      std::stack<std::string> nums { };
+      std::string num_buf { };
+      for (auto &&el: _k_s) {
+        if (isdigit(el)) {
+          num_buf += el;
         }
-    };
+        else if (el == ']') {
+          std::string temp { };
+          while (strs.top() != "[") {
+            temp = strs.top() + temp;
+            strs.pop();
+          }
+
+          strs.pop();
+
+          std::string temp2 { };
+          int number { std::stoi(nums.top()) };
+          for (size_t j { }; j < number; ++j) {
+            temp2 += temp;
+          }
+
+          strs.push(temp2);
+          nums.pop();
+        }
+        else {
+          if (el == '[') {
+            nums.push(num_buf);
+            num_buf.clear();
+          }
+
+          strs.push(std::string { el });
+        }
+      }
+
+      std::string result { };
+      while (strs.empty() == false) {
+        result = strs.top() + result;
+        strs.pop();
+      }
+
+      return result;
+    }
+  };
 };
 class Solution392 {
 public:
-    // Accepted
-    class TwoPointers {
-    public:
-        bool isSubsequence(const std::string &_k_s, 
-                           const std::string &_k_t) {
-            int l { };
-            for (size_t r { }; r < _k_t.size(); ++r) {
-                if (_k_s[l] == _k_t[r]) {
-                    ++l;
-                }
-            }
-
-            if (l == _k_s.size()) {
-                return true;
-            }
-
-            return false;
+  // Accepted
+  class TwoPointers {
+  public:
+    bool isSubsequence(const std::string &_k_s,
+                       const std::string &_k_t) {
+      int l { };
+      for (size_t r { }; r < _k_t.size(); ++r) {
+        if (_k_s[l] == _k_t[r]) {
+          ++l;
         }
-    };
+      }
+
+      if (l == _k_s.size()) {
+        return true;
+      }
+
+      return false;
+    }
+  };
 };
 class Solution437 {
 public:
-    // Accepted
-    class TreeNodeDFS {
-    private:
-        int count_;
-        std::unordered_map<int, int> umap_;
+  // Accepted
+  class TreeNodeDFS {
+  private:
+    int count_;
+    std::unordered_map<int, int> umap_;
 
-        void count(TreeNode *_p_root, int _tsum, int _sum) {
-            if (_p_root == nullptr) {
-                return;
-            }
+    void count(TreeNode *_p_root, int _tsum, int _sum) {
+      if (_p_root == nullptr) {
+        return;
+      }
 
-            _sum += _p_root->val;
-            if (_sum == _tsum) {
-                ++count_;
-            }
-            if (umap_.find(_sum - _tsum) != umap_.end()) {
-                count_ += umap_[_sum - _tsum];
-            }
-            
-            ++umap_[_sum];
-            count(_p_root->left, _tsum, _sum);
-            count(_p_root->right, _tsum, _sum);
-            --umap_[_sum];
-        }  
+      _sum += _p_root->val;
+      if (_sum == _tsum) {
+        ++count_;
+      }
+      if (umap_.find(_sum - _tsum) != umap_.end()) {
+        count_ += umap_[_sum - _tsum];
+      }
 
-    public:
-        TreeNodeDFS() noexcept
-            : count_ { } { }
+      ++umap_[_sum];
+      count(_p_root->left, _tsum, _sum);
+      count(_p_root->right, _tsum, _sum);
+      --umap_[_sum];
+    }
 
-        int pathSum(TreeNode *_p_root, int _tsum) {
-            count(_p_root, _tsum, 0);
-            return count_;
-        }
-    };
+  public:
+    TreeNodeDFS() noexcept
+      : count_ { } { }
+
+    int pathSum(TreeNode *_p_root, int _tsum) {
+      count(_p_root, _tsum, 0);
+      return count_;
+    }
+  };
 };
 class Solution443 {
 public:
-    // Accepted
-    class String {
-    private:
-        void compressSymbol(std::vector<char> &_dest,
-                            char _ch,
-                            int _amount) noexcept {
-            _dest.emplace_back(_ch);
-            if (_amount > 1) {
-                std::string number { std::to_string(_amount) };
-                for (auto &&ch: number) {
-                    _dest.emplace_back(ch);
-                }
-            }
+  // Accepted
+  class String {
+  private:
+    void compressSymbol(std::vector<char> &_dest,
+                        char _ch,
+                        int _amount) noexcept {
+      _dest.emplace_back(_ch);
+      if (_amount > 1) {
+        std::string number { std::to_string(_amount) };
+        for (auto &&ch: number) {
+          _dest.emplace_back(ch);
+        }
+      }
+    }
+
+  public:
+    int compress(std::vector<char> &_chars) {
+      std::vector<char> temp { };
+      int amount { };
+      char prev { _chars[0] };
+      for (auto &&el: _chars) {
+        if (el != prev) {
+          compressSymbol(temp, prev, amount);
+          prev = el;
+          amount = 0;
         }
 
-    public:
-        int compress(std::vector<char> &_chars) {
-            std::vector<char> temp { };
-            int amount { };
-            char prev { _chars[0] };
-            for (auto &&el: _chars) {
-                if (el != prev) {
-                    compressSymbol(temp, prev, amount);
-                    prev = el;
-                    amount = 0;
-                }
+        ++amount;
+      }
 
-                ++amount;
-            }
-
-            compressSymbol(temp, prev, amount);
-            _chars = temp;
-            return temp.size();
-        }
-    };
+      compressSymbol(temp, prev, amount);
+      _chars = temp;
+      return temp.size();
+    }
+  };
 };
 class Solution450 {
 public:
-    class BST {
-    private:
-        TreeNode *findMin(TreeNode *_p_root) {
-            TreeNode *p_result { };
-            int min { INT_MAX };
-            while (_p_root->left != nullptr) {
-                if (min > _p_root->val) {
-                    p_result = _p_root;
-                    min = _p_root->val;
-                }
-
-                _p_root = _p_root->left;
-            }
-
-            return _p_root;
+  class BST {
+  private:
+    TreeNode *findMin(TreeNode *_p_root) {
+      TreeNode *p_result { };
+      int min { INT_MAX };
+      while (_p_root->left != nullptr) {
+        if (min > _p_root->val) {
+          p_result = _p_root;
+          min = _p_root->val;
         }
 
-    public:
-        TreeNode *deleteNode(TreeNode *_p_root, int _key) {
-            // If _p_root is nullptr than return nullptr
-            if (_p_root == nullptr) {
-                return nullptr;
-            }
-            // Finds a value in a left subtree
-            if (_p_root->val > _key) {
-                _p_root->left = deleteNode(_p_root->left, _key);
-            }
-            // Finds a value in a right subtree
-            else if (_p_root->val < _key) {
-                _p_root->right = deleteNode(_p_root->right, _key);
-            }
-            // A value is found
-            else {
-                // If a value doesn`t have children than return nullptr
-                if ((_p_root->left == nullptr) && (_p_root->right == nullptr)) {
-                    return nullptr;
-                }
-                // If a value doesn`t have a left child than return a right child
-                else if (_p_root->left == nullptr) {
-                    return _p_root->right;
-                }
-                // If a value doesn`t have a right child than return a left child
-                else if (_p_root->right == nullptr) {
-                    return _p_root->left;
-                }
-                // If a value has both children
-                else {
-                    // Finds a minimum value in a right subtree
-                    TreeNode *p_min { findMin(_p_root->right) };
-                    // Replaces a value
-                    _p_root->val = p_min->val;
-                    // Deletes a minimum value from a right subtree
-                    _p_root->right = deleteNode(_p_root->right, p_min->val);
-                }
-            }
+        _p_root = _p_root->left;
+      }
 
-            return _p_root;
+      return _p_root;
+    }
+
+  public:
+    TreeNode *deleteNode(TreeNode *_p_root, int _key) {
+      // If _p_root is nullptr than return nullptr
+      if (_p_root == nullptr) {
+        return nullptr;
+      }
+      // Finds a value in a left subtree
+      if (_p_root->val > _key) {
+        _p_root->left = deleteNode(_p_root->left, _key);
+      }
+      // Finds a value in a right subtree
+      else if (_p_root->val < _key) {
+        _p_root->right = deleteNode(_p_root->right, _key);
+      }
+      // A value is found
+      else {
+        // If a value doesn`t have children than return nullptr
+        if ((_p_root->left == nullptr) && (_p_root->right == nullptr)) {
+          return nullptr;
         }
-    };
+        // If a value doesn`t have a left child than return a right child
+        else if (_p_root->left == nullptr) {
+          return _p_root->right;
+        }
+        // If a value doesn`t have a right child than return a left child
+        else if (_p_root->right == nullptr) {
+          return _p_root->left;
+        }
+        // If a value has both children
+        else {
+          // Finds a minimum value in a right subtree
+          TreeNode *p_min { findMin(_p_root->right) };
+          // Replaces a value
+          _p_root->val = p_min->val;
+          // Deletes a minimum value from a right subtree
+          _p_root->right = deleteNode(_p_root->right, p_min->val);
+        }
+      }
+
+      return _p_root;
+    }
+  };
 };
 class Solution509 {
 public:
@@ -2165,44 +2165,44 @@ public:
             continue;
           }
 
-                    int p { i };
-                    int q { j };
-                    int p_root { find(p) };
-                    int q_root { find(q) };
-                    if (p_root == q_root) {
-                        continue;
-                    }
-                    if (sz_[p_root] > sz_[q_root]) {
-                        id_[q_root] = p_root;
-                        sz_[p_root] += sz_[q_root];
-                    }
-                    else {
-                        id_[p_root] = q_root;
-                        sz_[q_root] += sz_[p_root];
-                    }
-                }
-            }
+          int p { i };
+          int q { j };
+          int p_root { find(p) };
+          int q_root { find(q) };
+          if (p_root == q_root) {
+            continue;
+          }
+          if (sz_[p_root] > sz_[q_root]) {
+            id_[q_root] = p_root;
+            sz_[p_root] += sz_[q_root];
+          }
+          else {
+            id_[p_root] = q_root;
+            sz_[q_root] += sz_[p_root];
+          }
         }
-    };
-    class GraphDFS {
-    private:
-        using Matrix = std::vector<std::vector<int>>;
+      }
+    }
+  };
+  class GraphDFS {
+  private:
+    using Matrix = std::vector<std::vector<int>>;
 
-        std::unordered_map<int, bool> visited { };
+    std::unordered_map<int, bool> visited { };
 
-        int getTotalNumberOfProvinces(int _v, const Matrix &_k_is_connected) {
+    int getTotalNumberOfProvinces(int _v, const Matrix &_k_is_connected) {
 
-            for (auto it { _k_is_connected.begin() }; it != _k_is_connected.end(); ++it) {
-                
-            }
-        }
+      for (auto it { _k_is_connected.begin() }; it != _k_is_connected.end(); ++it) {
 
-    public:
-        int findCircleNum(const Matrix &_k_is_connected) {
-            
+      }
+    }
 
-        }
-    };
+  public:
+    int findCircleNum(const Matrix &_k_is_connected) {
+
+
+    }
+  };
 };
 class Solution605 {
 public:
@@ -2234,67 +2234,67 @@ public:
         return false;
       }
 
-            return true;
-        }
-    };
+      return true;
+    }
+  };
 };
 class Solution643 {
 public:
-    // Accepted
-    class SlidingWindow {
-    public:
-        double findMaxAverage(const std::vector<int> &_k_nums, 
-                              int _k) {
-            int l { };
-            double sum { };
-            double max { INT_MIN };
-            for (int r { }; r < _k_nums.size(); ++r) {
-                sum += _k_nums[r];
-                
-                int range { r - l + 1 };
-                if (range == _k) {
-                    max = std::max(max, sum);
-                    sum -= _k_nums[l++];
-                }
-            }
+  // Accepted
+  class SlidingWindow {
+  public:
+    double findMaxAverage(const std::vector<int> &_k_nums,
+                          int _k) {
+      int l { };
+      double sum { };
+      double max { INT_MIN };
+      for (int r { }; r < _k_nums.size(); ++r) {
+        sum += _k_nums[r];
 
-            return max / _k;
+        int range { r - l + 1 };
+        if (range == _k) {
+          max = std::max(max, sum);
+          sum -= _k_nums[l++];
         }
-    };
+      }
+
+      return max / _k;
+    }
+  };
 };
 class Solution649 {
 public:
-    // Accepted
-    class Queue {
-    public:
-        std::string predictPartyVictory(const std::string &_k_senate) {
-            size_t n { _k_senate.size() };
-            std::queue<size_t> radiants { };
-            std::queue<size_t> dires { };
-            for (size_t i { }; i < _k_senate.size(); ++i) {
-                char el { _k_senate[i] };
-                if (el == 'D') {
-                    dires.push(i);
-                }
-                else if (el == 'R') {
-                    radiants.push(i);
-                }
-            }
-            while ((radiants.empty() == false) && (dires.empty() == false)) {
-                if (dires.front() < radiants.front()) {
-                    dires.push(n++);
-                }
-                else {
-                    radiants.push(n++);
-                }
-
-                radiants.pop();
-                dires.pop();
-            }
-
-            return radiants.empty() == true ? "Dire" : "Radiant";
+  // Accepted
+  class Queue {
+  public:
+    std::string predictPartyVictory(const std::string &_k_senate) {
+      size_t n { _k_senate.size() };
+      std::queue<size_t> radiants { };
+      std::queue<size_t> dires { };
+      for (size_t i { }; i < _k_senate.size(); ++i) {
+        char el { _k_senate[i] };
+        if (el == 'D') {
+          dires.push(i);
         }
-    };
+        else if (el == 'R') {
+          radiants.push(i);
+        }
+      }
+      while ((radiants.empty() == false) && (dires.empty() == false)) {
+        if (dires.front() < radiants.front()) {
+          dires.push(n++);
+        }
+        else {
+          radiants.push(n++);
+        }
+
+        radiants.pop();
+        dires.pop();
+      }
+
+      return radiants.empty() == true ? "Dire" : "Radiant";
+    }
+  };
 };
 class Solution695 {
 public:
@@ -2390,34 +2390,34 @@ public:
 };
 class Solution700 {
 public:
-    // Accepted
-    class BST {
-    private:
-        TreeNode *search(TreeNode *_p_root, int _val) {
-            TreeNode *p_it { _p_root };
-            while (true) {
-                if (p_it == nullptr) {
-                    return nullptr;
-                }
-                if (p_it->val == _val) {
-                    return p_it;
-                }
-                if ((p_it->left != nullptr) && (p_it->val >= _val)) {
-                    p_it = p_it->left;
-                }
-                if ((p_it->right != nullptr) && (p_it->val <= _val)) {
-                    p_it = p_it->right;
-                }
-            }
-            
-            return nullptr;
+  // Accepted
+  class BST {
+  private:
+    TreeNode *search(TreeNode *_p_root, int _val) {
+      TreeNode *p_it { _p_root };
+      while (true) {
+        if (p_it == nullptr) {
+          return nullptr;
         }
+        if (p_it->val == _val) {
+          return p_it;
+        }
+        if ((p_it->left != nullptr) && (p_it->val >= _val)) {
+          p_it = p_it->left;
+        }
+        if ((p_it->right != nullptr) && (p_it->val <= _val)) {
+          p_it = p_it->right;
+        }
+      }
 
-    public:
-        TreeNode* searchBST(TreeNode *_p_root, int _val) {
-            return search(_p_root, _val);
-        }
-    };
+      return nullptr;
+    }
+
+  public:
+    TreeNode* searchBST(TreeNode *_p_root, int _val) {
+      return search(_p_root, _val);
+    }
+  };
 };
 class Solution705 {
 public:
@@ -2485,66 +2485,66 @@ public:
 };
 class Solution724 {
 public:
-    // Accepted
-    class PrefixSum {
-    public:
-        int pivotIndex(const std::vector<int> &_k_nums) {
-            std::vector<int> right_sum { };
-            right_sum.resize(_k_nums.size());
-            right_sum.back() = _k_nums.back();
-            for (int i { static_cast<int>(_k_nums.size() - 2) }; i >= 0; --i) {
-                right_sum[i] = right_sum[i + 1] + _k_nums[i];
-            }
+  // Accepted
+  class PrefixSum {
+  public:
+    int pivotIndex(const std::vector<int> &_k_nums) {
+      std::vector<int> right_sum { };
+      right_sum.resize(_k_nums.size());
+      right_sum.back() = _k_nums.back();
+      for (int i { static_cast<int>(_k_nums.size() - 2) }; i >= 0; --i) {
+        right_sum[i] = right_sum[i + 1] + _k_nums[i];
+      }
 
-            int temp { };
-            for (int i { }; i < _k_nums.size(); ++i) {
-                temp += _k_nums[i];
-                if (temp == right_sum[i]) {
-                    return i;
-                }
-            }
-
-            return -1;
+      int temp { };
+      for (int i { }; i < _k_nums.size(); ++i) {
+        temp += _k_nums[i];
+        if (temp == right_sum[i]) {
+          return i;
         }
-    };
+      }
+
+      return -1;
+    }
+  };
 };
 class Solution735 {
 public:
-    // Accepted
-    class Stack {
-    public:
-        std::vector<int> asteroidCollision(const std::vector<int> &_k_asteroids) {
-            std::vector<int> result { };
-            for (auto &&el: _k_asteroids) {
-                if ((result.empty() == true) || (el > 0)) {
-                    result.emplace_back(el);
-                }
-                else {
-                    if (-el == result.back()) {
-                        result.pop_back();
-                    }
-                    else if (result.back() < 0) {
-                        result.emplace_back(el);
-                    }
-                    else {
-                        while (-el > result.back()) {
-                            result.pop_back();
-                            if ((result.empty() == true) || (result.back() < 0)) {
-                                result.emplace_back(el);
-                                break;
-                            }
-                            else if (-el == result.back()) {
-                                result.pop_back();
-                                break;
-                            }
-                        }                    
-                    }
-                }
-            }
-
-            return result;
+  // Accepted
+  class Stack {
+  public:
+    std::vector<int> asteroidCollision(const std::vector<int> &_k_asteroids) {
+      std::vector<int> result { };
+      for (auto &&el: _k_asteroids) {
+        if ((result.empty() == true) || (el > 0)) {
+          result.emplace_back(el);
         }
-    };
+        else {
+          if (-el == result.back()) {
+            result.pop_back();
+          }
+          else if (result.back() < 0) {
+            result.emplace_back(el);
+          }
+          else {
+            while (-el > result.back()) {
+              result.pop_back();
+              if ((result.empty() == true) || (result.back() < 0)) {
+                result.emplace_back(el);
+                break;
+              }
+              else if (-el == result.back()) {
+                result.pop_back();
+                break;
+              }
+            }
+          }
+        }
+      }
+
+      return result;
+    }
+  };
 };
 class Solution744 {
 public:
@@ -2572,18 +2572,18 @@ public:
       return false;
     }
 
-    public:
-        char nextGreatestLetter(const std::vector<char> &_k_letters,
-                                char _target) {
-            int limit { 26 + 97 };
-            int it { _target + 1 };
-            while (true) {
-                if (it >= limit) {
-                    it = 97;
-                }
-                if (binarySearch(0, _k_letters.size() - 1, it, _k_letters)) {
-                    return it;
-                }
+  public:
+    char nextGreatestLetter(const std::vector<char> &_k_letters,
+                            char _target) {
+      int limit { 26 + 97 };
+      int it { _target + 1 };
+      while (true) {
+        if (it >= limit) {
+          it = 97;
+        }
+        if (binarySearch(0, _k_letters.size() - 1, it, _k_letters)) {
+          return it;
+        }
 
         ++it;
       }
@@ -2594,15 +2594,15 @@ public:
 };
 class Solution771 {
 public:
-    // Accepted
-    class HashTable {
-    public:
-        int numJewelsInStones(const std::string &_k_jewels,
-                              const std::string &_k_stones) {
-            std::unordered_map<int, int> hash { };
-            for (auto &&el : _k_jewels) {
-                ++hash[el];
-            }
+  // Accepted
+  class HashTable {
+  public:
+    int numJewelsInStones(const std::string &_k_jewels,
+                          const std::string &_k_stones) {
+      std::unordered_map<int, int> hash { };
+      for (auto &&el : _k_jewels) {
+        ++hash[el];
+      }
 
       int amount { };
       for (auto &&el : _k_stones) {
@@ -2617,106 +2617,106 @@ public:
 };
 class Solution841 {
 public:
-    // Accepted
-    class GraphDFS {
-    private:
-        using Matrix = std::vector<std::vector<int>>;
+  // Accepted
+  class GraphDFS {
+  private:
+    using Matrix = std::vector<std::vector<int>>;
 
-        std::unordered_map<size_t, bool> opened_;
+    std::unordered_map<size_t, bool> opened_;
 
-        void dfs(int _start, const Matrix &_k_rooms) {
-            opened_[_start] = true;
-            for (size_t i { }; i < _k_rooms[_start].size(); ++i) {
-                auto door { _k_rooms[_start][i] };
-                if (opened_[door] == false) {
-                    dfs(door, _k_rooms);
-                }
-            }
+    void dfs(int _start, const Matrix &_k_rooms) {
+      opened_[_start] = true;
+      for (size_t i { }; i < _k_rooms[_start].size(); ++i) {
+        auto door { _k_rooms[_start][i] };
+        if (opened_[door] == false) {
+          dfs(door, _k_rooms);
         }
+      }
+    }
 
-    public:
-        bool canVisitAllRooms(const Matrix &_k_rooms) {
-            for (size_t i { }; i < _k_rooms.size(); ++i) {
-                opened_[i] = false;
-            }
+  public:
+    bool canVisitAllRooms(const Matrix &_k_rooms) {
+      for (size_t i { }; i < _k_rooms.size(); ++i) {
+        opened_[i] = false;
+      }
 
-            dfs(0, _k_rooms);
-            for (auto &&[ind, is_opened]: opened_) {
-                if (is_opened == false) {
-                    return false;
-                }
-            }
-
-            return true;
+      dfs(0, _k_rooms);
+      for (auto &&[ind, is_opened]: opened_) {
+        if (is_opened == false) {
+          return false;
         }
-    };
+      }
+
+      return true;
+    }
+  };
 };
 class Solution872 {
 public:
-    // Accepted
-    class TreeNodeDFS {
-    private:
-        void nodesToVector(TreeNode *_p_current, 
-                           std::vector<int> &_nodes) {
-            if ((_p_current->left == nullptr) ||
-                (_p_current->right == nullptr)) {
-                _nodes.emplace_back(_p_current->val);
-                return;
-            }
-            if (_p_current->left != nullptr) {
-                nodesToVector(_p_current->left, _nodes);
-            }
-            if (_p_current->right != nullptr) {
-                nodesToVector(_p_current->right, _nodes);
-            }
-        }       
+  // Accepted
+  class TreeNodeDFS {
+  private:
+    void nodesToVector(TreeNode *_p_current,
+                       std::vector<int> &_nodes) {
+      if ((_p_current->left == nullptr) ||
+          (_p_current->right == nullptr)) {
+        _nodes.emplace_back(_p_current->val);
+        return;
+      }
+      if (_p_current->left != nullptr) {
+        nodesToVector(_p_current->left, _nodes);
+      }
+      if (_p_current->right != nullptr) {
+        nodesToVector(_p_current->right, _nodes);
+      }
+    }
 
-    public:
-        bool leafSimilar(TreeNode *_p_root1, TreeNode *_p_root2) {
-            std::vector<int> root1_nodes { };
-            std::vector<int> root2_nodes { };
-            nodesToVector(_p_root1, root1_nodes);
-            nodesToVector(_p_root2, root2_nodes);
-            return root1_nodes == root2_nodes;
-        }
-    };
+  public:
+    bool leafSimilar(TreeNode *_p_root1, TreeNode *_p_root2) {
+      std::vector<int> root1_nodes { };
+      std::vector<int> root2_nodes { };
+      nodesToVector(_p_root1, root1_nodes);
+      nodesToVector(_p_root2, root2_nodes);
+      return root1_nodes == root2_nodes;
+    }
+  };
 };
 class Solution933 {
 public:
-    // Accepted
-    class Queue {
+  // Accepted
+  class Queue {
+  public:
+    class RecentCounter {
+    private:
+      std::queue<int> queue_;
+      int counter_;
+
     public:
-        class RecentCounter {
-        private:
-            std::queue<int> queue_;
-            int counter_;
+      RecentCounter()
+        : queue_ { }
+        , counter_ { } { }
 
-        public:
-            RecentCounter() 
-                : queue_ { }
-                , counter_ { } { }
+      int ping(int _t) {
+        if (queue_.empty()) {
+          queue_.push(_t);
+          return 0;
+        }
 
-            int ping(int _t) {
-                if (queue_.empty()) {
-                    queue_.push(_t);
-                    return 0;
-                }
+        int range { _t - 3'000 };
+        while (queue_.empty() == false) {
+          if ((queue_.front() < range) || (queue_.front() > _t)) {
+            queue_.pop();
+          }
+          else {
+            break;
+          }
+        }
 
-                int range { _t - 3'000 };
-                while (queue_.empty() == false) {
-                    if ((queue_.front() < range) || (queue_.front() > _t)) { 
-                        queue_.pop();
-                    }
-                    else {
-                        break;
-                    }
-                }
-
-                queue_.push(_t);
-                return queue_.size();
-            }
-        };
+        queue_.push(_t);
+        return queue_.size();
+      }
     };
+  };
 };
 class Solution959 {
 public:
@@ -2811,36 +2811,36 @@ public:
         }
       }
 
-            return result;
-        }
-    };
+      return result;
+    }
+  };
 };
 class Solution1004 {
 public:
-    class SlidingWindow {
-    public:
-        int longestOnes(const std::vector<int> &_k_nums, 
-                        int _k) {
-            int l { };
-            int r { };
-            while (r < _k_nums.size()) {
-                if (_k_nums[r] == 0) {
-                    --_k;
-                }
-                if (_k < 0) {
-                    if (_k_nums[l] == 0) {
-                        ++_k;
-                    }
-
-                    ++l;
-                }
-
-                ++r;
-            }
-
-            return r - l;
+  class SlidingWindow {
+  public:
+    int longestOnes(const std::vector<int> &_k_nums,
+                    int _k) {
+      int l { };
+      int r { };
+      while (r < _k_nums.size()) {
+        if (_k_nums[r] == 0) {
+          --_k;
         }
-    };
+        if (_k < 0) {
+          if (_k_nums[l] == 0) {
+            ++_k;
+          }
+
+          ++l;
+        }
+
+        ++r;
+      }
+
+      return r - l;
+    }
+  };
 };
 class Solution1061 {
 public:
@@ -3026,72 +3026,72 @@ public:
         }
       }
 
-            return s_cache[_n];
-        }
-    };
+      return s_cache[_n];
+    }
+  };
 };
 class Solution1161 {
 public:
-    // Accepted
-    class TreeNodeBFS {
-    public:
-        int maxLevelSum(TreeNode *_p_root) {
-            std::queue<TreeNode *> queue { };
-            queue.push(_p_root);
+  // Accepted
+  class TreeNodeBFS {
+  public:
+    int maxLevelSum(TreeNode *_p_root) {
+      std::queue<TreeNode *> queue { };
+      queue.push(_p_root);
 
-            int level { };
-            int depth { 1 };
-            int max_sum { INT_MIN };
-            while (queue.empty() == false) {
-                size_t level_size { queue.size() };
-                int sum { };
-                for (size_t i { }; i < level_size; ++i) {
-                    TreeNode *p_temp { queue.front() };
-                    queue.pop();
-                    sum += p_temp->val;
-                    if (p_temp->left != nullptr) {
-                        queue.push(p_temp->left);
-                    }
-                    if (p_temp->right != nullptr) {
-                        queue.push(p_temp->right);
-                    }
-                }
-
-                if (max_sum < sum) {
-                    max_sum = sum;
-                    level = depth;
-                }
-
-                ++depth;
-            }
-
-            return level;
+      int level { };
+      int depth { 1 };
+      int max_sum { INT_MIN };
+      while (queue.empty() == false) {
+        size_t level_size { queue.size() };
+        int sum { };
+        for (size_t i { }; i < level_size; ++i) {
+          TreeNode *p_temp { queue.front() };
+          queue.pop();
+          sum += p_temp->val;
+          if (p_temp->left != nullptr) {
+            queue.push(p_temp->left);
+          }
+          if (p_temp->right != nullptr) {
+            queue.push(p_temp->right);
+          }
         }
-    };
+
+        if (max_sum < sum) {
+          max_sum = sum;
+          level = depth;
+        }
+
+        ++depth;
+      }
+
+      return level;
+    }
+  };
 };
 class Solution1207 {
 public:
-    // Accepted
-    class HashTable {
-    public:
-        bool uniqueOccurrences(const std::vector<int> &_k_arr) {
-            std::unordered_map<int, int> hash { };
-            for (auto &&el: _k_arr) {
-                ++hash[el];
-            }
+  // Accepted
+  class HashTable {
+  public:
+    bool uniqueOccurrences(const std::vector<int> &_k_arr) {
+      std::unordered_map<int, int> hash { };
+      for (auto &&el: _k_arr) {
+        ++hash[el];
+      }
 
-            std::unordered_set<int> temp { };
-            for (auto &&[key, value]: hash) {
-                if (temp.find(value) != temp.end()) {
-                    return false;
-                }
-
-                temp.insert(value);
-            }
-
-            return true;
+      std::unordered_set<int> temp { };
+      for (auto &&[key, value]: hash) {
+        if (temp.find(value) != temp.end()) {
+          return false;
         }
-    };
+
+        temp.insert(value);
+      }
+
+      return true;
+    }
+  };
 };
 class Solution1237 {
 public:
@@ -3306,45 +3306,45 @@ public:
         result.emplace_back(hash[el]);
       }
 
-            return result;
-        }
-    };
+      return result;
+    }
+  };
 };
 class Solution1372 {
 public:
-    // Accepted
-    class TreeNodeDFS {
-    private:
-        enum Dir : bool {
-            LEFT, 
-            RIGHT
-        };
-
-        int max_;
-
-        void findMaxZigZagPath(TreeNode *_p_root, int _height, Dir _dir) {
-            if (_p_root == nullptr) {
-                return;
-            }
-
-            max_ = std::max(max_, _height);
-            if (_dir == LEFT) {
-                findMaxZigZagPath(_p_root->right, _height + 1, RIGHT);
-                findMaxZigZagPath(_p_root->left, 1, _dir);
-            }
-            else {
-                findMaxZigZagPath(_p_root->left, _height + 1, LEFT);
-                findMaxZigZagPath(_p_root->right, 1, _dir);
-            }
-        }
-
-    public:
-        int longestZigZag(TreeNode *_p_root) {
-            findMaxZigZagPath(_p_root, 0, LEFT);
-            findMaxZigZagPath(_p_root, 0, RIGHT);
-            return max_;
-        }
+  // Accepted
+  class TreeNodeDFS {
+  private:
+    enum Dir : bool {
+      LEFT,
+      RIGHT
     };
+
+    int max_;
+
+    void findMaxZigZagPath(TreeNode *_p_root, int _height, Dir _dir) {
+      if (_p_root == nullptr) {
+        return;
+      }
+
+      max_ = std::max(max_, _height);
+      if (_dir == LEFT) {
+        findMaxZigZagPath(_p_root->right, _height + 1, RIGHT);
+        findMaxZigZagPath(_p_root->left, 1, _dir);
+      }
+      else {
+        findMaxZigZagPath(_p_root->left, _height + 1, LEFT);
+        findMaxZigZagPath(_p_root->right, 1, _dir);
+      }
+    }
+
+  public:
+    int longestZigZag(TreeNode *_p_root) {
+      findMaxZigZagPath(_p_root, 0, LEFT);
+      findMaxZigZagPath(_p_root, 0, RIGHT);
+      return max_;
+    }
+  };
 };
 class Solution1382 {
 public:
@@ -3414,95 +3414,95 @@ public:
 };
 class Solution1448 {
 public:
-    // Accepted
-    class TreeNodeDFS {
-    private:
-        int counter_;
+  // Accepted
+  class TreeNodeDFS {
+  private:
+    int counter_;
 
-        void count(TreeNode *_p_current, int _max) {
-            if (_p_current == nullptr) {
-                return;
-            }
-            if (_p_current->val >= _max) {
-                _max = _p_current->val;
-                ++counter_;
-            }
-            if (_p_current->left != nullptr) {
-                count(_p_current->left, _max);
-            }
-            if (_p_current->right != nullptr) {
-                count(_p_current->right, _max);
-            }
-        }
+    void count(TreeNode *_p_current, int _max) {
+      if (_p_current == nullptr) {
+        return;
+      }
+      if (_p_current->val >= _max) {
+        _max = _p_current->val;
+        ++counter_;
+      }
+      if (_p_current->left != nullptr) {
+        count(_p_current->left, _max);
+      }
+      if (_p_current->right != nullptr) {
+        count(_p_current->right, _max);
+      }
+    }
 
-    public:
-        int goodNodes(TreeNode *_p_root) {
-            int max { _p_root->val };
-            count(_p_root, max);
-            return counter_;
-        }
-    };
+  public:
+    int goodNodes(TreeNode *_p_root) {
+      int max { _p_root->val };
+      count(_p_root, max);
+      return counter_;
+    }
+  };
 };
 class Solution1456 {
 public:
-    // Accepted
-    class SlidingWindow {
-    private:
-        bool isVowel(char _ch) const noexcept {
-            return _ch == 'a' || _ch == 'e' || _ch == 'i' || _ch == 'o' || _ch == 'u';
+  // Accepted
+  class SlidingWindow {
+  private:
+    bool isVowel(char _ch) const noexcept {
+      return _ch == 'a' || _ch == 'e' || _ch == 'i' || _ch == 'o' || _ch == 'u';
+    }
+
+  public:
+    int maxVowels(const std::string &_k_s,
+                  int _k) {
+      int l { };
+      int max { INT_MIN };
+      int sum { };
+      for (int r { }; r < _k_s.size(); ++r) {
+        if (isVowel(_k_s[r])) {
+          ++sum;
         }
 
-    public:
-        int maxVowels(const std::string &_k_s, 
-                      int _k) {
-            int l { };
-            int max { INT_MIN };
-            int sum { };
-            for (int r { }; r < _k_s.size(); ++r) {
-                if (isVowel(_k_s[r])) {
-                    ++sum;
-                }
-
-                int range { r - l + 1 };
-                if (range == _k) {
-                    max = std::max(sum, max);
-                    if (isVowel(_k_s[l++])) {
-                        --sum;
-                    }
-                }
-            }
-
-            return max;
+        int range { r - l + 1 };
+        if (range == _k) {
+          max = std::max(sum, max);
+          if (isVowel(_k_s[l++])) {
+            --sum;
+          }
         }
-    };
+      }
+
+      return max;
+    }
+  };
 };
 class Solution1493 {
 public:
-    // Accepted
-    class SlidingWindow {
-    public:
-        int longestSubarray(const std::vector<int> &_k_nums) {
-            int l { };
-            int r { };
-            int number_of_delete { 1 };
-            while (r < _k_nums.size()) {
-                if (_k_nums[r] == 0) {
-                    --number_of_delete;
-                }
-                if (number_of_delete < 0) {
-                    if (_k_nums[l] == 0) {
-                        ++number_of_delete;
-                    }
-
-                    ++l;
-                }
-
-                ++r;
-            }
-
-            return r - l - 1;
+  // Accepted
+  class SlidingWindow {
+  public:
+    int longestSubarray(const std::vector<int> &_k_nums) {
+      int l { };
+      int r { };
+      int number_of_delete { 1 };
+      while (r < _k_nums.size()) {
+        if (_k_nums[r] == 0) {
+          --number_of_delete;
         }
-    };
+        if (number_of_delete < 0) {
+          if (_k_nums[l] == 0) {
+            ++number_of_delete;
+          }
+
+          ++l;
+        }
+
+        ++r;
+      }
+
+      return r - l - 1;
+    }
+  };
 };
 class Solution1539 {
 public:
@@ -3550,147 +3550,147 @@ public:
 };
 class Solution1657 {
 public:
-    // Accepted
-    class HashTable {
-    public:
-        bool closeStrings(const std::string &_k_word1, 
-                          const std::string &_k_word2) {
-            if (_k_word1.size() != _k_word2.size()) {
-                return false;
-            }
-                 
-            std::unordered_set<char> alphabet_word1 { };
-            for (auto &&el: _k_word1) {
-                alphabet_word1.insert(el);
-            }
+  // Accepted
+  class HashTable {
+  public:
+    bool closeStrings(const std::string &_k_word1,
+                      const std::string &_k_word2) {
+      if (_k_word1.size() != _k_word2.size()) {
+        return false;
+      }
 
-            std::unordered_set<char> alphabet_word2 { };
-            for (auto &&el: _k_word2) {
-                alphabet_word2.insert(el);
-            }
+      std::unordered_set<char> alphabet_word1 { };
+      for (auto &&el: _k_word1) {
+        alphabet_word1.insert(el);
+      }
 
-            if (alphabet_word1.size() != alphabet_word2.size()) {
-                return false;
-            }
+      std::unordered_set<char> alphabet_word2 { };
+      for (auto &&el: _k_word2) {
+        alphabet_word2.insert(el);
+      }
 
-            for (auto &&el: alphabet_word1) {
-                auto pos { alphabet_word2.find(el) };
-                if (pos == alphabet_word2.end()) {
-                    return false;
-                }
-            }
-            for (auto &&el: alphabet_word2) {
-                auto pos { alphabet_word1.find(el) };
-                if (pos == alphabet_word1.end()) {
-                    return false;
-                }
-            }
+      if (alphabet_word1.size() != alphabet_word2.size()) {
+        return false;
+      }
 
-            std::vector<int> vec_word1 { };
-            vec_word1.resize(26);
-            for (auto &&el: _k_word1) {
-                ++vec_word1[el - 'a'];
-            }
-                 
-            std::vector<int> vec_word2 { };
-            vec_word2.resize(26);
-            for (auto &&el: _k_word2) {
-                ++vec_word2[el - 'a'];
-            }
-
-            std::sort(vec_word1.begin(), vec_word1.end());
-            std::sort(vec_word2.begin(), vec_word2.end());
-            for (size_t i { }; i < 26; ++i) {
-                if (vec_word1[i] != vec_word2[i]) {
-                    return false;
-                }
-            }
-
-            return true;
+      for (auto &&el: alphabet_word1) {
+        auto pos { alphabet_word2.find(el) };
+        if (pos == alphabet_word2.end()) {
+          return false;
         }
-    };
+      }
+      for (auto &&el: alphabet_word2) {
+        auto pos { alphabet_word1.find(el) };
+        if (pos == alphabet_word1.end()) {
+          return false;
+        }
+      }
+
+      std::vector<int> vec_word1 { };
+      vec_word1.resize(26);
+      for (auto &&el: _k_word1) {
+        ++vec_word1[el - 'a'];
+      }
+
+      std::vector<int> vec_word2 { };
+      vec_word2.resize(26);
+      for (auto &&el: _k_word2) {
+        ++vec_word2[el - 'a'];
+      }
+
+      std::sort(vec_word1.begin(), vec_word1.end());
+      std::sort(vec_word2.begin(), vec_word2.end());
+      for (size_t i { }; i < 26; ++i) {
+        if (vec_word1[i] != vec_word2[i]) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  };
 };
 class Solution1679 {
 public:
-    // Accepted
-    class TwoPointers {
-    private:
-        int partition(std::vector<int> &_nums,
-                       int _l,
-                       int _r) {
-            int mid { _nums[_l + (_r - _l) / 2] };
-            while (true) {
-                while (_nums[_l] < mid) {
-                    ++_l;
-                }                
-                while (_nums[_r] > mid) {
-                    --_r;
-                }
-
-                if (_l >= _r) {
-                    break;
-                }
-
-                std::swap(_nums[_l++], _nums[_r--]);
-            }
-
-            return _r;
+  // Accepted
+  class TwoPointers {
+  private:
+    int partition(std::vector<int> &_nums,
+                  int _l,
+                  int _r) {
+      int mid { _nums[_l + (_r - _l) / 2] };
+      while (true) {
+        while (_nums[_l] < mid) {
+          ++_l;
         }
-        void quickSort(std::vector<int> &_nums,
-                       int _l,
-                       int _r) {
-            if (_l < _r) {
-                int p { partition(_nums, _l, _r) };
-                quickSort(_nums, _l, p);
-                quickSort(_nums, p + 1, _r);
-            }
+        while (_nums[_r] > mid) {
+          --_r;
         }
 
-    public:
-        int maxOperations(std::vector<int> &_nums, 
-                          int _k) {
-            quickSort(_nums, 0, _nums.size() - 1);
-
-            int operations_amount { };
-            int l { };
-            int r { static_cast<int>(_nums.size() - 1) };
-            while (l < r) {
-                if ((_nums[l] + _nums[r]) == _k) {
-                    --r;
-                    ++l;
-                }
-                else if ((_nums[l] + _nums[r]) > _k) {
-                    --r;
-                }
-                else {
-                    ++l;
-                }
-            }
-
-            return operations_amount;
+        if (_l >= _r) {
+          break;
         }
-    };
+
+        std::swap(_nums[_l++], _nums[_r--]);
+      }
+
+      return _r;
+    }
+    void quickSort(std::vector<int> &_nums,
+                   int _l,
+                   int _r) {
+      if (_l < _r) {
+        int p { partition(_nums, _l, _r) };
+        quickSort(_nums, _l, p);
+        quickSort(_nums, p + 1, _r);
+      }
+    }
+
+  public:
+    int maxOperations(std::vector<int> &_nums,
+                      int _k) {
+      quickSort(_nums, 0, _nums.size() - 1);
+
+      int operations_amount { };
+      int l { };
+      int r { static_cast<int>(_nums.size() - 1) };
+      while (l < r) {
+        if ((_nums[l] + _nums[r]) == _k) {
+          --r;
+          ++l;
+        }
+        else if ((_nums[l] + _nums[r]) > _k) {
+          --r;
+        }
+        else {
+          ++l;
+        }
+      }
+
+      return operations_amount;
+    }
+  };
 };
 class Solution1732 {
 public:
-    // Accepted
-    class PrefixSum {
-    public:
-        int largestAltitude(std::vector<int> &_gain) {
-            for (size_t i { 1 }; i < _gain.size(); ++i) {
-                _gain[i] = _gain[i - 1] + _gain[i];
-            }
+  // Accepted
+  class PrefixSum {
+  public:
+    int largestAltitude(std::vector<int> &_gain) {
+      for (size_t i { 1 }; i < _gain.size(); ++i) {
+        _gain[i] = _gain[i - 1] + _gain[i];
+      }
 
-            int max { }; 
-            for (auto &&el: _gain) {
-                if (el > 0) {
-                    max = std::max(el, max);
-                }
-            }
-
-            return max;
+      int max { };
+      for (auto &&el: _gain) {
+        if (el > 0) {
+          max = std::max(el, max);
         }
-    };
+      }
+
+      return max;
+    }
+  };
 };
 class Solution1748 {
 public:
@@ -3986,86 +3986,86 @@ public:
 };
 class Solution2095 {
 public:
-    // Accepted
-    class LinkedList {
-    public:
-        ListNode* deleteMiddle(ListNode *_p_head) {
-            if (_p_head->next == nullptr) {
-                return nullptr;
-            }
+  // Accepted
+  class LinkedList {
+  public:
+    ListNode* deleteMiddle(ListNode *_p_head) {
+      if (_p_head->next == nullptr) {
+        return nullptr;
+      }
 
-            ListNode *p_fast { _p_head->next };
-            ListNode *p_slow { _p_head };
-            while ((p_fast != nullptr) && (p_fast->next != nullptr)) {
-                p_fast = p_fast->next->next;
-                if (p_fast != nullptr) {
-                    p_slow = p_slow->next;
-                }
-            }
-
-            p_slow->next = p_slow->next->next;
-            return _p_head;
+      ListNode *p_fast { _p_head->next };
+      ListNode *p_slow { _p_head };
+      while ((p_fast != nullptr) && (p_fast->next != nullptr)) {
+        p_fast = p_fast->next->next;
+        if (p_fast != nullptr) {
+          p_slow = p_slow->next;
         }
-    };
+      }
+
+      p_slow->next = p_slow->next->next;
+      return _p_head;
+    }
+  };
 };
 class Solution2130 {
 public:
-    // Accepted
-    class LinkedList {
-    public:
-        int pairSum(ListNode *_p_head) {
-            ListNode *p_slow { _p_head };
-            ListNode *p_fast { _p_head };
-            while ((p_fast != nullptr) && (p_fast->next != nullptr)) {
-                p_fast = p_fast->next->next;
-                if (p_fast != nullptr) {
-                    p_slow = p_slow->next; 
-                }
-            }
-
-            ListNode *p_normal { p_slow->next };
-            ListNode *p_reversed { };
-            while (_p_head != p_normal) {
-                ListNode *p_temp { _p_head->next };
-                _p_head->next = p_reversed;
-                p_reversed = _p_head;
-                _p_head = p_temp;
-            }
-
-
-            int max { INT_MIN };
-            while (p_normal != nullptr) {
-                max = std::max(max, p_normal->val + p_reversed->val);
-                p_normal = p_normal->next;
-                p_reversed = p_reversed->next;
-            }
-
-            return max;
+  // Accepted
+  class LinkedList {
+  public:
+    int pairSum(ListNode *_p_head) {
+      ListNode *p_slow { _p_head };
+      ListNode *p_fast { _p_head };
+      while ((p_fast != nullptr) && (p_fast->next != nullptr)) {
+        p_fast = p_fast->next->next;
+        if (p_fast != nullptr) {
+          p_slow = p_slow->next;
         }
-    };
+      }
+
+      ListNode *p_normal { p_slow->next };
+      ListNode *p_reversed { };
+      while (_p_head != p_normal) {
+        ListNode *p_temp { _p_head->next };
+        _p_head->next = p_reversed;
+        p_reversed = _p_head;
+        _p_head = p_temp;
+      }
+
+
+      int max { INT_MIN };
+      while (p_normal != nullptr) {
+        max = std::max(max, p_normal->val + p_reversed->val);
+        p_normal = p_normal->next;
+        p_reversed = p_reversed->next;
+      }
+
+      return max;
+    }
+  };
 };
 class Solution2215 {
 public:
-    // Accepted
-    class HashTable {
-    public:
-        std::vector<std::vector<int>> findDifference(const std::vector<int> &_k_nums1, 
-                                                     const std::vector<int> &_k_nums2) {
-            std::vector<std::vector<int>> result { };
-            result.resize(2);
+  // Accepted
+  class HashTable {
+  public:
+    std::vector<std::vector<int>> findDifference(const std::vector<int> &_k_nums1,
+                                                 const std::vector<int> &_k_nums2) {
+      std::vector<std::vector<int>> result { };
+      result.resize(2);
 
-            std::set<int> set1 { _k_nums1.begin(), _k_nums1.end() };
-            std::set<int> set2 { _k_nums2.begin(), _k_nums2.end() };
-            for (auto &&el: set1) {
-                if (set2.find(el) == set2.end()) {
-                    result[0].emplace_back(el);
-                }
-            }
-            for (auto &&el: set2) {
-                if (set1.find(el) == set1.end()) {
-                    result[1].emplace_back(el);
-                }
-            }
+      std::set<int> set1 { _k_nums1.begin(), _k_nums1.end() };
+      std::set<int> set2 { _k_nums2.begin(), _k_nums2.end() };
+      for (auto &&el: set1) {
+        if (set2.find(el) == set2.end()) {
+          result[0].emplace_back(el);
+        }
+      }
+      for (auto &&el: set2) {
+        if (set1.find(el) == set1.end()) {
+          result[1].emplace_back(el);
+        }
+      }
 
       return result;
     }
@@ -4144,85 +4144,85 @@ public:
 };
 class Solution2325 {
 public:
-    // Accepted
-    class HashTable {
-    public:
-        std::string decodeMessage(const std::string &_k_key, 
-                                  const std::string &_k_message) {
-            std::string result { };
-            std::unordered_map<char, char> hash { };
-            int index { 97 };
-            for (auto &&el : _k_key) {
-                if ((!isspace(el)) && (!hash[el])) {
-                    hash[el] = index++;
-                }
-            }
-            for (auto &&el : _k_message) {
-                if (isspace(el)) {
-                    result += ' ';
-                }
-                else {
-                    result += el;
-                }
-            }
-
-            return result;
+  // Accepted
+  class HashTable {
+  public:
+    std::string decodeMessage(const std::string &_k_key,
+                              const std::string &_k_message) {
+      std::string result { };
+      std::unordered_map<char, char> hash { };
+      int index { 97 };
+      for (auto &&el : _k_key) {
+        if ((!isspace(el)) && (!hash[el])) {
+          hash[el] = index++;
         }
-    };
+      }
+      for (auto &&el : _k_message) {
+        if (isspace(el)) {
+          result += ' ';
+        }
+        else {
+          result += el;
+        }
+      }
+
+      return result;
+    }
+  };
 };
 class Solution2352 {
 public:
-    // Accepted
-    class HashTable {
-    public:
-        int equalPairs(const std::vector<std::vector<int>> &_k_grid) {
-            std::map<std::vector<int>, int> map { };
-            for (auto &&row: _k_grid) {
-                ++map[row];
-            }      
+  // Accepted
+  class HashTable {
+  public:
+    int equalPairs(const std::vector<std::vector<int>> &_k_grid) {
+      std::map<std::vector<int>, int> map { };
+      for (auto &&row: _k_grid) {
+        ++map[row];
+      }
 
-            int result { };
-            for (size_t i { }; i < _k_grid.size(); ++i) {
-                std::vector<int> temp { };
-                for (size_t j { }; j < _k_grid[i].size(); ++j) {
-                    temp.emplace_back(_k_grid[j][i]);
-                }
-
-                if (map.find(temp) != map.end()) {
-                    result += map[temp];
-                }
-            }
-
-            return result;
+      int result { };
+      for (size_t i { }; i < _k_grid.size(); ++i) {
+        std::vector<int> temp { };
+        for (size_t j { }; j < _k_grid[i].size(); ++j) {
+          temp.emplace_back(_k_grid[j][i]);
         }
-    };
+
+        if (map.find(temp) != map.end()) {
+          result += map[temp];
+        }
+      }
+
+      return result;
+    }
+  };
 };
 class Solution2390 {
 public:
-    // Accepted
-    class Stack {
-    public:
-        std::string removeStars(const std::string &_k_s) {
-            std::stack<char> stack { };
-            for (auto &&el: _k_s) {
-                if (el != '*') {
-                    stack.push(el);
-                }
-                else {
-                    stack.pop();
-                }
-            }
-
-            std::string result { };
-            while (!stack.empty()) {
-                result += stack.top();
-                stack.pop();
-            }
-
-            std::reverse(result.begin(), result.end());
-            return result;
+  // Accepted
+  class Stack {
+  public:
+    std::string removeStars(const std::string &_k_s) {
+      std::stack<char> stack { };
+      for (auto &&el: _k_s) {
+        if (el != '*') {
+          stack.push(el);
         }
-    };
+        else {
+          stack.pop();
+        }
+      }
+
+      std::string result { };
+      while (!stack.empty()) {
+        result += stack.top();
+        stack.pop();
+      }
+
+      std::reverse(result.begin(), result.end());
+      return result;
+    }
+  };
 };
 class Solution2418 {
 public:
