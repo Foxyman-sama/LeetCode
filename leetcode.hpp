@@ -248,27 +248,75 @@ public:
 class Solution36 {
 public:
   class HashTable {
+  private:
+    bool isContains(const std::unordered_map<int, bool> &hash_map, int element) noexcept {
+      if (hash_map.find(element) != hash_map.end()) {
+        return false;
+      }
+
+      return true;
+    }
+
   public:
     bool isValidSudoku(const std::vector<std::vector<char>> &board) {
-      for (size_t i { }; i < board.size(); ++i) {
+      constexpr int number_of_rows { 9 };
+      constexpr int number_of_columns { 9 };
+      for (size_t i { }; i < number_of_rows; ++i) {
         std::unordered_map<int, bool> unique_elements_in_row { };
-        for (auto &&el: board[i]) {
-          if (unique_elements_in_row.find(el) != unique_elements_in_row.end()) {
-            return false;
-          }
+        for (auto &&element_in_row: board[i]) {
+          if (element_in_row != '.') {
+            if (!isContains(unique_elements_in_row, element_in_row)) {
+              return false;
+            }
 
-          unique_elements_in_row[el] = true;
+            unique_elements_in_row[element_in_row] = true;
+          }
         }
       }
-      for (size_t i { }; i < board.size(); ++i) {
+      for (size_t i { }; i < number_of_rows; ++i) {
         std::unordered_map<int, bool> unique_elements_in_column { };
-        for (size_t j { }; j < board[i].size(); ++j) {
-          auto el { board[j][i] };
-          if (unique_elements_in_column.find(el) != unique_elements_in_column.end()) {
+        for (size_t j { }; j < number_of_columns; ++j) {
+          auto element_in_column { board[j][i] };
+          if (element_in_column != '.') {
+            if (!isContains(unique_elements_in_column, element_in_column)) {
+              return false;
+            }
+
+            unique_elements_in_column[element_in_column] = true;
+          }
+        }
+      }
+      std::unordered_map<int, std::unordered_map<int, int>> unique_elements_in_grid_first_row { };
+      for (size_t i { }; i < 3; ++i) {
+        unique_elements_in_grid_first_row[i / 3];
+        for (auto &&el: board[i]) {
+          if (unique_elements_in_grid_first_row[i / 3].find(el) != unique_elements_in_grid_first_row[i / 3].end()) {
             return false;
           }
 
-          unique_elements_in_column[board[j][i]] = true;
+          unique_elements_in_grid_first_row[i / 3][el] = true;
+        }
+      }
+      std::unordered_map<int, std::unordered_map<int, int>> unique_elements_in_grid_second_row { };
+      for (size_t i { 3 }; i < 6; ++i) {
+        unique_elements_in_grid_second_row[i / 3];
+        for (auto &&el: board[i]) {
+          if (unique_elements_in_grid_second_row[i / 3].find(el) != unique_elements_in_grid_second_row[i / 3].end()) {
+            return false;
+          }
+
+          unique_elements_in_grid_second_row[i / 3][el] = true;
+        }
+      }
+      std::unordered_map<int, std::unordered_map<int, int>> unique_elements_in_grid_third_row { };
+      for (size_t i { 6 }; i < 9; ++i) {
+        unique_elements_in_grid_third_row[i / 3];
+        for (auto &&el: board[i]) {
+          if (unique_elements_in_grid_third_row[i / 3].find(el) != unique_elements_in_grid_third_row[i / 3].end()) {
+            return false;
+          }
+
+          unique_elements_in_grid_third_row[i / 3][el] = true;
         }
       }
 
