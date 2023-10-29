@@ -2374,6 +2374,48 @@ public:
     }
   };
 };
+class Solution659 {
+public:
+  class String {
+  private:
+    static constexpr char service_character { ';' };
+
+  public:
+    std::string encode(const std::vector<std::string> &strs) {
+      std::string result { };
+      for (auto &&str: strs) {
+        result += std::to_string(str.size()) + service_character;
+        result += str;
+      }
+
+      return result;
+    }
+    std::vector<std::string> decode(std::string &str) {
+      std::vector<std::string> result { };
+      std::string temp { };
+      std::string size { };
+      for (size_t i { }; i < str.size(); ++i) {
+        while (isdigit(str[i])) {
+          size += str[i++];
+        }
+        if (str[i] == service_character) {
+          int size_int { std::stoi(size) };
+          size_t j { j + 1 };
+          for (; j < size_int; ++j) {
+            temp += str[j];
+          }
+
+          temp.clear();
+          size.clear();
+          result.emplace_back(temp);
+          i = j;
+        }
+      }
+
+      return result;
+    }
+  };
+};
 class Solution695 {
 public:
   // Accepted
@@ -2492,7 +2534,7 @@ public:
     }
 
   public:
-    TreeNode* searchBST(TreeNode *_p_root, int _val) {
+    TreeNode *searchBST(TreeNode *_p_root, int _val) {
       return search(_p_root, _val);
     }
   };
