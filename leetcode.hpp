@@ -247,77 +247,76 @@ public:
 };
 class Solution36 {
 public:
+  // Accepted
   class HashTable {
   private:
+    static constexpr int number_of_rows { 9 };
+    static constexpr int number_of_columns { 9 };
+
     bool isContains(const std::unordered_map<int, bool> &hash_map, int element) noexcept {
       if (hash_map.find(element) != hash_map.end()) {
-        return false;
+        return true;
       }
 
-      return true;
+      return false;
+    }
+    bool isUniqueInRow(const std::vector<std::vector<char>> &board, size_t row_index) {
+      std::unordered_map<int, bool> unique_elements_in_row { };
+      for (auto &&element_in_row: board[row_index]) {
+        if (element_in_row != '.') {
+          if (isContains(unique_elements_in_row, element_in_row)) {
+            return false;
+          }
+
+          unique_elements_in_row[element_in_row] = true;
+        }
+      }
+    }
+    bool isUniqueInColumn(const std::vector<std::vector<char>> &board, size_t column_index) {
+      std::unordered_map<int, bool> unique_elements_in_column { };
+      for (size_t j { }; j < number_of_columns; ++j) {
+        auto element_in_column { board[j][column_index] };
+        if (element_in_column != '.') {
+          if (isContains(unique_elements_in_column, element_in_column)) {
+            return false;
+          }
+
+          unique_elements_in_column[element_in_column] = true;
+        }
+      }
+    }
+    bool isUniqueInGrids3x3(const std::vector<std::vector<char>> &board) {
+      std::map<std::pair<int, int>, std::unordered_map<int, bool>> unique_elements_in_grids { };
+      for (size_t i { }; i < number_of_rows; ++i) {
+        for (size_t j { }; j < number_of_columns; ++j) {
+          int element_in_row { board[i][j] };
+          if (element_in_row != '.') {
+            std::pair<int, int> pos { i / 3, j / 3 };
+            if (unique_elements_in_grids[pos].find(element_in_row) != unique_elements_in_grids[pos].end()) {
+              return false;
+            }
+
+            unique_elements_in_grids[pos][element_in_row] = true;
+          }
+        }
+      }
     }
 
   public:
     bool isValidSudoku(const std::vector<std::vector<char>> &board) {
-      constexpr int number_of_rows { 9 };
-      constexpr int number_of_columns { 9 };
       for (size_t i { }; i < number_of_rows; ++i) {
-        std::unordered_map<int, bool> unique_elements_in_row { };
-        for (auto &&element_in_row: board[i]) {
-          if (element_in_row != '.') {
-            if (!isContains(unique_elements_in_row, element_in_row)) {
-              return false;
-            }
-
-            unique_elements_in_row[element_in_row] = true;
-          }
+        if (isUniqueInRow(board, i) == false) {
+          return false;
         }
       }
       for (size_t i { }; i < number_of_rows; ++i) {
-        std::unordered_map<int, bool> unique_elements_in_column { };
-        for (size_t j { }; j < number_of_columns; ++j) {
-          auto element_in_column { board[j][i] };
-          if (element_in_column != '.') {
-            if (!isContains(unique_elements_in_column, element_in_column)) {
-              return false;
-            }
-
-            unique_elements_in_column[element_in_column] = true;
-          }
+        if (isUniqueInColumn(board, i) == false) {
+          return false;
         }
       }
-      std::unordered_map<int, std::unordered_map<int, int>> unique_elements_in_grid_first_row { };
-      for (size_t i { }; i < 3; ++i) {
-        unique_elements_in_grid_first_row[i / 3];
-        for (auto &&el: board[i]) {
-          if (unique_elements_in_grid_first_row[i / 3].find(el) != unique_elements_in_grid_first_row[i / 3].end()) {
-            return false;
-          }
 
-          unique_elements_in_grid_first_row[i / 3][el] = true;
-        }
-      }
-      std::unordered_map<int, std::unordered_map<int, int>> unique_elements_in_grid_second_row { };
-      for (size_t i { 3 }; i < 6; ++i) {
-        unique_elements_in_grid_second_row[i / 3];
-        for (auto &&el: board[i]) {
-          if (unique_elements_in_grid_second_row[i / 3].find(el) != unique_elements_in_grid_second_row[i / 3].end()) {
-            return false;
-          }
-
-          unique_elements_in_grid_second_row[i / 3][el] = true;
-        }
-      }
-      std::unordered_map<int, std::unordered_map<int, int>> unique_elements_in_grid_third_row { };
-      for (size_t i { 6 }; i < 9; ++i) {
-        unique_elements_in_grid_third_row[i / 3];
-        for (auto &&el: board[i]) {
-          if (unique_elements_in_grid_third_row[i / 3].find(el) != unique_elements_in_grid_third_row[i / 3].end()) {
-            return false;
-          }
-
-          unique_elements_in_grid_third_row[i / 3][el] = true;
-        }
+      if (isUniqueInGrids3x3(board) == false) {
+        return false;
       }
 
       return true;
