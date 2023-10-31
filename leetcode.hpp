@@ -651,27 +651,30 @@ public:
 };
 class Solution128 {
 public:
+  // Accepted
   class HashTable {
   public:
     int longestConsecutive(const std::vector<int> &nums) {
-      std::set<int> num_set { };
+      if (nums.empty() == true) {
+        return 0;
+      }
+
+      std::unordered_set<int> num_set { };
+      num_set.reserve(nums.size());
       for (auto &&num: nums) {
         num_set.emplace(num);
       }
 
       int max_length { };
-      for (auto i { nums.begin() }; i != nums.end(); ++i) {
-        if (num_set.contains(*i - 1) == false) {
-          int local_length { };
-          int local_i { *i };
-          while (num_set.contains(local_i) == true) { 
+      for (auto &&num: nums) {
+        if (num_set.contains(num - 1) == false) {
+          int local_length { 1 };
+          while (num_set.contains(num + local_length) == true) {
             ++local_length;
-            ++local_i;
           }
 
           max_length = std::max(local_length, max_length);
         }
-
       }
 
       return max_length;
