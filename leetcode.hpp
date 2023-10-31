@@ -649,6 +649,35 @@ public:
     }
   };
 };
+class Solution128 {
+public:
+  class HashTable {
+  public:
+    int longestConsecutive(const std::vector<int> &nums) {
+      std::set<int> num_set { };
+      for (auto &&num: nums) {
+        num_set.emplace(num);
+      }
+
+      int max_length { };
+      for (auto i { nums.begin() }; i != nums.end(); ++i) {
+        if (num_set.contains(*i - 1) == false) {
+          int local_length { };
+          int local_i { *i };
+          while (num_set.contains(local_i) == true) { 
+            ++local_length;
+            ++local_i;
+          }
+
+          max_length = std::max(local_length, max_length);
+        }
+
+      }
+
+      return max_length;
+    }
+  };
+};
 class Solution151 {
 public:
   // Accepted
