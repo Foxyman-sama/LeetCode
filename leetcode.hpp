@@ -625,22 +625,32 @@ class Solution125 {
 public:
   // Accepted
   class TwoPointers {
+  private:
+    bool isPunct(char ch) noexcept {
+      if ((std::ispunct(ch) > 0) || (std::isspace(ch) > 0)) {
+        return true;
+      }
+
+      return false;
+    }
+
   public:
-    bool isPalindrome(const std::string &_k_s) {
+    bool isPalindrome(const std::string &str) {
+      if (str.size() < 2) {
+        return true;
+      }
+
       int l { };
-      int r { static_cast<int>(_k_s.size() - 1) };
+      int r { static_cast<int>(str.size() - 1) };
       while (l < r) {
-        while ((l < _k_s.size()) && (!isalnum(_k_s[l]))) {
+        while ((isPunct(str[l]) == true) && (l < r)) {
           ++l;
         }
-        while ((r >= 0) && (!isalnum(_k_s[r]))) {
+        while ((isPunct(str[r]) == true) && (l < r)) {
           --r;
         }
 
-        if (l > r) {
-          break;
-        }
-        if (tolower(_k_s[l++]) != tolower(_k_s[r--])) {
+        if (std::tolower(str[l++]) != std::tolower(str[r--])) {
           return false;
         }
       }
