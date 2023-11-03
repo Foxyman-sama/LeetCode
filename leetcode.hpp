@@ -169,7 +169,9 @@ public:
           if (sum == 0) {
             result.emplace_back(std::vector<int> { nums[i], nums[l], nums[r] });
             ++l;
-            --r;
+            while ((nums[l] == nums[l - 1]) && (l < r)) {
+              ++l;
+            }
           }
           else if (sum > 0) {
             --r;
