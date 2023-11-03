@@ -149,6 +149,41 @@ public:
     }
   };
 };
+class Solution15 {
+public:
+  class TwoPointers {
+  public:
+    std::vector<std::vector<int>> threeSum(std::vector<int> &nums) {
+      std::sort(nums.begin(), nums.end());
+
+      std::vector<std::vector<int>> result { };
+      for (size_t i { }; i < nums.size(); ++i) {
+        if ((i > 0) && (nums[i] == nums[i - 1])) {
+          continue;
+        } 
+
+        size_t l { i + 1 };
+        size_t r { nums.size() - 1 };
+        while (l < r) {
+          int sum { nums[i] + nums[l] + nums[r] };
+          if (sum == 0) {
+            result.emplace_back(std::vector<int> { nums[i], nums[l], nums[r] });
+            ++l;
+            --r;
+          }
+          else if (sum > 0) {
+            --r;
+          }
+          else {
+            ++l;
+          }
+        }
+      }
+
+      return result;
+    }
+  };
+};
 class Solution26 {
 public:
   // Accepted

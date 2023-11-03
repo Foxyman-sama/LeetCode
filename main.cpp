@@ -7,8 +7,8 @@
 int main() {
   setlocale(0, " ");
 
-  std::string test_case { "a." };
-  Solution125::TwoPointers sol { };
-  sol.isPalindrome(test_case);
+  std::vector<int> test_case { -2, 0, 0, 2, 2 };
+  Solution15::TwoPointers sol { };
+  sol.threeSum(test_case);
   system("pause");
 }
