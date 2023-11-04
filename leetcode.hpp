@@ -60,27 +60,26 @@ public:
 };
 class Solution11 {
 public:
-    // Accepted
-    class TwoPointers { 
-    public:
-        int maxArea(const std::vector<int> &_k_heighs) {
-            int max { INT_MIN };
-            int l { };
-            int r { static_cast<int>(_k_heighs.size() - 1) };
-            while (l < r) {
-                int areas_amount { r - l };
-                int current_height { std::min(_k_heighs[r], _k_heighs[l]) };
-                max = std::max(max, areas_amount * current_height);
-                if (_k_heighs[l] > _k_heighs[r]) {
-                    --r;
-                }
-                else {
-                    ++l;
-                }
-            }
-
-            return max;
+  // Accepted
+  class TwoPointers {
+  public:
+    int maxArea(const std::vector<int> &heights) {
+      int result { INT_MIN };
+      size_t l { };
+      size_t r { heights.size() - 1 };
+      while (l < r) {
+        int area { static_cast<int>(std::min(heights[l], heights[r]) * (r - l)) };
+        result = std::max(result, area);
+        if (heights[l] < heights[r]) {
+          ++l;
         }
+        else {
+          --r;
+        }
+      }
+
+      return result;
+    }
     };
 };
 class Solution13 {
