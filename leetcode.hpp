@@ -360,6 +360,31 @@ public:
     }
  };
 };
+class Solution42 {
+public:
+  class TwoPointers {
+  public:
+    int trap(std::vector<int> &height) {
+      size_t l { };
+      int max_l { INT_MIN };
+      size_t r { height.size() - 1 };
+      int max_r { INT_MIN };
+      int result { };
+      while (l < r) {
+
+
+        if (height[l] < height[r]) {
+          ++l;
+        }
+        else {
+          --r;
+        }
+      }
+
+      return result;
+    }
+  };
+};
 class Solution49 {
 public:
   // Accepted
