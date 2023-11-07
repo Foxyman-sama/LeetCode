@@ -186,6 +186,43 @@ public:
     }
   };
 };
+class Solution20 {
+public:
+  // Accepted
+  class Stack {
+  public:
+    bool isValid(const std::string &str) {
+      if (str.size() % 2 != 0) {
+        return false;
+      }
+
+      std::stack<char> opened_brackets { };
+      for (auto &&ch: str) {
+        if ((ch == '(') || (ch == '{') || (ch == '[')) {
+          opened_brackets.push(ch);
+        }
+        else if (opened_brackets.empty() == true) {
+          return false;
+        }
+        else {
+          if ((ch == ')') && (opened_brackets.top() != '(')) {
+            return false;
+          }
+          else if ((ch == '}') && (opened_brackets.top() != '{')) {
+            return false;
+          }
+          else if ((ch == ']') && (opened_brackets.top() != '[')) {
+            return false;
+          }
+
+          opened_brackets.pop();
+        }
+      }
+
+      return opened_brackets.empty();
+    }
+  };
+};
 class Solution26 {
 public:
   // Accepted
