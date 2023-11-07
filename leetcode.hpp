@@ -848,6 +848,50 @@ public:
     }
   };
 };
+class Solution155 {
+public:
+  // Accepted
+  class Stack {
+  public:
+    class MinStack {
+    private:
+      std::vector<int> values;
+      std::stack<int> mins;
+
+    public:
+      MinStack() { 
+        values.reserve(1'000);
+      }
+
+      void push(int val) {
+        if (mins.empty() == true) {
+          mins.push(val);
+        }
+        else if (mins.top() > val) {
+          mins.push(val);
+        }
+
+        values.push_back(val);
+      }
+
+      void pop() {
+        if (values.back() == mins.top()) {
+          mins.pop();
+        }
+
+        values.pop_back();
+      }
+
+      int top() {
+        return values.back();
+      }
+
+      int getMin() {
+        return mins.top();
+      }
+    };
+  };
+};
 class Solution167 {
 public:
   // Accepted
