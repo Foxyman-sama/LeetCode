@@ -362,17 +362,23 @@ public:
 };
 class Solution42 {
 public:
+  // Accepted
   class TwoPointers {
   public:
     int trap(std::vector<int> &height) {
       size_t l { };
-      int max_l { INT_MIN };
+      int max_l {  };
       size_t r { height.size() - 1 };
-      int max_r { INT_MIN };
+      int max_r { };
       int result { };
       while (l < r) {
-
-
+        int min_of_max { std::min(max_l, max_r) };
+        int temp { min_of_max - height[l] };
+        int temp2 { min_of_max - height[r] };
+        result += temp > 0 ? temp : 0;
+        result += temp2 > 0 ? temp2 : 0;
+        max_l = std::max(height[l], max_l);
+        max_r = std::max(height[l], max_r);
         if (height[l] < height[r]) {
           ++l;
         }
