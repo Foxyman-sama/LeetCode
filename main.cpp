@@ -8,8 +8,8 @@
 int main() {
   setlocale(0, " ");
 
-  std::string test_case { "){" };
-  Solution20::Stack sol { };
-  sol.isValid(test_case);
+  std::vector<std::string> test_case { "10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+" };
+  Solution150::Stack sol { };
+  print(sol.evalRPN(test_case));
   system("pause");
 }

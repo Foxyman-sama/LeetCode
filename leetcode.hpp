@@ -796,6 +796,42 @@ public:
     }
   };
 };
+class Solution150 {
+public:
+  // Accepted
+  class Stack {
+  public:
+    int evalRPN(const std::vector<std::string> &tokens) {
+      std::stack<int> values { };
+      for (auto &&token: tokens) {
+        if ((token == "+") || (token == "-") || (token == "*") || (token == "/")) {
+          int first_operand { values.top() };
+          values.pop();
+
+          int second_operand { values.top() };
+          values.pop();
+          if (token == "+") {
+            values.push(second_operand + first_operand);
+          }
+          else if (token == "-") {
+            values.push(second_operand - first_operand);
+          }
+          else if (token == "*") {
+            values.push(second_operand * first_operand);
+          }
+          else if (token == "/") {
+            values.push(second_operand / first_operand);
+          }
+        }
+        else {
+          values.push(std::stoi(token));
+        }
+      }
+
+      return values.top();
+    }
+  };
+};
 class Solution151 {
 public:
   // Accepted
@@ -859,7 +895,7 @@ public:
       std::stack<int> mins;
 
     public:
-      MinStack() { 
+      MinStack() {
         values.reserve(1'000);
       }
 
