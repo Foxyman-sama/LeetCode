@@ -223,6 +223,27 @@ public:
     }
   };
 };
+class Solution22 {
+public:
+  class Backtracking {
+  private:
+    std::vector<std::string> result;
+
+    void backtrack(int n, int open_brackets, int closed_brackets, const std::string &path) {
+      if (path.size() == n) {
+        result.emplace_back(path);
+      }
+      else if (open_brackets < closed_brackets) {
+        backtrack(n, )
+      }
+    }
+
+  public:
+    std::vector<std::string> generateParenthesis(int n) {
+      backtrack(n, 0, 0, {});
+    }
+  };
+};
 class Solution26 {
 public:
   // Accepted
