@@ -225,22 +225,39 @@ public:
 };
 class Solution22 {
 public:
+  // Accepted
   class Backtracking {
   private:
+    std::vector<char> buffer;
     std::vector<std::string> result;
 
-    void backtrack(int n, int open_brackets, int closed_brackets, const std::string &path) {
-      if (path.size() == n) {
-        result.emplace_back(path);
+    void backtrack(int n, int open_brackets, int closed_brackets) {
+      if (buffer.size() == n * 2) {
+        std::string temp { };
+        for (auto &&ch: buffer) {
+          temp += ch;
+        }
+
+        result.emplace_back(temp);
+        return;
       }
-      else if (open_brackets < closed_brackets) {
-        backtrack(n, )
+      if (open_brackets < n) {
+        buffer.push_back('(');
+        backtrack(n, open_brackets + 1, closed_brackets);
+        buffer.pop_back();
+      }
+      if (closed_brackets < open_brackets) {
+        buffer.push_back(')');
+        backtrack(n, open_brackets, closed_brackets + 1);
+        buffer.pop_back();
       }
     }
 
   public:
     std::vector<std::string> generateParenthesis(int n) {
-      backtrack(n, 0, 0, {});
+      buffer.reserve(n * 2);
+      backtrack(n, 0, 0);
+      return result;
     }
   };
 };
