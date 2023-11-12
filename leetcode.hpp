@@ -84,7 +84,7 @@ public:
 
       return result;
     }
-    };
+  };
 };
 class Solution13 {
 public:
@@ -160,7 +160,7 @@ public:
       for (size_t i { }; i < nums.size(); ++i) {
         if ((i > 0) && (nums[i] == nums[i - 1])) {
           continue;
-        } 
+        }
 
         size_t l { i + 1 };
         size_t r { nums.size() - 1 };
@@ -433,7 +433,7 @@ public:
 
       return true;
     }
- };
+  };
 };
 class Solution42 {
 public:
@@ -442,7 +442,7 @@ public:
   public:
     int trap(std::vector<int> &height) {
       size_t l { };
-      int max_l {  };
+      int max_l { };
       size_t r { height.size() - 1 };
       int max_r { };
       int result { };
@@ -1415,8 +1415,8 @@ public:
     }
 
   public:
-    TreeNode* lowestCommonAncestor(TreeNode* _p_root, TreeNode* _p_p,
-                                   TreeNode* _p_q) {
+    TreeNode *lowestCommonAncestor(TreeNode *_p_root, TreeNode *_p_p,
+                                   TreeNode *_p_q) {
       int p_depth { depth(_p_root, _p_p, 1) };
       int q_depth { depth(_p_root, _p_q, 1) };
       while (p_depth != q_depth) {
@@ -2956,6 +2956,36 @@ public:
     }
   };
 };
+class Solution739 {
+public:
+  // Accepted
+  class Stack {
+  private:
+    struct IndexAndTemperature {
+      size_t index;
+      int temperature;
+    };
+
+  public:
+    std::vector<int> dailyTemperatures(const std::vector<int> &temperatures) {
+      std::vector<int> result { };
+      result.resize(temperatures.size());
+
+      std::stack<IndexAndTemperature> stack { };
+      stack.push({ 0, temperatures[0] });
+      for (size_t i { 1 }; i < temperatures.size(); ++i) {
+        while ((stack.empty() == false) && (temperatures[i] > stack.top().temperature)) {
+          result[stack.top().index] = i - stack.top().index;
+          stack.pop();
+        }
+        
+        stack.push({ i, temperatures[i] });
+      }
+
+      return result;
+    }
+  };
+};
 class Solution744 {
 public:
   // Accepted
@@ -3761,7 +3791,7 @@ public:
   // Accepted
   class DivideAndConquer {
   private:
-    TreeNode* balance(int _l,
+    TreeNode *balance(int _l,
                       int _r,
                       const std::vector<TreeNode *> &_k_nodes) {
       if (_l > _r) {
@@ -4399,7 +4429,7 @@ public:
   // Accepted
   class LinkedList {
   public:
-    ListNode* deleteMiddle(ListNode *_p_head) {
+    ListNode *deleteMiddle(ListNode *_p_head) {
       if (_p_head->next == nullptr) {
         return nullptr;
       }

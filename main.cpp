@@ -8,8 +8,8 @@
 int main() {
   setlocale(0, " ");
 
-  std::vector<std::string> test_case { "10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+" };
-  Solution150::Stack sol { };
-  print(sol.evalRPN(test_case));
+  std::vector<int> test_case { 73, 74, 75, 71, 69, 72, 76, 73 };
+  Solution739::Stack sol { };
+  print(sol.dailyTemperatures(test_case));
   system("pause");
 }
