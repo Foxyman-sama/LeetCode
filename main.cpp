@@ -8,8 +8,9 @@
 int main() {
   setlocale(0, " ");
 
-  std::vector<int> test_case { 73, 74, 75, 71, 69, 72, 76, 73 };
-  Solution739::Stack sol { };
-  print(sol.dailyTemperatures(test_case));
+  std::vector<int> positions { 10, 8, 0, 5, 3 };
+  std::vector<int> speeds { 2, 4, 1, 1, 3 };
+  Solution853::Stack sol { };
+  print(sol.carFleet(10, positions, speeds));
   system("pause");
 }
