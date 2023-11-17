@@ -3093,6 +3093,7 @@ public:
 };
 class Solution853 {
 public:
+  // Accepted
   class Stack {
   public:
     int carFleet(int target, const std::vector<int> &position, const std::vector<int> &speed) {
@@ -3101,12 +3102,13 @@ public:
         positions_and_speeds.emplace_back(std::make_pair(position[i], speed[i]));
       }
 
-      std::stack<double> stack { };
       std::sort(positions_and_speeds.begin(), positions_and_speeds.end(), std::greater<>());
+
+      std::stack<double> stack { };
       for (auto &&[pos, speed]: positions_and_speeds) {
-        double prev_stack_value { stack.empty() ? DBL_MIN : stack.top() };
+        double old_top { stack.empty() ? DBL_MIN : stack.top() };
         stack.push((target - pos) / speed);
-        if ((stack.size() >= 2) && (stack.top() <= prev_stack_value)) { 
+        if ((stack.size() >= 2) && (stack.top() <= old_top)) {
           stack.pop();
         }
       }
