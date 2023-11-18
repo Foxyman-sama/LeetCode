@@ -8,9 +8,8 @@
 int main() {
   setlocale(0, " ");
 
-  std::vector<int> positions { 10, 8, 0, 5, 3 };
-  std::vector<int> speeds { 2, 4, 1, 1, 3 };
-  Solution853::Stack sol { };
-  print(sol.carFleet(12, positions, speeds));
+  std::vector<int> heights { 2, 1, 5, 6, 2, 3 };
+  Solution84::Stack sol { };
+  print(sol.largestRectangleArea(heights));
   system("pause");
 }

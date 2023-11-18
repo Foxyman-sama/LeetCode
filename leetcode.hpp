@@ -656,6 +656,19 @@ public:
     }
   };
 };
+class Solution84 {
+public:
+  class Stack {
+  public:
+    int largestRectangleArea(const std::vector<int> &heights) {
+      std::stack<int> stack { }; 
+      stack.push(heights.front());
+      for (auto it { heights.begin() }; it != heights.end(); ++it) {
+
+      }
+    }
+  };
+};
 class Solution104 {
 public:
   // Accepted
