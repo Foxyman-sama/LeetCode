@@ -658,14 +658,30 @@ public:
 };
 class Solution84 {
 public:
+  // Accepted
   class Stack {
   public:
     int largestRectangleArea(const std::vector<int> &heights) {
-      std::stack<int> stack { }; 
-      stack.push(heights.front());
+      std::stack<std::pair<size_t, int>> stack { }; 
+      size_t max_area { };
       for (auto it { heights.begin() }; it != heights.end(); ++it) {
+        auto current_index { it - heights.begin() };
+        auto start_index { current_index };
+        while ((stack.empty() == false) && (stack.top().second > *it)) {
+          auto [index, height] = stack.top();
+          stack.pop();
+          max_area = std::max(max_area, height * (current_index - index));
+          start_index = index;
+        }
 
+        stack.push(std::make_pair(start_index, *it));
       }
+      for (; stack.empty() == false; stack.pop()) {
+        auto [index, height] { stack.top() };
+        max_area = std::max(max_area, height * (heights.size() - index));
+      }
+
+      return max_area;
     }
   };
 };
