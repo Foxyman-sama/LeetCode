@@ -660,25 +660,32 @@ class Solution84 {
 public:
   // Accepted
   class Stack {
+  private:
+    std::stack<std::pair<size_t, int>> stack;
+
+    auto getAndPopTopStack() {
+      auto pair = stack.top();
+      stack.pop();
+      return pair;
+    }
+
   public:
     int largestRectangleArea(const std::vector<int> &heights) {
       std::stack<std::pair<size_t, int>> stack { }; 
-      size_t max_area { };
-      for (auto it { heights.begin() }; it != heights.end(); ++it) {
-        auto current_index { it - heights.begin() };
-        auto start_index { current_index };
-        while ((stack.empty() == false) && (stack.top().second > *it)) {
-          auto [index, height] = stack.top();
-          stack.pop();
-          max_area = std::max(max_area, height * (current_index - index));
-          start_index = index;
+      size_t max_area;
+      for (size_t i { }; i < heights.size(); ++i) {
+        size_t index_to_add { i };
+        while ((stack.empty() == false) && (heights[i] < stack.top().second)) {
+          auto [index_of_top, height_of_top] = getAndPopTopStack();
+          max_area = std::max(max_area, height_of_top * (i - index_of_top));
+          index_to_add = index_of_top;
         }
 
-        stack.push(std::make_pair(start_index, *it));
+        stack.push(std::make_pair(index_to_add, heights[i]));
       }
-      for (; stack.empty() == false; stack.pop()) {
-        auto [index, height] { stack.top() };
-        max_area = std::max(max_area, height * (heights.size() - index));
+      while (stack.empty() == false) {          
+        auto [index_of_top, height_of_top] = getAndPopTopStack();
+        max_area = std::max(max_area, height_of_top * (heights.size() - index_of_top));
       }
 
       return max_area;
@@ -790,6 +797,28 @@ public:
       }
 
       return triangle[_index];
+    }
+  };
+};
+class Solution121 {
+public:
+  // Accepted
+  class SlidingWindow {
+  public:
+    int maxProfit(const std::vector<int> &prices) {
+      int l { };
+      int r { };
+      int max_profit { };
+      while (r < prices.size()) {
+        max_profit = std::max(max_profit, prices[r] - prices[l]);
+        if (prices[r] < prices[l]) {
+          l = r;
+        }
+
+        ++r;
+      }
+
+      return max_profit;
     }
   };
 };
