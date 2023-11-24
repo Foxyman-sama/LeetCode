@@ -8,9 +8,9 @@
 int main() {
   setlocale(0, " ");
 
-  std::vector<int> heights { 2, 1, 5, 6, 2, 3 };
-  std::vector<int> heights2 { 1, 1 };
-  Solution84::Stack sol { };
-  print(sol.largestRectangleArea(heights));
+  auto str { "pwwkew" };
+  auto str2 { "abcabcbb" };
+  Solution3::SlidingWindow sol { };
+  print(sol.lengthOfLongestSubstring(str));
   system("pause");
 }

@@ -41,6 +41,33 @@ public:
     }
   };
 };
+class Solution3 {
+public:
+  // Accepted
+  class SlidingWindow {
+  public:
+    int lengthOfLongestSubstring(const std::string &str) {
+      int l { };
+      int r { };
+      int max_length { };
+      std::unordered_set<char> uniques { };
+      while (r < str.size()) {
+        max_length = std::max(max_length, r - l);
+        if ((l < r) || (uniques.contains(str[r]))) {
+          while (uniques.contains(str[r])) {
+            uniques.erase(str[l]);
+            ++l;
+          }
+        }
+
+        uniques.emplace(str[r]);
+        ++r;
+      }
+
+      return std::max(max_length, r - l);
+    }
+  };
+};
 class Solution9 {
 public:
   // Accepted
