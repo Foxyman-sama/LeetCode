@@ -2343,32 +2343,21 @@ class Solution424 {
 public:
   class SlidingWindow {
   public:
-    int characterReplacement(std::string &str, int k) {
+    int characterReplacement(const std::string &str, int k) {
       int l { };
       int r { };
-      int number_of_replacements { };
       int max_length { };
-      char prev_ch { };
+      std::vector<int> counts { };
+      counts.resize(26);
       while (r < str.size()) {
-        max_length = std::max(max_length, r - l);
-        if (str[l] != str[r]) {
-          if (number_of_replacements < k) {
-            ++number_of_replacements;
-            prev_ch = str[l];
-            str[l] = str[r];
-          }
-          else if (positions.empty() == false) {
-            l = positions.front() + 1;
-            positions.pop();
-            --number_of_replacements;
-          }
-          else {
-            while (str[l] != str[r]) {
-              ++l;
-            }
-          }
+        int current_length { r - l };
+        max_length = std::max(max_length, current_length);
+        while (current_length - counts[str[r] - 'A'] > k) {
+          --counts[str[l] - 'A'];
+          ++l;
         }
 
+        ++counts[str[r] - 'A'];
         ++r;
       }
 
