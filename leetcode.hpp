@@ -2339,6 +2339,43 @@ public:
     }
   };
 };
+class Solution424 {
+public:
+  class SlidingWindow {
+  public:
+    int characterReplacement(std::string &str, int k) {
+      int l { };
+      int r { };
+      int number_of_replacements { };
+      int max_length { };
+      char prev_ch { };
+      while (r < str.size()) {
+        max_length = std::max(max_length, r - l);
+        if (str[l] != str[r]) {
+          if (number_of_replacements < k) {
+            ++number_of_replacements;
+            prev_ch = str[l];
+            str[l] = str[r];
+          }
+          else if (positions.empty() == false) {
+            l = positions.front() + 1;
+            positions.pop();
+            --number_of_replacements;
+          }
+          else {
+            while (str[l] != str[r]) {
+              ++l;
+            }
+          }
+        }
+
+        ++r;
+      }
+
+      return std::max(max_length, r - l);
+    }
+  };
+};
 class Solution437 {
 public:
   // Accepted

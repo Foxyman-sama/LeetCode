@@ -8,9 +8,10 @@
 int main() {
   setlocale(0, " ");
 
-  auto str { "pwwkew" };
-  auto str2 { "abcabcbb" };
-  Solution3::SlidingWindow sol { };
-  print(sol.lengthOfLongestSubstring(str));
+  auto str { "AABABBA" };
+  auto str2 { "AAAB" };
+  auto str3 { "ABBB" };
+  Solution424::SlidingWindow sol { };
+  print(sol.characterReplacement(str3, 2));
   system("pause");
 }
