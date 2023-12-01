@@ -2352,7 +2352,7 @@ public:
       while (r < str.size()) {
         int current_length { r - l };
         max_length = std::max(max_length, current_length);
-        while (current_length - counts[str[r] - 'A'] > k) {
+        while ((l < r) && (current_length - counts.at(str.at(r) - 'A') > k)) {
           --counts[str[l] - 'A'];
           ++l;
         }

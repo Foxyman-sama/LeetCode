@@ -9,9 +9,9 @@ int main() {
   setlocale(0, " ");
 
   auto str { "AABABBA" };
-  auto str2 { "AAAB" };
+  auto str2 { "ABAB" };
   auto str3 { "ABBB" };
   Solution424::SlidingWindow sol { };
-  print(sol.characterReplacement(str3, 2));
+  print(sol.characterReplacement(str2, 2));
   system("pause");
 }
