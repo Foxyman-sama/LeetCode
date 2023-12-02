@@ -2342,26 +2342,50 @@ public:
 class Solution424 {
 public:
   class SlidingWindow {
-  public:
-    int characterReplacement(const std::string &str, int k) {
-      int l { };
-      int r { };
-      int max_length { };
-      std::vector<int> counts { };
-      counts.resize(26);
-      while (r < str.size()) {
-        int current_length { r - l };
-        max_length = std::max(max_length, current_length);
-        while ((l < r) && (current_length - counts.at(str.at(r) - 'A') > k)) {
-          --counts[str[l] - 'A'];
-          ++l;
-        }
+  private:
+    int l;
+    int r;
+    int max_length;
+    int current_length;
+    std::vector<int> frequencies;
 
-        ++counts[str[r] - 'A'];
+  public:
+    SlidingWindow() 
+      : l { }, r { }, max_length { }, current_length { }, frequencies { } {
+      frequencies.resize(26);
+    }
+
+    int characterReplacement(const std::string &str, int k) {
+      while (r < str.size()) {
+        ++frequencies.at(str.at(r) - 'A');
+        updateCurrentLength();
+        while (isNeedMoreReplacements(k) == true) {
+          --frequencies.at(str.at(l) - 'A');
+          ++l;
+          updateCurrentLength();
+        }
+        
+        updateMaxLength();
         ++r;
       }
 
       return std::max(max_length, r - l);
+    }
+
+  private:
+    void updateCurrentLength() {
+      current_length = r - l;
+    }
+
+    bool isNeedMoreReplacements(int k) {
+      return (l < r) && (current_length - getNumberOfMaximumCharacterInSubarray() > k);
+    }
+    int getNumberOfMaximumCharacterInSubarray() {
+      return *std::max_element(frequencies.begin() + l, frequencies.begin() + r);
+    }
+
+    void updateMaxLength() {
+        max_length = std::max(max_length, current_length);
     }
   };
 };
