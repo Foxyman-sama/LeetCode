@@ -2341,6 +2341,7 @@ public:
 };
 class Solution424 {
 public:
+  // Accepted
   class SlidingWindow {
   private:
     int l;
@@ -2369,19 +2370,19 @@ public:
         ++r;
       }
 
-      return std::max(max_length, r - l);
+      return max_length;
     }
 
   private:
     void updateCurrentLength() {
-      current_length = r - l;
+      current_length = r - l + 1;
     }
 
     bool isNeedMoreReplacements(int k) {
-      return (l < r) && (current_length - getNumberOfMaximumCharacterInSubarray() > k);
+      return current_length - getNumberOfMaximumCharacterInSubarray() > k;
     }
     int getNumberOfMaximumCharacterInSubarray() {
-      return *std::max_element(frequencies.begin() + l, frequencies.begin() + r);
+      return *std::max_element(frequencies.begin(), frequencies.end());
     }
 
     void updateMaxLength() {

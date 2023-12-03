@@ -10,10 +10,10 @@ int main() {
   try {
     auto str { "AABABBA" };
     auto str2 { "BAAAB" };
-    auto str3 { "ABBB" };
+    auto str3 { "ABAB" };
     auto str4 { "AAAB" };
     Solution424::SlidingWindow sol { };
-    print(sol.characterReplacement(str4, 0));
+    print(sol.characterReplacement(str3, 2));
   }
   catch (const std::exception &e) {
     std::cerr << e.what() << '\n';
