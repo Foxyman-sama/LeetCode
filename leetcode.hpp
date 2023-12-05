@@ -2379,9 +2379,9 @@ public:
     }
 
     bool isNeedMoreReplacements(int k) {
-      return current_length - getNumberOfMaximumCharacterInSubarray() > k;
+      return current_length - getNumberOfMaximumCharacterInArray() > k;
     }
-    int getNumberOfMaximumCharacterInSubarray() {
+    int getNumberOfMaximumCharacterInArray() {
       return *std::max_element(frequencies.begin(), frequencies.end());
     }
 
@@ -2704,6 +2704,15 @@ public:
   public:
     int findCircleNum(const Matrix &_k_is_connected) {
 
+
+    }
+  };
+};
+class Solution567 {
+public:
+  class SlidingWindow {
+  public:
+    bool checkInclusion(const std::string &s1, const std::string &s2) {
 
     }
   };
