@@ -2711,9 +2711,46 @@ public:
 class Solution567 {
 public:
   class SlidingWindow {
-  public:
-    bool checkInclusion(const std::string &s1, const std::string &s2) {
+  private:
+    std::vector<char> freq;
+    int current_length;
+    size_t r;
+    size_t l;
 
+  public:
+    SlidingWindow()
+      : freq { },current_length { }, r { }, l { } {
+      freq.resize(26);
+    }
+
+    bool checkInclusion(const std::string &s1, const std::string &s2) {
+      while (r < s2.size()) {
+        ++freq[s2[r] - 'a'];
+        current_length = r - l + 1;
+        if (current_length == s1.size()) {
+          if (isContains(s1) == true) {
+            return true;
+          }
+
+          --freq[s2[l] - 'a'];
+          ++l;
+        }
+
+        ++r;
+      }
+
+      return false;
+    }
+
+  private:
+    bool isContains(const std::string &str) {
+      for (auto &&ch: str) {
+        if (freq[ch - 'a'] != std::count(str.begin(), str.end(), ch)) {
+          return false;
+        }
+      }
+
+      return true;
     }
   };
 };

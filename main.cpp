@@ -8,12 +8,10 @@
 int main() {
   setlocale(0, " ");
   try {
-    auto str { "AABABBA" };
-    auto str2 { "BAAAB" };
-    auto str3 { "ABAB" };
-    auto str4 { "AAAB" };
-    Solution424::SlidingWindow sol { };
-    print(sol.characterReplacement(str3, 2));
+    auto str { "ab" };
+    auto str2 { "eidbaooo" };
+    Solution567::SlidingWindow sol { };
+    print(sol.checkInclusion(str, str2));
   }
   catch (const std::exception &e) {
     std::cerr << e.what() << '\n';
