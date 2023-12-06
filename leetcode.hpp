@@ -2710,29 +2710,33 @@ public:
 };
 class Solution567 {
 public:
+  // Accepted
   class SlidingWindow {
   private:
-    std::vector<char> freq;
+    std::vector<unsigned char> freq_s1;
+    std::vector<unsigned char> freq_s2;
     int current_length;
     size_t r;
     size_t l;
 
   public:
     SlidingWindow()
-      : freq { },current_length { }, r { }, l { } {
-      freq.resize(26);
+      : freq_s1 { }, freq_s2 { }, current_length { }, r { }, l { } {
+      freq_s1.resize(26);
+      freq_s2.resize(26);
     }
 
     bool checkInclusion(const std::string &s1, const std::string &s2) {
+      countFrequencyAndSet(s2);
       while (r < s2.size()) {
-        ++freq[s2[r] - 'a'];
+        ++freq_s1[s2[r] - 'a'];
         current_length = r - l + 1;
         if (current_length == s1.size()) {
-          if (isContains(s1) == true) {
+          if (isContains() == true) {
             return true;
           }
 
-          --freq[s2[l] - 'a'];
+          --freq_s1[s2[l] - 'a'];
           ++l;
         }
 
@@ -2743,11 +2747,15 @@ public:
     }
 
   private:
-    bool isContains(const std::string &str) {
+    void countFrequencyAndSet(const std::string &str) {
       for (auto &&ch: str) {
-        if (freq[ch - 'a'] != std::count(str.begin(), str.end(), ch)) {
-          return false;
-        }
+        ++freq_s2[ch - 'a'];
+      }
+    }
+
+    bool isContains() {
+      if (freq_s1 != freq_s2) {
+        return false;
       }
 
       return true;

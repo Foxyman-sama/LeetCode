@@ -9,7 +9,7 @@ int main() {
   setlocale(0, " ");
   try {
     auto str { "ab" };
-    auto str2 { "eidbaooo" };
+    auto str2 { "eidboaoo" };
     Solution567::SlidingWindow sol { };
     print(sol.checkInclusion(str, str2));
   }
